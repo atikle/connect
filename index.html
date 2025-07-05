@@ -213,9 +213,23 @@
             <button class="btn-mute"></button>
             <button class="btn-camera"></button>
           </div>
-          <a href="#" class="name-tag">Andy Will</a>
-          <video autoplay="true" id="videoElement" controls>
-    </video>
+          <a href="#" class="name-tag">You</a>
+          <video autoplay="true" id="videoElement" controls></video>
+          <script>
+              var video = document.querySelector("#videoElement");
+
+              if (navigator.mediaDevices.getUserMedia) {
+                  navigator.mediaDevices.getUserMedia({
+                      video: true
+                  })
+                      .then(function (stream) {
+                          video.srcObject = stream;
+                      })
+                      .catch(function (err0r) {
+                          console.log("Something went wrong!");
+                      });
+              }
+          </script>
         </div>
         <div class="video-participant">
           <div class="participant-actions">
