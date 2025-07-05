@@ -341,6 +341,7 @@ a { text-decoration: none; }
   width: 33.3%;
   height: 50%;
   position: relative;
+  background-color: black;
   
   img {
     width: 100%;
