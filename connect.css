@@ -402,11 +402,12 @@ a { text-decoration: none; }
 }
 
 .logo-para {
-  align-items: center;
+  position: fixed;
+  bottom: 0px;
   padding-top: 64px;
   max-width: 100px;
   float: inline-start;
-  left: 0;
+  left: 0px;
 }
 
 .video-call-actions {
