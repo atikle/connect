@@ -403,7 +403,7 @@ a { text-decoration: none; }
 
 .logo-para {
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   padding-top: 64px;
   /* float: inline-start; */
   left: 20px;
