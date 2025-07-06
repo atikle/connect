@@ -94,6 +94,7 @@ a { text-decoration: none; }
 }
 
 .navigation {
+  z-index: 110;
   display: flex;
   flex-direction: column;
   background-color: var(--navigation-bg);
