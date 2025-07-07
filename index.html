@@ -212,15 +212,14 @@
     </div>
     <div class="app-main">
       <div class="video-call-wrapper">
-        <div class="video-participant">
+        <div class="video-participant" style="background-image: url(camera-access.png);">
           <div class="participant-actions">
             <button class="btn-mute"></button>
             <button class="btn-camera"></button>
           </div>
           <a href="#" class="name-tag">You</a>
           <!-- https://images.unsplash.com/photo-1566821582776-92b13ab46bb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60 -->
-           <img src="camera-access.png" alt="camera-access error" style="z-index: 1;">
-          <video autoplay="true" id="videoElement" style="z-index: 2;"></video>
+          <video autoplay="true" id="videoElement"></video>
           <script>
               var video = document.querySelector("#videoElement");
 
