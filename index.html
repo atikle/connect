@@ -2,9 +2,13 @@
 <link rel="icon" href="https://atikle.github.io/resource/atikle-icon.png" type="image/x-icon">
 
 <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="connect.css">
+
 <script src="connect.js"></script>
-<script>$(document).ready(function () {
+
+<script>
+  $(document).ready(function () {
     $('button.mode-switch').click(function () {
       $('body').toggleClass('dark');
     });
@@ -18,10 +22,10 @@
       $(".right-side").addClass("show");
       $(this).removeClass("show");
     });
-  });</script>
+  });
+</script>
 
 <!-- for loading page -->
-
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Roboto @ Google Fonts -->
@@ -50,10 +54,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 
 <style>
-
   loading-screen {
     z-index: 100;
   }
+
   /* Custom styles for the loading spinner */
   .loader {
     border-top-color: #3498db;
@@ -212,7 +216,8 @@
     </div>
     <div class="app-main">
       <div class="video-call-wrapper">
-        <div class="video-participant" style="background-image: url(camera-access.png); background-repeat: no-repeat; background-size: cover;">
+        <div class="video-participant"
+          style="background-image: url(camera-access.png); background-repeat: no-repeat; background-size: cover;">
           <div class="participant-actions">
             <button class="btn-mute"></button>
             <button class="btn-camera"></button>
@@ -221,19 +226,19 @@
           <!-- https://images.unsplash.com/photo-1566821582776-92b13ab46bb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60 -->
           <video autoplay="true" id="videoElement"></video>
           <script>
-              var video = document.querySelector("#videoElement");
+            var video = document.querySelector("#videoElement");
 
-              if (navigator.mediaDevices.getUserMedia) {
-                  navigator.mediaDevices.getUserMedia({
-                      video: true
-                  })
-                      .then(function (stream) {
-                          video.srcObject = stream;
-                      })
-                      .catch(function (err0r) {
-                          console.log("Something went wrong!");
-                      });
-              }
+            if (navigator.mediaDevices.getUserMedia) {
+              navigator.mediaDevices.getUserMedia({
+                video: true
+              })
+                .then(function (stream) {
+                  video.srcObject = stream;
+                })
+                .catch(function (err0r) {
+                  console.log("Something went wrong!");
+                });
+            }
           </script>
         </div>
         <div class="video-participant">
@@ -256,7 +261,8 @@
             src="https://images.unsplash.com/photo-1576110397661-64a019d88a98?ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80"
             alt="participant"> -->
         </div>
-        <div class="video-participant" style="background-image: url(spotlight.png); background-repeat: no-repeat; background-size: cover;">
+        <div class="video-participant"
+          style="background-image: url(spotlight.png); background-repeat: no-repeat; background-size: cover;">
           <div class="participant-actions">
             <button class="btn-mute"></button>
             <button class="btn-camera"></button>

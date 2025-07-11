@@ -1,0 +1,64 @@
+body,
+html {
+    width: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: black;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    border: 0;
+    top: 0;
+}
+
+body {
+    --app-background: #eaebf5;
+    --chat-background: #fff;
+    --link-color: #c0c1c5;
+    --navigation-bg: #fff;
+    --navigation-box-shadow: 0 2px 6px 0 rgba(136, 148, 171, 0.2), 0 24px 20px -24px rgba(71, 82, 107, 0.1);
+    --main-color: #3d42df;
+    --message-bg: #f3f4f9;
+    --message-bg-2: #3d42df;
+    --message-text: #2c303a;
+    --placeholder-text: #a2a4bc;
+    --button-bg: #fff;
+}
+
+body.dark {
+    --app-background: #262a42;
+    --navigation-box-shadow: 0px 0px 8px 0px #282b33;
+    --chat-background: #3c3f56;
+    --message-bg: #2c3046;
+    --message-text: rgba(255, 255, 255, 0.8);
+    --placeholder-text: #fff;
+    --navigation-bg: #3c3f56;
+    --button-bg: #3c3f56;
+    --main-color: #6f74ff;
+    --message-bg-2: #6f74ff;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    position: fixed;
+    height: 100%;
+    min-width: 30px;
+    background-color: white;
+}
+
+.nav-link+.nav-link {
+    margin-top: 32px;
+}
+
+.nav-link:hover svg {
+    color: #3d42df;
+}
+
+.icon svg {
+    width: 30px;
+    height: 30px;
+    color: var(--link-color);
+    transition: .2s ease-in;
+}
