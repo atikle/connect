@@ -4,8 +4,8 @@ html {
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: black;
-    color: white;
+    background-color: var(--app-background);
+    color: var(--message-text);
     font-family: 'Poppins', sans-serif;
     border: 0;
     top: 0;
@@ -45,7 +45,7 @@ body.dark {
     position: fixed;
     height: 100%;
     /* min-width: 30px; */
-    background-color: white;
+    background-color: var(--app-background);
     align-items: center;
 }
 
@@ -75,13 +75,11 @@ body.dark {
 }
 
 .logo-para {
-    width: 90%;
+    width: 96%;
     position: fixed;
+    top: 10px;
     right: 0;
     margin-top: 10px;
     margin-left: 60px;
-}
-
-.logo {
-    background-color: grey;
+    border-radius: 40px;
 }
