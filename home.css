@@ -63,3 +63,19 @@ body.dark {
     color: var(--link-color);
     transition: .2s ease-in;
 }
+
+.connect {
+    font-family: "Roboto", sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.connect-text {
+    color: crimson;
+}
+
+.logo-para {
+    position: fixed;
+    margin-top: 10px;
+    margin-left: 60px;
+}
