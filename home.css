@@ -82,6 +82,7 @@ h1 {
     right: 12px;
     border-radius: 15px;
     background-color: var(--navigation-bg);
+    box-shadow: var(--navigation-box-shadow);
     padding: 10px 20px;
     padding-bottom: 10px;
 }
@@ -102,15 +103,17 @@ h1 {
     position: fixed;
     top: 88px;
     bottom: 12px;
-    left: 85px;
+    left: 88px;
     right: 12px;
     border-radius: 15px;
     background-color: var(--navigation-bg);
+    box-shadow: var(--navigation-box-shadow);
 }
 
 .section-heading {
     padding: 40px 30px;
     background-image: url(banner_dark.png);
+    box-shadow: var(--navigation-box-shadow);
     background-size: 510px;
     color: white;
     top: 0px;
