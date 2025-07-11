@@ -43,10 +43,12 @@ body.dark {
     flex-direction: column;
     padding: 20px;
     position: fixed;
-    height: 100%;
-    /* min-width: 30px; */
+    height: auto;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 15px;
     background-color: var(--navigation-bg);
-    align-items: center;
 }
 
 .nav-link+.nav-link {
@@ -64,22 +66,36 @@ body.dark {
     transition: .2s ease-in;
 }
 
-.connect {
+.branding {
     font-family: "Roboto", sans-serif;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 700;
 }
 
-.connect-text {
+.connect-branding {
     color: crimson;
 }
 
 .logo-para {
-    width: 95%;
+    width: auto;
     position: fixed;
-    margin-top: 5px;
-    margin-right: 5px;
-    border-radius: 20px;
+    top: 10px;
+    left: 85px;
+    right: 12px;
+    border-radius: 15px;
     background-color: var(--navigation-bg);
-    padding: 0px 5px;
+    padding: 5px 20px;
+    padding-bottom: 5px;
+}
+
+.main-content {
+    width: auto;
+    height: auto;
+    position: fixed;
+    top: 78px;
+    bottom: 10px;
+    left: 85px;
+    right: 12px;
+    border-radius: 15px;
+    background-color: var(--navigation-bg);
 }
