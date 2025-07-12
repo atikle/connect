@@ -134,6 +134,7 @@
         </div>
         <div class="webinar-tags">
           <div class="tag live">O Live</div>
+          <div class="tag recording">Recording</div>
         </div>
         <a href="https://atikle.github.io/connect/webinar" class="join-button active">Join Session</a>
       </div>
@@ -145,7 +146,10 @@
         <div class="webinar-date-time">
           5PM | 20th June 2025
         </div>
-        <a class="join-button over">Session Over</a>
+        <div class="webinar-tags">
+          <div class="tag recording">Recording</div>
+        </div>
+        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
       <div class="webinar">
@@ -155,7 +159,10 @@
         <div class="webinar-date-time">
           5PM | 25th June 2025
         </div>
-        <a href="https://atikle.github.io/connect/webinar" onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
+        <div class="webinar-tags">
+          <div class="tag recording">Recording</div>
+        </div>
+        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
       <div class="webinar">
@@ -165,7 +172,10 @@
         <div class="webinar-date-time">
           5PM | 30th June 2025
         </div>
-        <a href="https://atikle.github.io/connect/webinar" class="join-button over">Session Over</a>
+        <div class="webinar-tags">
+          <div class="tag recording">Recording</div>
+        </div>
+        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
       <div class="webinar">
@@ -175,7 +185,10 @@
         <div class="webinar-date-time">
           5PM | 2nd July 2025
         </div>
-        <a href="https://atikle.github.io/connect/webinar" class="join-button over">Session Over</a>
+        <div class="webinar-tags">
+          <div class="tag recording">Recording</div>
+        </div>
+        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
       <div class="webinar">
@@ -185,7 +198,10 @@
         <div class="webinar-date-time">
           5PM | 7th July 2025
         </div>
-        <a href="https://atikle.github.io/connect/webinar" class="join-button over">Session Over</a>
+        <div class="webinar-tags">
+          <div class="tag recording">Recording</div>
+        </div>
+        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
       <div class="webinar">
@@ -195,7 +211,10 @@
         <div class="webinar-date-time">
           5PM | 11th July 2025
         </div>
-        <a href="https://atikle.github.io/connect/webinar" class="join-button over">Session Over</a>
+        <div class="webinar-tags">
+          <div class="tag recording">Recording</div>
+        </div>
+        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
       <div class="webinar">
@@ -205,7 +224,7 @@
         <div class="webinar-date-time">
           5PM | 13th July 2025
         </div>
-        <a href="https://atikle.github.io/connect/webinar" class="join-button inactive">Join Session</a>
+        <a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Join Session</a>
       </div>
 
       <div class="webinar">
@@ -215,7 +234,7 @@
         <div class="webinar-date-time">
           5PM | 15th July 2025
         </div>
-        <a href="https://atikle.github.io/connect/webinar" class="join-button inactive">Join Session</a>
+        <a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Join Session</a>
       </div>
 
     </div>
@@ -224,6 +243,7 @@
 
   <script>
     const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
+    const INACTIVE_MESSAGE = "Session is not started yet.";
   </script>
 
 </body>
