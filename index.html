@@ -125,7 +125,7 @@
 
     <div class="scroolable-content">
 
-      <div class="webinar" id="webinar">
+      <div class="webinar">
         <div class="webinar-name">
           Pilot Testing Session (active window)
         </div>
@@ -138,7 +138,7 @@
         <a href="https://atikle.github.io/connect/webinar" class="join-button active">Join Session</a>
       </div>
 
-      <div class="webinar" id="webinar">
+      <div class="webinar">
         <div class="webinar-name">
           Pilot Testing Session 1
         </div>
@@ -148,18 +148,17 @@
         <a class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar" id="webinar">
+      <div class="webinar">
         <div class="webinar-name">
           Pilot Testing Session 2
         </div>
         <div class="webinar-date-time">
           5PM | 25th June 2025
         </div>
-        <a onclick="alert('Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.')"
-          class="join-button over">Session Over</a>
+        <a href="https://atikle.github.io/connect/webinar" onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar" id="webinar">
+      <div class="webinar">
         <div class="webinar-name">
           Pilot Testing Session 3
         </div>
@@ -169,7 +168,7 @@
         <a href="https://atikle.github.io/connect/webinar" class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar" id="webinar">
+      <div class="webinar">
         <div class="webinar-name">
           Pilot Testing Session 4
         </div>
@@ -179,7 +178,7 @@
         <a href="https://atikle.github.io/connect/webinar" class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar" id="webinar">
+      <div class="webinar">
         <div class="webinar-name">
           Pilot Testing Session 5
         </div>
@@ -189,7 +188,7 @@
         <a href="https://atikle.github.io/connect/webinar" class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar" id="webinar">
+      <div class="webinar">
         <div class="webinar-name">
           Pilot Testing Session 6
         </div>
@@ -199,7 +198,7 @@
         <a href="https://atikle.github.io/connect/webinar" class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar" id="webinar">
+      <div class="webinar">
         <div class="webinar-name">
           Pilot Testing Session 7
         </div>
@@ -209,7 +208,7 @@
         <a href="https://atikle.github.io/connect/webinar" class="join-button inactive">Join Session</a>
       </div>
 
-      <div class="webinar" id="webinar">
+      <div class="webinar">
         <div class="webinar-name">
           Pilot Testing Session 8
         </div>
@@ -224,14 +223,7 @@
   </div>
 
   <script>
-    const OVER_MESSAGE = "This is the shared alert for all buttons.";
-
-    document.getElementById('webinar').addEventListener('click', function (event) {
-      // Check if the clicked element (event.target) is one of the buttons
-      if (event.target.classList.contains('over')) {
-        alert(OVER_MESSAGE);
-      }
-    });
+    const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
   </script>
 
 </body>
