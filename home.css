@@ -1,3 +1,37 @@
+::selection {
+    color: silver;
+    background: transparent;
+}
+
+
+/* ------------------- Scroll Bar ------------------- */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+    padding: 10px 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: silver;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: cadetblue;
+    border-radius: 35px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: silver;
+}
+
+
+
 body,
 html {
     width: 100%;
@@ -23,6 +57,11 @@ body {
     --message-text: #2c303a;
     --placeholder-text: #a2a4bc;
     --button-bg: #fff;
+    /* --webinar-bg: #141414;
+    --webinar-text: #fff; */
+    --webinar-bg: transparent;
+    --webinar-border: #eaebf5;
+    --webinar-text: black;
 }
 
 body.dark {
@@ -111,13 +150,16 @@ h1 {
 }
 
 .scroolable-content {
-    flex-grow: 1;
-    /* Allows content to fill available space */
+    flex-grow: 1; /* Allows content to fill available space */
     overflow-y: auto;
+    height: auto;
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 .section-heading {
-    top: 0px;
     margin-top: 0px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -133,9 +175,11 @@ h1 {
     margin: auto;
     padding: 10px 10px;
     border-radius: 15px;
-    background-color: black;
-    color: whitesmoke;
-    margin-top: 30px;
+    margin-top: 50px;
+    background-color: var(--webinar-bg);
+    color: var(--webinar-text);
+    box-shadow: var(--navigation-box-shadow);
+    border: 3px solid var(--webinar-border);
 }
 
 .webinar-name {
