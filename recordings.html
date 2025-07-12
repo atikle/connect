@@ -34,7 +34,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 
   <style>
-    .webinar {
+    .recording-conatiner {
       width: auto;
       margin: auto;
       margin-top: 40px;
@@ -46,16 +46,36 @@
       background-color: var(--webinar-bg);
       color: var(--webinar-text);
       box-shadow: var(--navigation-box-shadow);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 40px;
     }
 
-    .webinar-name {
+    .thumbnail-container {
+      width: auto;
       padding: 10px 10px;
+    }
+
+    .recording-thumbnail {
+      width: 200px;
+      border: 3px solid black;
+      border-radius: 15px;
+    }
+
+    .details-container {
+      width: auto;
+      padding: 0px 10px;
+    }
+
+    .recording-name {
+      padding: 0px 10px;
       font-family: "Roboto", sans-serif;
       font-size: 30px;
       font-weight: 500;
     }
 
-    .webinar-date-time {
+    .recording-date-time {
       padding: 10px 10px;
       font-family: 'Ubuntu', sans-serif;
       font-size: 15px;
@@ -135,8 +155,8 @@
       </abbr>
     </a>
 
-    <a href="recordings.html" class="nav-link icon">
-      <abbr title="Recordings">
+    <a href="#" class="nav-link icon">
+      <abbr title="Home">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="feather feather-hard-drive">
@@ -190,120 +210,116 @@
 
   <div class="main-content">
 
-    <h1 class="section-heading">Webinar Schedule</h1>
+    <h1 class="section-heading">Recordings</h1>
 
     <div class="scroolable-content">
 
-      <div class="webinar">
-        <div class="webinar-name">
-          Pilot Testing Session (active window)
+      <div class="recording-conatiner">
+        <div class="thumbnail-container">
+          <img class="recording-thumbnail" src="logo.jpeg" alt="">
         </div>
-        <div class="webinar-date-time">
-          Always active
+        <div class="details-container">
+          <div class="recording-name">
+            Pilot Testing Session 1
+          </div>
+          <div class="recording-date-time">
+            5PM | 20th June 2025 | 63 minutes
+          </div>
+          <div class="webinar-tags">
+            <div class="tag recording">Recording</div>
+          </div>
+          <a onclick="alert(DELETE_MESSAGE)" class="join-button active">View Recording</a>
         </div>
-        <div class="webinar-tags">
-          <div class="tag live">O Live</div>
-          <div class="tag recording">Recording</div>
-        </div>
-        <a href="https://atikle.github.io/connect/webinar" class="join-button active">Join Session</a>
       </div>
 
-      <div class="webinar">
-        <div class="webinar-name">
-          Pilot Testing Session 1
+      <div class="recording-conatiner">
+        <div class="thumbnail-container">
+          <img class="recording-thumbnail" src="logo.jpeg" alt="">
         </div>
-        <div class="webinar-date-time">
-          5PM | 20th June 2025
+        <div class="details-container">
+          <div class="recording-name">
+            Pilot Testing Session 2
+          </div>
+          <div class="recording-date-time">
+            5PM | 25th June 2025 | 42 minutes
+          </div>
+          <div class="webinar-tags">
+            <div class="tag recording">Recording</div>
+          </div>
+          <a onclick="alert(DELETE_MESSAGE)" class="join-button active">View Recording</a>
         </div>
-        <div class="webinar-tags">
-          <div class="tag recording">Recording</div>
-        </div>
-        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar">
-        <div class="webinar-name">
-          Pilot Testing Session 2
+      <div class="recording-conatiner">
+        <div class="thumbnail-container">
+          <img class="recording-thumbnail" src="logo.jpeg" alt="">
         </div>
-        <div class="webinar-date-time">
-          5PM | 25th June 2025
+        <div class="details-container">
+          <div class="recording-name">
+            Pilot Testing Session 3
+          </div>
+          <div class="recording-date-time">
+            5PM | 30th June 2025 | 30 minutes
+          </div>
+          <div class="webinar-tags">
+            <div class="tag recording">Recording</div>
+          </div>
+          <a onclick="alert(DELETE_MESSAGE)" class="join-button active">View Recording</a>
         </div>
-        <div class="webinar-tags">
-          <div class="tag recording">Recording</div>
-        </div>
-        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar">
-        <div class="webinar-name">
-          Pilot Testing Session 3
+      <div class="recording-conatiner">
+        <div class="thumbnail-container">
+          <img class="recording-thumbnail" src="logo.jpeg" alt="">
         </div>
-        <div class="webinar-date-time">
-          5PM | 30th June 2025
+        <div class="details-container">
+          <div class="recording-name">
+            Pilot Testing Session 4
+          </div>
+          <div class="recording-date-time">
+            5PM | 2nd July 2025 | 126 minutes
+          </div>
+          <div class="webinar-tags">
+            <div class="tag recording">Recording</div>
+          </div>
+          <a onclick="alert(DELETE_MESSAGE)" class="join-button active">View Recording</a>
         </div>
-        <div class="webinar-tags">
-          <div class="tag recording">Recording</div>
-        </div>
-        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar">
-        <div class="webinar-name">
-          Pilot Testing Session 4
+      <div class="recording-conatiner">
+        <div class="thumbnail-container">
+          <img class="recording-thumbnail" src="logo.jpeg" alt="">
         </div>
-        <div class="webinar-date-time">
-          5PM | 2nd July 2025
+        <div class="details-container">
+          <div class="recording-name">
+            Pilot Testing Session 5
+          </div>
+          <div class="recording-date-time">
+            5PM | 7th July 2025 | 97 minutes
+          </div>
+          <div class="webinar-tags">
+            <div class="tag recording">Recording</div>
+          </div>
+          <a onclick="alert(DELETE_MESSAGE)" class="join-button active">View Recording</a>
         </div>
-        <div class="webinar-tags">
-          <div class="tag recording">Recording</div>
-        </div>
-        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
       </div>
 
-      <div class="webinar">
-        <div class="webinar-name">
-          Pilot Testing Session 5
+      <div class="recording-conatiner">
+        <div class="thumbnail-container">
+          <img class="recording-thumbnail" src="logo.jpeg" alt="">
         </div>
-        <div class="webinar-date-time">
-          5PM | 7th July 2025
+        <div class="details-container">
+          <div class="recording-name">
+            Pilot Testing Session 6
+          </div>
+          <div class="recording-date-time">
+            5PM | 11th July 2025 | 39 minutes
+          </div>
+          <div class="webinar-tags">
+            <div class="tag recording">Recording</div>
+          </div>
+          <a onclick="alert(DELETE_MESSAGE)" class="join-button active">View Recording</a>
         </div>
-        <div class="webinar-tags">
-          <div class="tag recording">Recording</div>
-        </div>
-        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
-      </div>
-
-      <div class="webinar">
-        <div class="webinar-name">
-          Pilot Testing Session 6
-        </div>
-        <div class="webinar-date-time">
-          5PM | 11th July 2025
-        </div>
-        <div class="webinar-tags">
-          <div class="tag recording">Recording</div>
-        </div>
-        <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
-      </div>
-
-      <div class="webinar">
-        <div class="webinar-name">
-          Pilot Testing Session 7
-        </div>
-        <div class="webinar-date-time">
-          5PM | 13th July 2025
-        </div>
-        <a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Join Session</a>
-      </div>
-
-      <div class="webinar">
-        <div class="webinar-name">
-          Pilot Testing Session 8
-        </div>
-        <div class="webinar-date-time">
-          5PM | 15th July 2025
-        </div>
-        <a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Join Session</a>
       </div>
 
     </div>
@@ -311,8 +327,7 @@
   </div>
 
   <script>
-    const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
-    const INACTIVE_MESSAGE = "Session is not started yet.";
+    const DELETE_MESSAGE = "Recording not found. Deleted by space sense";
   </script>
 
 </body>
