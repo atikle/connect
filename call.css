@@ -508,3 +508,20 @@ a {
         height: 33.3%;
     }
 }
+
+
+
+
+#message {
+    display: none;
+}
+
+@media (max-width: 500px) {
+    #demo {
+        display: none;
+    }
+
+    #message {
+        display: block;
+    }
+}
