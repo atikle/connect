@@ -59,6 +59,77 @@
         ::-webkit-scrollbar-thumb:hover {
             background: gray;
         }
+
+        .logo-para {
+            z-index: 100;
+        }
+
+        .navigation {
+            z-index: 100;
+        }
+
+
+
+
+        
+
+        /* Custom CSS for the spinner animation */
+        .spinner {
+            margin-top: 200px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid #3498db;
+            /* Blue color for the spinner */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Hide content initially */
+        .content-hidden {
+            display: none;
+        }
+
+        /* Loading Screen Styles */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background-color: whitesmoke;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 90;
+            transition: opacity 500ms ease-in-out;
+        }
+
+        .loading-text {
+            color: black;
+            font-size: 1.125rem;
+            margin-top: 1rem;
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .5;
+            }
+        }
     </style>
 </head>
 
@@ -85,7 +156,35 @@
 
     <p id="message" style="display: none;">Please use this on a desktop/ laptop.</p>
 
-    <p id="atikle-connect-application">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <text style="margin-top: 300px;" class="branding">atikle <font class="connect-branding">connect</font></text>
+            <div class="spinner"></div>
+            <p class="loading-text">Loading webinar application...</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('atikle-connect-application');
+
+            // Set a timeout for 1 second (1000 milliseconds)
+            setTimeout(() => {
+                // Add a class to fade out the loading screen
+                loadingScreen.style.opacity = '0';
+                // After the fade-out transition completes, hide the loading screen and show content
+                loadingScreen.addEventListener('transitionend', () => {
+                    loadingScreen.style.display = 'none';
+                    mainContent.classList.remove('content-hidden');
+                    document.body.style.overflow = 'auto'; // Re-enable scrolling
+                }, { once: true }); // Ensure the event listener runs only once
+            }, 1500); // 1000 milliseconds = 1 second
+        });
+    </script>
+
+    <p id="atikle-connect-application" class="content-hidden">
 
     <nav class="navigation">
         <a href="https://atikle.github.io/connect" class="nav-link icon">
