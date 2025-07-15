@@ -134,6 +134,7 @@
 </head>
 
 <body onload="zoom()">
+    <div id="flscreen">
     <script type="text/javascript">
         function zoom() {
             document.body.style.zoom = "100%"
@@ -338,7 +339,7 @@
     <div class="video-call-actions ">
         <button class="video-action-button mic"></button>
         <button class="video-action-button camera"></button>
-        <button class="video-action-button maximize"></button>
+        <button class="video-action-button maximize" onclick="flscreen.requestFullscreen();"></button>
         <button class="spotlight-button">Spotlight</button>
         <button class="video-action-button endcall">Leave</button>
         <button class="video-action-button magnifier">
@@ -484,6 +485,8 @@
         const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
         const INACTIVE_MESSAGE = "Session is not started yet.";
     </script>
+
+    </div>
 
 </body>
 
