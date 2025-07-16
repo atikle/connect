@@ -167,7 +167,7 @@ h1 {
     border-top-right-radius: 15px;
     padding: 40px 30px;
     color: white;
-    background-image: url(banner_dark.png);
+    background-image: url(https://atikle.github.io/resource/atikle_connect/banner_dark.png);
     box-shadow: var(--navigation-box-shadow);
     background-size: 510px;
 }
