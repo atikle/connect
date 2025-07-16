@@ -32,15 +32,30 @@ a {
     left: 85px;
     right: 500px;
     border-radius: 15px;
-    background-color: var(--navigation-bg);
-    box-shadow: var(--navigation-box-shadow);
+    /* background-color: var(--navigation-bg);
+    box-shadow: var(--navigation-box-shadow); */
+    background-color: transparent;
 }
 
 .video-participant {
-    width: 33.3%;
-    height: 50%;
+    width: 32.8%;
+    /* width: 33.33%; */
+    height: 48.8%;
+    /* height: 50%; */
     position: relative;
     background-color: black;
+
+    /* delete this */
+    border-radius: 15px;
+    border: 0.53% solid transparent;
+    box-shadow: var(--navigation-box-shadow);
+    margin: auto;
+    /* delete till here */
+
+    /* background-image: url(https://atikle.github.io/resource/atikle_connect/host-icon.png);
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-position: 150px 150px; */
 
     img {
         width: 100%;
