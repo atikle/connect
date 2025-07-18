@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse by atikle</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1f2937; /* Gray-800 */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563; /* Gray-600 */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280; /* Gray-500 */
+        }
+
+        /* Ensure smooth transition for height changes */
+        textarea {
+            transition: height 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        /* Basic animation for loading dots */
+        @keyframes blink {
+            0% { opacity: 0.2; }
+            20% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        .loading-dot {
+            animation: blink 1.4s infinite both;
+        }
+
+        .loading-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Message entry animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-fade-in {
+            animation: fadeInUp 0.3s ease-out forwards;
+        }
+
+        /* Button hover effects */
+        .send-button-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .send-button-hover:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+        .new-chat-button-hover:hover {
+            background-color: #4b5563; /* Gray-600 */
+            transform: scale(1.02);
+        }
+        .new-chat-button-hover:active {
+            transform: scale(0.98);
+        }
+
+        /* Specific styling for message bubbles */
+        .ai-message {
+            border-bottom-left-radius: 0.25rem; /* rounded-bl-sm */
+            border-top-right-radius: 0.75rem; /* rounded-tr-lg */
+            border-bottom-right-radius: 0.75rem; /* rounded-br-lg */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        }
+
+        .user-message {
+            border-bottom-right-radius: 0.25rem; /* rounded-br-sm */
+            border-top-left-radius: 0.75rem; /* rounded-tl-lg */
+            border-bottom-left-radius: 0.75rem; /* rounded-bl-lg */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        }
+
+        /* Message box for errors/system messages */
+        #message-box {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ef4444; /* Red-500 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        #message-box.show {
+            opacity: 1;
+        }
+
+        /* Input area focus effect */
+        #user-input:focus {
+            border-color: #3b82f6; /* Blue-500 */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Blue-500 with transparency */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased flex flex-col h-screen">
+
+    <div class="flex flex-col h-full w-full max-w-4xl mx-auto p-4 md:p-6">
+        <!-- Header -->
+        <header class="flex items-center justify-between p-4 bg-gray-800 rounded-lg shadow-lg mb-4">
+            <div class="flex items-center">
+                <img src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="Synapse Logo" class="h-10 w-10 mr-3 rounded-full">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-100">Synapse</h1>
+            </div>
+            <!-- New Chat Button -->
+            <button
+                id="new-chat-button"
+                class="bg-gray-700 hover:bg-gray-600 text-gray-200 px-4 py-2 rounded-lg flex items-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 new-chat-button-hover"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                New Chat
+            </button>
+        </header>
+
+        <!-- Chat Container -->
+        <div id="chat-container" class="flex-1 bg-gray-800 rounded-lg shadow-lg p-4 overflow-y-auto mb-4 flex flex-col space-y-4">
+            <!-- Initial welcome message - Timestamp will be added by JavaScript -->
+            <div id="initial-welcome-message" class="flex justify-start items-start">
+                <img src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="AI Profile" class="w-8 h-8 rounded-full mr-3 flex-shrink-0">
+                <div class="bg-gray-700 text-gray-200 p-3 rounded-lg max-w-[80%] md:max-w-[70%] shadow-md message-fade-in ai-message">
+                    <p>Hello! I'm Synapse, your AI assistant. How can I help you today?<br><span class="text-xs text-gray-400 mt-1 block">Disclaimer: I am an AI model and may occasionally produce inaccurate or misleading information. Please verify critical details.</span></p>
+                    <span class="text-xs text-gray-400 mt-1 block text-left" id="initial-message-timestamp"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="flex items-end bg-gray-800 p-3 rounded-lg shadow-lg">
+            <textarea
+                id="user-input"
+                class="flex-1 bg-gray-700 text-gray-100 p-3 rounded-l-lg resize-none outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 max-h-40 overflow-y-auto"
+                placeholder="Ask Synapse anything..."
+                rows="1"
+            ></textarea>
+            <button
+                id="send-button"
+                class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-r-lg ml-1 flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 send-button-hover"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                    <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.917H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.918a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Message Box for Alerts/Errors -->
+    <div id="message-box" class="hidden"></div>
+
+    <script>
+        console.log("Synapse AI Chatbot script loaded and running!");
+
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const newChatButton = document.getElementById('new-chat-button');
+        const messageBox = document.getElementById('message-box');
+        const initialWelcomeMessageTimestamp = document.getElementById('initial-message-timestamp');
+
+
+        // Profile picture URLs
+        const aiProfilePic = "https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png"; // Synapse logo for AI
+        const userProfilePic = "https://placehold.co/32x32/2563eb/ffffff?text=YOU"; // Blue for user
+
+        // Store chat history for context
+        let chatHistory = [];
+        let loadingMessageDiv = null; // To keep track of the loading message element
+
+        // Function to get current time for timestamp
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+
+        // Function to display messages in the chat container
+        function displayMessage(message, sender) {
+            const messageWrapper = document.createElement('div');
+            messageWrapper.classList.add('flex', 'items-start', 'message-fade-in');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('p-3', 'rounded-lg', 'shadow-md');
+
+            const profilePic = document.createElement('img');
+            profilePic.classList.add('w-8', 'h-8', 'rounded-full', 'flex-shrink-0');
+
+            const timestampSpan = document.createElement('span');
+            timestampSpan.classList.add('text-xs', 'text-gray-400', 'mt-1', 'block');
+            timestampSpan.textContent = getCurrentTime();
+
+            if (sender === 'user') {
+                messageWrapper.classList.add('justify-end');
+                profilePic.src = userProfilePic;
+                profilePic.alt = "User Profile";
+                profilePic.classList.add('ml-3');
+                messageDiv.classList.add('bg-blue-600', 'text-white', 'max-w-[80%]', 'md:max-w-[70%]', 'user-message');
+                timestampSpan.classList.add('text-right'); // Align timestamp right for user messages
+                messageDiv.appendChild(document.createTextNode(message)); // Use textNode to prevent HTML injection
+                messageDiv.appendChild(document.createElement('br')); // Add a line break before timestamp
+                messageDiv.appendChild(timestampSpan);
+                messageWrapper.appendChild(messageDiv);
+                messageWrapper.appendChild(profilePic);
+            } else {
+                messageWrapper.classList.add('justify-start');
+                profilePic.src = aiProfilePic;
+                profilePic.alt = "AI Profile";
+                profilePic.classList.add('mr-3');
+                messageDiv.classList.add('bg-gray-700', 'text-gray-200', 'max-w-[80%]', 'md:max-w-[70%]', 'ai-message');
+                timestampSpan.classList.add('text-left'); // Align timestamp left for AI messages
+                messageDiv.appendChild(document.createTextNode(message)); // Use textNode to prevent HTML injection
+                messageDiv.appendChild(document.createElement('br')); // Add a line break before timestamp
+                messageDiv.appendChild(timestampSpan);
+                messageWrapper.appendChild(profilePic);
+                messageWrapper.appendChild(messageDiv);
+            }
+
+            chatContainer.appendChild(messageWrapper);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Function to show loading indicator as an AI message
+        function showLoadingIndicator() {
+            loadingMessageDiv = document.createElement('div');
+            loadingMessageDiv.classList.add('flex', 'justify-start', 'items-start', 'message-fade-in');
+            loadingMessageDiv.id = 'ai-typing-indicator'; // Add an ID for easier removal
+
+            const profilePic = document.createElement('img');
+            profilePic.src = aiProfilePic;
+            profilePic.alt = "AI Profile";
+            profilePic.classList.add('w-8', 'h-8', 'rounded-full', 'mr-3', 'flex-shrink-0');
+
+            const messageBubble = document.createElement('div');
+            messageBubble.classList.add('bg-gray-700', 'text-gray-300', 'p-3', 'rounded-lg', 'shadow-md', 'ai-message', 'max-w-[80%]', 'md:max-w-[70%]');
+            messageBubble.innerHTML = `
+                <div class="flex items-center space-x-1">
+                    <span class="loading-dot w-2 h-2 bg-gray-400 rounded-full"></span>
+                    <span class="loading-dot w-2 h-2 bg-gray-400 rounded-full"></span>
+                    <span class="loading-dot w-2 h-2 bg-gray-400 rounded-full"></span>
+                    <span class="ml-2">Synapse is thinking...</span>
+                </div>
+                <span class="text-xs text-gray-400 mt-1 block text-left">${getCurrentTime()}</span>
+            `;
+
+            loadingMessageDiv.appendChild(profilePic);
+            loadingMessageDiv.appendChild(messageBubble);
+            chatContainer.appendChild(loadingMessageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Function to hide loading indicator
+        function hideLoadingIndicator() {
+            if (loadingMessageDiv) {
+                loadingMessageDiv.remove();
+                loadingMessageDiv = null;
+            }
+        }
+
+        // Function to display a temporary message box
+        function showMessageBox(message, type = 'error', duration = 3000) {
+            messageBox.textContent = message;
+            messageBox.className = ''; // Clear existing classes
+            messageBox.classList.add('show');
+            if (type === 'error') {
+                messageBox.classList.add('bg-red-500');
+            } else if (type === 'success') {
+                messageBox.classList.add('bg-green-500');
+            } else {
+                messageBox.classList.add('bg-gray-600');
+            }
+            messageBox.classList.remove('hidden');
+
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+                setTimeout(() => {
+                    messageBox.classList.add('hidden');
+                }, 300); // Allow fade-out transition
+            }, duration);
+        }
+
+        // Function to adjust textarea height dynamically
+        function adjustTextareaHeight() {
+            userInput.style.height = 'auto';
+            userInput.style.height = userInput.scrollHeight + 'px';
+        }
+
+        // Function to clear chat and start a new conversation
+        function startNewChat() {
+            chatHistory = [];
+            chatContainer.innerHTML = `
+                <div class="flex justify-start items-start message-fade-in">
+                    <img src="${aiProfilePic}" alt="AI Profile" class="w-8 h-8 rounded-full mr-3 flex-shrink-0">
+                    <div class="bg-gray-700 text-gray-200 p-3 rounded-lg max-w-[80%] md:max-w-[70%] shadow-md ai-message">
+                        <p>Hello! I'm Synapse, your AI assistant. How can I help you today?<br><span class="text-xs text-gray-400 mt-1 block">Disclaimer: I am an AI model and may occasionally produce inaccurate or misleading information. Please verify critical details.</span></p>
+                        <span class="text-xs text-gray-400 mt-1 block text-left" id="initial-message-timestamp-dynamic"></span>
+                    </div>
+                </div>
+            `;
+            // Set the timestamp for the initial message dynamically
+            document.getElementById('initial-message-timestamp-dynamic').textContent = getCurrentTime();
+
+            userInput.value = '';
+            adjustTextareaHeight();
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Function to send message to the AI
+        async function sendMessage() {
+            const prompt = userInput.value.trim();
+            if (!prompt) return;
+
+            // Disable input and button while AI is thinking
+            userInput.disabled = true;
+            sendButton.disabled = true;
+            sendButton.classList.add('opacity-50', 'cursor-not-allowed');
+
+            // Display user message
+            displayMessage(prompt, 'user');
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            // Clear input and adjust height
+            userInput.value = '';
+            adjustTextareaHeight();
+
+            // Show loading indicator
+            showLoadingIndicator();
+
+            try {
+                const apiKey = ""; // API key is provided by the Canvas environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: chatHistory
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`API error: ${response.status} - ${errorData.error.message || 'Unknown error'}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const aiResponseText = result.candidates[0].content.parts[0].text;
+                    hideLoadingIndicator(); // Hide loading before displaying actual response
+                    displayMessage(aiResponseText, 'ai');
+                    chatHistory.push({ role: "model", parts: [{ text: aiResponseText }] });
+                } else {
+                    hideLoadingIndicator();
+                    showMessageBox("Sorry, I couldn't get a response from the AI. Please try again.", 'error');
+                }
+            } catch (error) {
+                console.error('Error fetching AI response:', error);
+                hideLoadingIndicator();
+                showMessageBox(`An error occurred: ${error.message}. Please try again.`, 'error');
+            } finally {
+                // Re-enable input and button
+                userInput.disabled = false;
+                sendButton.disabled = false;
+                sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                userInput.focus(); // Focus back on the input field
+                chatContainer.scrollTop = chatContainer.scrollHeight; // Ensure scroll to bottom
+            }
+        }
+
+        // Event listener for send button click
+        sendButton.addEventListener('click', sendMessage);
+
+        // Event listener for Enter key press in the textarea
+        userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Event listener for textarea input to adjust height
+        userInput.addEventListener('input', adjustTextareaHeight);
+
+        // Event listener for new chat button click
+        newChatButton.addEventListener('click', startNewChat);
+
+        // Initial setup on page load
+        // Call startNewChat to set up the initial message with correct timestamp
+        startNewChat();
+    </script>
+</body>
+</html>

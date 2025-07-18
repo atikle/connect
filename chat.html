@@ -1,362 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>atikle connect | Chat</title>
-    <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png"
-        type="image/x-icon">
-    <link rel="stylesheet" href="connect.css">
-
-    <!-- Tailwind CSS CDN -->
+    <title>Synapse by atikle</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Roboto @ Google Fonts -->
-    <!-- font-family: "Roboto", sans-serif; -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-
-    <!-- Poppins @ Google Fonts -->
-    <!-- font-family: 'Poppins', sans-serif; -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-
-    <!-- Fredoka @ Google Fonts -->
-    <!-- font-family: 'Fredoka', sans-serif; -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
-
-    <!-- Ununtu @ Google Fonts -->
-    <!-- font-family: 'Ubuntu', sans-serif; -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Custom scrollbar for the chat messages area */
-        .chat-messages::-webkit-scrollbar {
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a; /* Dark background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #e0e0e0; /* Light text color */
+            overflow: hidden; /* Prevent body scrollbars */
+        }
+        /* Custom scrollbar for a more integrated look */
+        #chat-container::-webkit-scrollbar {
             width: 8px;
         }
-
-        .chat-messages::-webkit-scrollbar-track {
-            background: #1a1a1a;
-            /* Dark track */
+        #chat-container::-webkit-scrollbar-track {
+            background: #111827; /* bg-gray-900 */
         }
-
-        .chat-messages::-webkit-scrollbar-thumb {
-            background-color: #4a4a4a;
-            /* Darker thumb */
-            border-radius: 10px;
-            border: 2px solid #1a1a1a;
+        #chat-container::-webkit-scrollbar-thumb {
+            background-color: #374151; /* bg-gray-700 */
+            border-radius: 20px;
+            border: 3px solid #111827; /* bg-gray-900 */
         }
-
-        .chat-messages::-webkit-scrollbar-thumb:hover {
-            background-color: #6a6a6a;
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
         }
-
-        /* Inter font for better readability */
-        body {
-            font-family: "Inter", sans-serif;
-        }
-
-        /* Basic styling for the main container to ensure it fills its parent div */
-        #chatbot-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            /* Hide overflow if content exceeds container */
-        }
-
-        /* Animation for loading dots */
-        @keyframes blink {
-            0% {
-                opacity: .2;
-            }
-
-            20% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: .2;
-            }
-        }
-
-        .loading-dot {
-            animation: blink 1.4s infinite both;
-        }
-
-        .loading-dot:nth-child(2) {
-            animation-delay: .2s;
-        }
-
-        .loading-dot:nth-child(3) {
-            animation-delay: .4s;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
+<body class="bg-gray-900 p-4 sm:p-8 flex items-center justify-center min-h-screen">
 
-<body>
+    <!-- 
+      Chatbot Container: 
+      This is the main wrapper. You can place this div anywhere on your site.
+      Control its size by changing the `max-w-2xl` and `h-[85vh]` classes or by
+      setting width/height on a parent container.
+    -->
+    <div id="chatbot-wrapper" class="w-full max-w-2xl h-[85vh] bg-black text-white flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
 
-    <div class="icon-para">
-        <img style="width: 50px;"
-            src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="">
-    </div>
-
-    <nav class="navigation">
-        <a href="https://atikle.github.io/connect" class="nav-link icon">
-            <abbr title="Webinar Schedule">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-home" viewBox="0 0 24 24">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                    <path d="M9 22V12h6v10" />
-                </svg>
-            </abbr>
-        </a>
-
-        <a href="https://atikle.github.io/connect/webinar" class="nav-link icon">
-            <abbr title="Live Webinar">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-call"
-                    viewBox="0 0 24 24">
-                    <path
-                        d="M15.05 5A5 5 0 0119 8.95M15.05 1A9 9 0 0123 8.94m-1 7.98v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                </svg>
-            </abbr>
-        </a>
-
-        <a href="https://atikle.github.io/connect/recordings" class="nav-link icon">
-            <abbr title="Recordings">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-hard-drive">
-                    <line x1="22" y1="12" x2="2" y2="12" />
-                    <path
-                        d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
-                    <line x1="6" y1="16" x2="6.01" y2="16" />
-                    <line x1="10" y1="16" x2="10.01" y2="16" />
-                </svg>
-            </abbr>
-        </a>
-
-        <a href="#" class="nav-link icon">
-            <abbr title="Home">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder" viewBox="0 0 24 24">
-                    <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
-                </svg>
-            </abbr>
-        </a>
-
-        <a href="#" class="nav-link icon">
-            <abbr title="Home">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-message-square">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
-            </abbr>
-        </a>
-
-        <a href="#" class="nav-link icon">
-            <abbr title="Home">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-users">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-            </abbr>
-        </a>
-
-        <a href="#" class="nav-link icon">
-            <abbr title="Home">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="3" />
-                    <path
-                        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
-                </svg>
-            </abbr>
-        </a>
-        </div>
-    </nav>
-
-    <div class="main-content">
-        <!-- Main chatbot container - designed to be placed inside any div -->
-        <div id="chatbot-container"
-            class="max-w-xl w-full h-[600px] md:h-[700px] lg:h-[800px] bg-gray-900 rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700">
-
-            <!-- Chatbot Header -->
-            <div class="flex items-center p-4 bg-gray-800 border-b border-gray-700 rounded-t-xl">
-                <img src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png"
-                    alt="Synapse Logo" class="w-10 h-10 rounded-full mr-3 shadow-md">
-                <h1 class="text-xl font-bold text-gray-50">Synapse <span class="text-blue-400"></span></h1>
+        <!-- Header -->
+        <header class="bg-gray-900/70 backdrop-blur-sm shadow-lg p-4 border-b border-gray-800 flex-shrink-0">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="Synapse Logo" class="w-8 h-8">
+                    <h1 class="text-xl font-bold text-gray-200">Synapse by atikle</h1>
+                </div>
+                 <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
             </div>
+        </header>
 
-            <!-- Chat Messages Display Area -->
-            <div id="chat-messages" class="chat-messages flex-1 p-4 overflow-y-auto space-y-4">
-                <!-- Initial welcome message -->
-                <div class="flex justify-start">
-                    <div class="bg-gray-700 text-gray-100 p-3 rounded-xl rounded-bl-none shadow-md max-w-[80%]">
-                        Hello! I'm Synapse, your AI assistant from atikle. How can I help you today?
+        <!-- Chat Container -->
+        <main id="chat-container" class="flex-1 p-6 overflow-y-auto">
+            <div id="message-list" class="space-y-6">
+                <!-- Initial AI Message -->
+                <div class="flex items-start gap-3 fade-in">
+                    <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center font-bold text-sm flex-shrink-0">AI</div>
+                    <div class="bg-gray-900 p-4 rounded-lg rounded-tl-none max-w-lg shadow-md">
+                        <p class="text-gray-300">Hello! I'm Synapse, an AI assistant from atikle. How can I help you today?</p>
                     </div>
                 </div>
+                <!-- Messages will be appended here -->
             </div>
+        </main>
 
-            <!-- Input Area -->
-            <div class="p-4 bg-gray-800 border-t border-gray-700 flex items-center rounded-b-xl">
-                <input type="text" id="user-input" placeholder="Type your message..."
-                    class="flex-1 p-3 rounded-lg bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-blue-500 transition-all duration-200 mr-3 shadow-inner">
-                <button id="send-button"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
-                    Send
+        <!-- Input Form -->
+        <footer class="bg-gray-900/70 backdrop-blur-sm p-4 border-t border-gray-800 flex-shrink-0">
+            <form id="chat-form" class="flex items-center space-x-4">
+                <input type="text" id="message-input" placeholder="Type your message here..."
+                       class="flex-1 bg-gray-800 border border-gray-700 rounded-full py-3 px-5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300">
+                <button type="submit" id="send-button"
+                        class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-5 rounded-full transition duration-300 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <span>Send</span>
                 </button>
-            </div>
-        </div>
-
-        <script>
-            const chatMessages = document.getElementById('chat-messages');
-            const userInput = document.getElementById('user-input');
-            const sendButton = document.getElementById('send-button');
-
-            // Chat history to maintain context for the AI
-            let chatHistory = [];
-
-            /**
-             * Appends a message to the chat display.
-             * @param {string} message - The text content of the message.
-             * @param {string} sender - 'user' or 'ai'.
-             */
-            function appendMessage(message, sender) {
-                const messageContainer = document.createElement('div');
-                messageContainer.classList.add('flex', sender === 'user' ? 'justify-end' : 'justify-start');
-
-                const messageBubble = document.createElement('div');
-                messageBubble.classList.add(
-                    'p-3',
-                    'rounded-xl',
-                    'shadow-md',
-                    'max-w-[80%]',
-                    sender === 'user' ? 'bg-blue-600' : 'bg-gray-700',
-                    sender === 'user' ? 'rounded-br-none' : 'rounded-bl-none',
-                    'text-gray-100'
-                );
-                messageBubble.textContent = message;
-
-                messageContainer.appendChild(messageBubble);
-                chatMessages.appendChild(messageContainer);
-
-                // Scroll to the bottom of the chat messages
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            /**
-             * Displays a loading indicator while the AI is generating a response.
-             * @returns {HTMLElement} The loading indicator element.
-             */
-            function showLoadingIndicator() {
-                const loadingContainer = document.createElement('div');
-                loadingContainer.id = 'loading-indicator';
-                loadingContainer.classList.add('flex', 'justify-start');
-
-                const loadingBubble = document.createElement('div');
-                loadingBubble.classList.add(
-                    'bg-gray-700',
-                    'p-3',
-                    'rounded-xl',
-                    'rounded-bl-none',
-                    'shadow-md',
-                    'max-w-[80%]',
-                    'flex',
-                    'space-x-1'
-                );
-
-                for (let i = 0; i < 3; i++) {
-                    const dot = document.createElement('span');
-                    dot.classList.add('loading-dot', 'w-2', 'h-2', 'bg-gray-400', 'rounded-full');
-                    loadingBubble.appendChild(dot);
-                }
-
-                loadingContainer.appendChild(loadingBubble);
-                chatMessages.appendChild(loadingContainer);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                return loadingContainer;
-            }
-
-            /**
-             * Removes the loading indicator from the chat display.
-             * @param {HTMLElement} indicator - The loading indicator element to remove.
-             */
-            function hideLoadingIndicator(indicator) {
-                if (indicator && indicator.parentNode) {
-                    indicator.parentNode.removeChild(indicator);
-                }
-            }
-
-            /**
-             * Handles sending a message to the AI.
-             */
-            async function sendMessage() {
-                const prompt = userInput.value.trim();
-                if (!prompt) return; // Do not send empty messages
-
-                appendMessage(prompt, 'user');
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                userInput.value = ''; // Clear input field
-
-                const loadingIndicator = showLoadingIndicator(); // Show loading dots
-
-                try {
-                    const payload = { contents: chatHistory };
-                    const apiKey = ""; // Canvas will provide this at runtime
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const result = await response.json();
-
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        const aiResponse = result.candidates[0].content.parts[0].text;
-                        appendMessage(aiResponse, 'ai');
-                        chatHistory.push({ role: "model", parts: [{ text: aiResponse }] }); // Add AI response to history
-                    } else {
-                        console.error("Unexpected API response structure:", result);
-                        appendMessage("Sorry, I couldn't get a response. Please try again.", 'ai');
-                    }
-                } catch (error) {
-                    console.error("Error fetching AI response:", error);
-                    appendMessage("Oops! Something went wrong. Please check your network connection or try again later.", 'ai');
-                } finally {
-                    hideLoadingIndicator(loadingIndicator); // Hide loading dots
-                }
-            }
-
-            // Event listeners
-            sendButton.addEventListener('click', sendMessage);
-            userInput.addEventListener('keypress', (event) => {
-                if (event.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-        </script>
+            </form>
+        </footer>
     </div>
 
-</body>
+    <script>
+        // The JavaScript logic remains the same as it's not dependent on the new structure or theme.
+        const chatForm = document.getElementById('chat-form');
+        const messageInput = document.getElementById('message-input');
+        const messageList = document.getElementById('message-list');
+        const chatContainer = document.getElementById('chat-container');
+        const sendButton = document.getElementById('send-button');
 
+        let chatHistory = [];
+
+        // --- Event Listeners ---
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userInput = messageInput.value.trim();
+            if (!userInput) return;
+
+            toggleFormState(true);
+            addMessage('user', userInput);
+            messageInput.value = '';
+            chatHistory.push({ role: "user", parts: [{ text: userInput }] });
+            addTypingIndicator();
+
+            try {
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Leave empty, will be handled by the environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                removeTypingIndicator();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    
+                    const aiResponse = result.candidates[0].content.parts[0].text;
+                    addMessage('ai', aiResponse);
+                    chatHistory.push({ role: "model", parts: [{ text: aiResponse }] });
+                } else {
+                    addMessage('ai', "I'm sorry, I couldn't generate a response. Please try again.");
+                }
+
+            } catch (error) {
+                console.error("Error fetching AI response:", error);
+                removeTypingIndicator();
+                addMessage('ai', "Oops! Something went wrong. Please check the console for details and try again later.");
+            } finally {
+                toggleFormState(false);
+            }
+        });
+
+        // --- UI Helper Functions ---
+        function addMessage(sender, text) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('fade-in');
+
+            if (sender === 'user') {
+                messageElement.classList.add('flex', 'items-start', 'gap-3', 'justify-end');
+                messageElement.innerHTML = `
+                    <div class="bg-gray-700 p-4 rounded-lg rounded-br-none max-w-lg shadow-md">
+                        <p class="text-white">${text}</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center font-bold text-sm flex-shrink-0">YOU</div>
+                `;
+            } else {
+                messageElement.classList.add('flex', 'items-start', 'gap-3');
+                messageElement.innerHTML = `
+                    <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center font-bold text-sm flex-shrink-0">AI</div>
+                    <div class="bg-gray-900 p-4 rounded-lg rounded-tl-none max-w-lg shadow-md">
+                        <p class="text-gray-300">${text}</p>
+                    </div>
+                `;
+            }
+
+            messageList.appendChild(messageElement);
+            scrollToBottom();
+        }
+
+        function addTypingIndicator() {
+            const typingElement = document.createElement('div');
+            typingElement.id = 'typing-indicator';
+            typingElement.classList.add('flex', 'items-start', 'gap-3');
+            typingElement.innerHTML = `
+                <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center font-bold text-sm flex-shrink-0">AI</div>
+                <div class="bg-gray-900 p-4 rounded-lg rounded-tl-none max-w-lg shadow-md flex items-center space-x-2">
+                    <span class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0s;"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></span>
+                </div>
+            `;
+            messageList.appendChild(typingElement);
+            scrollToBottom();
+        }
+
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function scrollToBottom() {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function toggleFormState(isDisabled) {
+            messageInput.disabled = isDisabled;
+            sendButton.disabled = isDisabled;
+            if (isDisabled) {
+                sendButton.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                messageInput.focus();
+            }
+        }
+    </script>
+</body>
 </html>
