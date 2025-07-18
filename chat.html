@@ -8,7 +8,9 @@
     <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png"
         type="image/x-icon">
     <link rel="stylesheet" href="connect.css">
-    <script src="chat.js"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Roboto @ Google Fonts -->
     <!-- font-family: "Roboto", sans-serif; -->
@@ -36,42 +38,67 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Custom scrollbar for a more integrated look */
-        #chat-container::-webkit-scrollbar {
+        /* Custom scrollbar for the chat messages area */
+        .chat-messages::-webkit-scrollbar {
             width: 8px;
         }
 
-        #chat-container::-webkit-scrollbar-track {
-            background: #111827;
-            /* bg-gray-900 */
+        .chat-messages::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            /* Dark track */
         }
 
-        #chat-container::-webkit-scrollbar-thumb {
-            background-color: #374151;
-            /* bg-gray-700 */
-            border-radius: 20px;
-            border: 3px solid #111827;
-            /* bg-gray-900 */
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: #4a4a4a;
+            /* Darker thumb */
+            border-radius: 10px;
+            border: 2px solid #1a1a1a;
         }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background-color: #6a6a6a;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
+        /* Inter font for better readability */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+
+        /* Basic styling for the main container to ensure it fills its parent div */
+        #chatbot-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            /* Hide overflow if content exceeds container */
+        }
+
+        /* Animation for loading dots */
+        @keyframes blink {
+            0% {
+                opacity: .2;
             }
 
-            to {
+            20% {
                 opacity: 1;
-                transform: translateY(0);
             }
+
+            100% {
+                opacity: .2;
+            }
+        }
+
+        .loading-dot {
+            animation: blink 1.4s infinite both;
+        }
+
+        .loading-dot:nth-child(2) {
+            animation-delay: .2s;
+        }
+
+        .loading-dot:nth-child(3) {
+            animation-delay: .4s;
         }
     </style>
 </head>
@@ -169,19 +196,168 @@
     </nav>
 
     <div class="main-content">
-        <script>
-            import React from 'react';
-            import ChatbotApp from './App'; // Assuming you save the code above as App.js
+        <!-- Main chatbot container - designed to be placed inside any div -->
+        <div id="chatbot-container"
+            class="max-w-xl w-full h-[600px] md:h-[700px] lg:h-[800px] bg-gray-900 rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700">
 
-            function MyWebsitePage() {
-                return (
-                    <div style={{ width: '400px', height: '600px', margin: 'auto', border: '1px solid #333' }}>
-                        <ChatbotApp />
+            <!-- Chatbot Header -->
+            <div class="flex items-center p-4 bg-gray-800 border-b border-gray-700 rounded-t-xl">
+                <img src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png"
+                    alt="Synapse Logo" class="w-10 h-10 rounded-full mr-3 shadow-md">
+                <h1 class="text-xl font-bold text-gray-50">Synapse <span class="text-blue-400">by atikle</span></h1>
+            </div>
+
+            <!-- Chat Messages Display Area -->
+            <div id="chat-messages" class="chat-messages flex-1 p-4 overflow-y-auto space-y-4">
+                <!-- Initial welcome message -->
+                <div class="flex justify-start">
+                    <div class="bg-gray-700 text-gray-100 p-3 rounded-xl rounded-bl-none shadow-md max-w-[80%]">
+                        Hello! I'm Synapse, your AI assistant. How can I help you today?
                     </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-4 bg-gray-800 border-t border-gray-700 flex items-center rounded-b-xl">
+                <input type="text" id="user-input" placeholder="Type your message..."
+                    class="flex-1 p-3 rounded-lg bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-blue-500 transition-all duration-200 mr-3 shadow-inner">
+                <button id="send-button"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                    Send
+                </button>
+            </div>
+        </div>
+
+        <script>
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+
+            // Chat history to maintain context for the AI
+            let chatHistory = [];
+
+            /**
+             * Appends a message to the chat display.
+             * @param {string} message - The text content of the message.
+             * @param {string} sender - 'user' or 'ai'.
+             */
+            function appendMessage(message, sender) {
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('flex', sender === 'user' ? 'justify-end' : 'justify-start');
+
+                const messageBubble = document.createElement('div');
+                messageBubble.classList.add(
+                    'p-3',
+                    'rounded-xl',
+                    'shadow-md',
+                    'max-w-[80%]',
+                    sender === 'user' ? 'bg-blue-600' : 'bg-gray-700',
+                    sender === 'user' ? 'rounded-br-none' : 'rounded-bl-none',
+                    'text-gray-100'
                 );
+                messageBubble.textContent = message;
+
+                messageContainer.appendChild(messageBubble);
+                chatMessages.appendChild(messageContainer);
+
+                // Scroll to the bottom of the chat messages
+                chatMessages.scrollTop = chatMessages.scrollHeight;
             }
 
-            export default MyWebsitePage;
+            /**
+             * Displays a loading indicator while the AI is generating a response.
+             * @returns {HTMLElement} The loading indicator element.
+             */
+            function showLoadingIndicator() {
+                const loadingContainer = document.createElement('div');
+                loadingContainer.id = 'loading-indicator';
+                loadingContainer.classList.add('flex', 'justify-start');
+
+                const loadingBubble = document.createElement('div');
+                loadingBubble.classList.add(
+                    'bg-gray-700',
+                    'p-3',
+                    'rounded-xl',
+                    'rounded-bl-none',
+                    'shadow-md',
+                    'max-w-[80%]',
+                    'flex',
+                    'space-x-1'
+                );
+
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('loading-dot', 'w-2', 'h-2', 'bg-gray-400', 'rounded-full');
+                    loadingBubble.appendChild(dot);
+                }
+
+                loadingContainer.appendChild(loadingBubble);
+                chatMessages.appendChild(loadingContainer);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                return loadingContainer;
+            }
+
+            /**
+             * Removes the loading indicator from the chat display.
+             * @param {HTMLElement} indicator - The loading indicator element to remove.
+             */
+            function hideLoadingIndicator(indicator) {
+                if (indicator && indicator.parentNode) {
+                    indicator.parentNode.removeChild(indicator);
+                }
+            }
+
+            /**
+             * Handles sending a message to the AI.
+             */
+            async function sendMessage() {
+                const prompt = userInput.value.trim();
+                if (!prompt) return; // Do not send empty messages
+
+                appendMessage(prompt, 'user');
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                userInput.value = ''; // Clear input field
+
+                const loadingIndicator = showLoadingIndicator(); // Show loading dots
+
+                try {
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // Canvas will provide this at runtime
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const aiResponse = result.candidates[0].content.parts[0].text;
+                        appendMessage(aiResponse, 'ai');
+                        chatHistory.push({ role: "model", parts: [{ text: aiResponse }] }); // Add AI response to history
+                    } else {
+                        console.error("Unexpected API response structure:", result);
+                        appendMessage("Sorry, I couldn't get a response. Please try again.", 'ai');
+                    }
+                } catch (error) {
+                    console.error("Error fetching AI response:", error);
+                    appendMessage("Oops! Something went wrong. Please check your network connection or try again later.", 'ai');
+                } finally {
+                    hideLoadingIndicator(loadingIndicator); // Hide loading dots
+                }
+            }
+
+            // Event listeners
+            sendButton.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            });
         </script>
     </div>
 
