@@ -21,7 +21,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: cadetblue;
+    background-color: gray;
     border-radius: 35px;
 }
 
@@ -82,11 +82,35 @@ h1 {
     font-family: 'Poppins', sans-serif;
 }
 
-.logo-para {
+/* .logo-para {
     position: fixed;
     width: auto;
     top: 10px;
     left: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    background-color: var(--navigation-bg);
+    box-shadow: var(--navigation-box-shadow);
+} */
+
+.icon-para {
+    position: fixed;
+    width: auto;
+    margin-top: 10px;
+    left: 10px;
+    padding: 2px 7px;
+    padding-top: 9px;
+    border-radius: 15px;
+    background-color: var(--navigation-bg);
+    box-shadow: var(--navigation-box-shadow);
+}
+
+.logo-para {
+    position: fixed;
+    width: auto;
+    top: 10px;
+    left: 85px;
     right: 10px;
     padding: 10px 20px;
     border-radius: 15px;
@@ -101,7 +125,10 @@ h1 {
 }
 
 .connect-branding {
-    color: crimson;
+    background: linear-gradient(90deg, rgb(255, 85, 85) 0.1%, rgb(85, 85, 255) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .navigation {
@@ -123,7 +150,7 @@ h1 {
 }
 
 .nav-link:hover svg {
-    color: #3d42df;
+    color: #FF2D92;
 }
 
 .icon svg {
