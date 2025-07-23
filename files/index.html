@@ -53,35 +53,21 @@
     <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
 
     <style>
-        .file-conatiner {
+        .webinar-master-container {
             width: auto;
             margin: auto;
             margin-top: 40px;
             margin-left: 15px;
-            margin-right: 20px;
+            margin-right: 15px;
             padding: 20px 10px;
             border-radius: 15px;
-            border: 3px solid var(--webinar-border);
             background-color: var(--webinar-bg);
             color: var(--webinar-text);
             box-shadow: var(--navigation-box-shadow);
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             flex-wrap: wrap;
-            gap: 60px;
-        }
-
-        .thumbnail-container {
-            width: auto;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 60px;
-        }
-
-        .document-thumbnail {
-            width: 100px;
-            padding: 10px 10px;
+            gap: 0px;
         }
 
         .details-container {
@@ -89,14 +75,14 @@
             padding: 0px 10px;
         }
 
-        .recording-name {
+        .webinar-name {
             padding: 0px 10px;
             font-family: "Roboto", sans-serif;
             font-size: 30px;
             font-weight: 500;
         }
 
-        .recording-date-time {
+        .webinar-date-time {
             padding: 10px 10px;
             font-family: 'Ubuntu', sans-serif;
             font-size: 15px;
@@ -104,42 +90,39 @@
             color: cadetblue;
         }
 
-        .join-button {
-            display: block;
-            margin: auto;
-            text-align: center;
-            text-decoration: none;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            padding: 10px 20px;
+        .file-container {
+            width: auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 0px 20px;
+        }
+
+        .file-thumbnail {
+            width: 50px;
+            padding: 0px 0px;
+        }
+
+        .file-tab {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 10px;
             border-radius: 15px;
-            color: white;
-            transition: 0.3s;
-            cursor: pointer;
+            background-color: whitesmoke;
         }
 
-        .over {
-            background-color: silver;
-        }
-
-        .over:hover {
-            background-color: grey;
-        }
-
-        .active {
-            background-color: royalblue;
-        }
-
-        .active:hover {
-            background-color: #3d42df;
-        }
-
-        .inactive {
-            background-color: black;
-        }
-
-        .inactive:hover {
-            background-color: gray;
+        .file-tag {
+            width: fit-content;
+            padding: 12px 15px;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            background-color: white;
         }
     </style>
 
@@ -157,19 +140,30 @@
 
         <div class="scroolable-content">
 
-            <div class="file-conatiner">
+            <div class="webinar-master-container">
                 <div class="details-container">
-                    <div class="recording-name">
+                    <div class="webinar-name">
                         Pilot Testing Session 1
                     </div>
-                    <div class="recording-date-time">
+                    <div class="webinar-date-time">
                         20th June 2025 | 5PM 
                     </div>
                     <div class="webinar-tags">
                         <div class="tag recording">1 File</div>
                     </div>
-                    <div class="thumbnail-container">
-                        <img class="document-thumbnail"src="https://atikle.github.io/resource/atikle_connect/document.svg" alt="">
+                </div>
+                <div class="file-container">
+                    <a href="backdrop.jpg" class="file-tab">
+                        <img class="file-thumbnail"src="https://atikle.github.io/resource/atikle_connect/document.svg" alt="">
+                        <div class="file-tag">Hero Backdrop</div>
+                    </a>
+                    <div class="file-tab">
+                        <img class="file-thumbnail"src="https://atikle.github.io/resource/atikle_connect/document.svg" alt="">
+                        <div class="file-tag">1 File</div>
+                    </div>
+                    <div class="file-tab">
+                        <img class="file-thumbnail"src="https://atikle.github.io/resource/atikle_connect/document.svg" alt="">
+                        <div class="file-tag">1 File</div>
                     </div>
                 </div>
             </div>
