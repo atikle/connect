@@ -46,14 +46,14 @@
     </script>
 
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
-    <link rel="stylesheet" href="https://atikle.github.io/connect/connect.css">
+    <link rel="stylesheet" href="connect.css">
 
 
-    <title>atikle connect | Files</title>
+    <title>atikle connect | Settings</title>
     <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
 
     <style>
-        .file-conatiner {
+        .recording-conatiner {
             width: auto;
             margin: auto;
             margin-top: 40px;
@@ -73,14 +73,14 @@
 
         .thumbnail-container {
             width: auto;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 60px;
         }
 
-        .document-thumbnail {
-            width: 100px;
+        .recording-thumbnail {
+            width: 120%;
+            min-width: 200px;
+            max-width: 20vh;
+            border: 3px solid white;
+            border-radius: 17px;
             padding: 10px 10px;
         }
 
@@ -153,34 +153,13 @@
 
     <div class="main-content">
 
-        <h1 class="section-heading">Uploaded Files</h1>
+        <h1 class="section-heading">Recordings</h1>
 
         <div class="scroolable-content">
 
-            <div class="file-conatiner">
-                <div class="details-container">
-                    <div class="recording-name">
-                        Pilot Testing Session 1
-                    </div>
-                    <div class="recording-date-time">
-                        20th June 2025 | 5PM 
-                    </div>
-                    <div class="webinar-tags">
-                        <div class="tag recording">1 File</div>
-                    </div>
-                    <div class="thumbnail-container">
-                        <img class="document-thumbnail"src="https://atikle.github.io/resource/atikle_connect/document.svg" alt="">
-                    </div>
-                </div>
-            </div>
-
-        </div>
+            
 
     </div>
-
-    <script>
-        const DELETE_MESSAGE = "Recording not found. Deleted by space sense";
-    </script>
 
 </body>
 
