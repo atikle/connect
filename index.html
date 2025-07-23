@@ -2,19 +2,18 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>atikle connect | Schedule</title>
-  <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png"
-    type="image/x-icon">
-  <link rel="stylesheet" href="connect.css">
+  <meta name="robots" content="index, follow">
+  <!-- <meta name="description" content="This is description"> -->
+  <meta name="keyword" content="atikleconnect, atikle connect, financial webinar, atikle financial webinar">
 
   <!-- Roboto @ Google Fonts -->
   <!-- font-family: "Roboto", sans-serif; -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
   <!-- Poppins @ Google Fonts -->
   <!-- font-family: 'Poppins', sans-serif; -->
@@ -33,6 +32,26 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://atikle.github.io/framework/universal/script.js"></script>
+  <script>
+    $(function () {
+      $("#header-placeholder").load("https://atikle.github.io/connect/framework/header.html");
+    });
+  </script>
+  <script>
+    $(function () {
+      $("#footer-placeholder").load("https://atikle.github.io/framework/footer-1/index.html");
+    });
+  </script>
+
+  <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
+  <link rel="stylesheet" href="connect.css">
+
+  <title>atikle connect | Schedule</title>
+  <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png"
+    type="image/x-icon">
 
   <style>
     .webinar {
@@ -102,14 +121,12 @@
       background-color: gray;
     }
   </style>
+
 </head>
 
 <body>
 
-  <div class="logo-para">
-    <img class="connect-icon" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="connect-icon">
-    <text class="branding">atikle <font class="connect-branding">connect</font></text>
-  </div>
+  <div id="header-placeholder"></div>
 
   <nav class="navigation">
     <a href="https://atikle.github.io/connect" class="nav-link icon">
@@ -154,7 +171,7 @@
         </svg>
       </abbr>
     </a>
-    
+
     <a href="https://atikle.github.io/synapse" class="nav-link icon">
       <abbr title="Home">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
