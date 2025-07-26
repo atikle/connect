@@ -63,6 +63,7 @@ body {
     --webinar-bg: transparent;
     --webinar-border: #eaebf5;
     --webinar-text: black;
+    --secondary-text: white;
 }
 
 body.dark {
@@ -77,6 +78,7 @@ body.dark {
     --button-bg: #3c3f56;
     --main-color: #6f74ff;
     --message-bg-2: #6f74ff;
+    --secondary-text: black;
 }
 
 h1 {
@@ -117,7 +119,7 @@ h1 {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     padding: 40px 30px;
-    color: white;
+    color: #fff;
     background-image: url(https://atikle.github.io/resource/atikle_connect/banner_dark.png);
     box-shadow: var(--navigation-box-shadow);
     background-size: 510px;
