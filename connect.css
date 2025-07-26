@@ -114,9 +114,10 @@ h1 {
     padding-bottom: 10px;
 
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
     /* flex-wrap: wrap; */
-    white-space: nowrap; /* Prevent text wrapping */
+    /* white-space: nowrap; */
+    /* Prevent text wrapping */
 }
 
 .section-heading {
@@ -150,6 +151,7 @@ h1 {
     font-weight: 500;
     box-shadow: var(--shadow-2);
     white-space: nowrap; /* Prevent text wrapping */
+    cursor: default;
 }
 
 .live {
