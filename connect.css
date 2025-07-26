@@ -125,7 +125,7 @@ h1 {
     background-size: 510px;
 }
 
-.webinar-tags {
+.webinar-tags-container {
     width: 100%;
     margin-bottom: 20px;
     display: flex;
@@ -133,6 +133,7 @@ h1 {
     justify-content: left;
     flex-wrap: wrap;
     gap: 10px;
+    margin-left: 10px;
 }
 
 .tag {
@@ -144,7 +145,6 @@ h1 {
     font-weight: 500;
     box-shadow: var(--shadow-2);
     white-space: nowrap; /* Prevent text wrapping */
-    margin-left: 10px;
 }
 
 .live {
