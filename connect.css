@@ -114,7 +114,7 @@ h1 {
     padding-bottom: 10px;
 
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: row-reverse;
     /* flex-wrap: wrap; */
     white-space: nowrap; /* Prevent text wrapping */
 }
