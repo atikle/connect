@@ -109,11 +109,6 @@
             padding: 0px 20px;
         }
 
-        .file-thumbnail {
-            width: 50px;
-            padding: 0px 0px;
-        }
-
         .file-tab {
             display: flex;
             flex-direction: row;
@@ -123,6 +118,12 @@
             padding: 10px 10px;
             border-radius: 15px;
             background-color: whitesmoke;
+            cursor: pointer;
+        }
+
+        .file-thumbnail {
+            width: 50px;
+            padding: 0px 0px;
         }
 
         .file-tag {
@@ -191,7 +192,46 @@
                     </div>
                 </div>
                 <div class="file-container">
-                    <a href="backdrop.jpg" class="file-tab">
+                    <a onclick="alert(FILE_MESSAGE)" class="file-tab">
+                        <img class="file-thumbnail"src="https://atikle.github.io/resource/atikle_connect/document-placeholder.svg" alt="">
+                        <div class="file-tag">Image 1</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="webinar-master-container">
+                <div class="details-container">
+                    <div class="webinar-name">
+                        Pilot Testing Session 2
+                    </div>
+                    <div class="webinar-date-time">
+                        25th June 2025 | 5PM | 42 minutes
+                    </div>
+                    <div class="webinar-tags-container">
+                        <div class="tag recording">1 File</div>
+                    </div>
+                </div>
+                <div class="file-container">
+                    <a onclick="alert(FILE_MESSAGE)" class="file-tab">
+                        <img class="file-thumbnail"src="https://atikle.github.io/resource/atikle_connect/document-placeholder.svg" alt="">
+                        <div class="file-tag">Image 1</div>
+                    </a>
+                </div>
+            </div>
+            <div class="webinar-master-container">
+                <div class="details-container">
+                    <div class="webinar-name">
+                        Pilot Testing Session 3
+                    </div>
+                    <div class="webinar-date-time">
+                        30th June 2025 | 5PM | 30 minutes
+                    </div>
+                    <div class="webinar-tags-container">
+                        <div class="tag recording">1 File</div>
+                    </div>
+                </div>
+                <div class="file-container">
+                    <a onclick="alert(FILE_MESSAGE)" class="file-tab">
                         <img class="file-thumbnail"src="https://atikle.github.io/resource/atikle_connect/document-placeholder.svg" alt="">
                         <div class="file-tag">Image 1</div>
                     </a>
@@ -203,7 +243,7 @@
     </div>
 
     <script>
-        const DELETE_MESSAGE = "Recording not found. Deleted by space sense";
+        const FILE_MESSAGE = "File isn't available right now. Try again later.";
     </script>
 
 </body>
