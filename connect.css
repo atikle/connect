@@ -116,6 +116,7 @@ h1 {
     display: flex;
     flex-direction: column-reverse;
     flex-wrap: wrap;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .section-heading {
