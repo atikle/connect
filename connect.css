@@ -142,7 +142,9 @@ h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     font-weight: 500;
-    box-shadow: var(--navigation-box-shadow);
+    box-shadow: var(--shadow-2);
+    white-space: nowrap; /* Prevent text wrapping */
+    margin-left: 10px;
 }
 
 .live {
