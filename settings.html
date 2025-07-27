@@ -63,24 +63,9 @@
     <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
 
     <style>
-        .recording-conatiner {
-            width: auto;
-            margin: auto;
-            margin-top: 40px;
-            margin-left: 15px;
-            margin-right: 20px;
-            padding: 20px 10px;
-            border-radius: 15px;
-            border: 3px solid var(--webinar-border);
-            background-color: var(--webinar-bg);
-            color: var(--webinar-text);
-            box-shadow: var(--navigation-box-shadow);
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 60px;
+        .main-content {
+            background-color: var(--main-content-background);
         }
-
         .section-heading-settings {
             margin-top: 0px;
             border-top-left-radius: 15px;
@@ -88,6 +73,261 @@
             padding: 40px 30px;
             color: black;
             background-color: var(--navigation-bg);
+        }
+
+        /* CSS Root Variables for Theming */
+        :root {
+            --light-background: #f0f2f5;
+            --light-card-background: #ffffff;
+            --light-text-primary: #050505;
+            --light-text-secondary: #65676b;
+            --light-primary-button-bg: #1877f2;
+            --light-primary-button-text: #ffffff;
+            --light-secondary-button-bg: #e4e6eb;
+            --light-secondary-button-text: #050505;
+            --light-hover-overlay: rgba(0, 0, 0, 0.05);
+            --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            --dark-background-1: black;
+            --dark-background-2: #18191a;
+            --dark-card-background: #242526;
+            --dark-text-primary: #e4e6eb;
+            --dark-text-secondary: #b0b3b8;
+            --dark-primary-button-bg: #2d88ff;
+            --dark-primary-button-text: #ffffff;
+            --dark-secondary-button-bg: #3a3b3c;
+            --dark-secondary-button-text: #e4e6eb;
+            --dark-hover-overlay: rgba(255, 255, 255, 0.08);
+            --dark-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Applying the theme */
+        body {
+            --app-background: var(--light-background);
+            --card-background: var(--light-card-background);
+            --text-primary: var(--light-text-primary);
+            --text-secondary: var(--light-text-secondary);
+            --primary-button-bg: var(--light-primary-button-bg);
+            --primary-button-text: var(--light-primary-button-text);
+            --secondary-button-bg: var(--light-secondary-button-bg);
+            --secondary-button-text: var(--light-secondary-button-text);
+            --hover-overlay: var(--light-hover-overlay);
+            --shadow: var(--light-shadow);
+
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--app-background);
+            color: var(--text-primary);
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            --main-content-background: var(--dark-background-1);
+            --app-background: var(--dark-background-2);
+            --card-background: var(--dark-card-background);
+            --text-primary: var(--dark-text-primary);
+            --text-secondary: var(--dark-text-secondary);
+            --primary-button-bg: var(--dark-primary-button-bg);
+            --primary-button-text: var(--dark-primary-button-text);
+            --secondary-button-bg: var(--dark-secondary-button-bg);
+            --secondary-button-text: var(--dark-secondary-button-text);
+            --hover-overlay: var(--dark-hover-overlay);
+            --shadow: var(--dark-shadow);
+        }
+
+        /* Main container for the settings page */
+        .settings-container {
+            max-width: 800px;
+            margin: 0 auto;
+            /* padding: 20px; */
+        }
+
+        /* Page header */
+        .settings-header {
+            color: var(--secondary-button-text);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--secondary-button-bg);
+        }
+
+        /* Styling for each settings section */
+        .settings-section {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s;
+        }
+
+        .settings-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        /* General setting item styling */
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--app-background);
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-item-label {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .setting-item-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Dark Mode Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--secondary-button-bg);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-button-bg);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Custom Select Dropdown */
+        .select-wrapper {
+            position: relative;
+            width: 220px;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: var(--secondary-button-bg);
+            border: none;
+            padding: 12px 40px 12px 15px;
+            border-radius: 8px;
+            width: 100%;
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .select-wrapper::after {
+            content: '▼';
+            font-size: 1rem;
+            color: var(--text-secondary);
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        
+        /* About/Info Section Styling */
+        .info-section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        
+        /* Buttons */
+        .actions {
+            text-align: right;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .btn:hover {
+            opacity: 0.85;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-button-bg);
+            color: var(--primary-button-text);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .settings-container {
+                padding: 10px;
+            }
+            .settings-header {
+                font-size: 2rem;
+            }
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .setting-item > div:first-child {
+                margin-bottom: 10px;
+            }
+            .select-wrapper {
+                width: 100%;
+            }
+            .actions {
+                text-align: center;
+            }
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 
@@ -101,15 +341,157 @@
 
     <div class="main-content">
 
-        <h1 class="section-heading-settings">Settings</h1>
+        <!-- <h1 class="section-heading-settings">Settings</h1> -->
 
-        <!-- <div class="scroolable-content">
-            <div class="setting-row">
-                Theme
+        <div class="scroolable-content">
+
+            <div class="settings-container">
+        <h1 class="settings-header">Settings</h1>
+
+        <!-- General Settings Section -->
+        <div class="settings-section">
+            <h2>General</h2>
+            <div class="setting-item">
+                <div>
+                    <div class="setting-item-label">Dark Mode</div>
+                    <div class="setting-item-description">Switch between light and dark themes.</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                </label>
             </div>
-        </div> -->
+        </div>
+        
+        <!-- Audio & Video Settings Section -->
+        <div class="settings-section">
+            <h2>Audio & Video</h2>
+            <!-- <div class="setting-item">
+                <div>
+                    <div class="setting-item-label">Camera</div>
+                    <div class="setting-item-description">Choose your preferred camera.</div>
+                </div>
+                <div class="select-wrapper">
+                    <select id="cameraSelect">
+                        <option>Integrated Webcam</option>
+                        <option>External Cam Pro</option>
+                        <option>DroidCam Source</option>
+                    </select>
+                </div>
+            </div> -->
+            <!-- <div class="setting-item">
+                <div>
+                    <div class="setting-item-label">Microphone</div>
+                    <div class="setting-item-description">Choose your preferred microphone.</div>
+                </div>
+                <div class="select-wrapper">
+                    <select id="micSelect">
+                        <option>Default - Internal Mic</option>
+                        <option>Blue Yeti Microphone</option>
+                        <option>Headset Microphone</option>
+                    </select>
+                </div>
+            </div> -->
+            <div class="setting-item">
+                <div>
+                    <div class="setting-item-label">Video Quality</div>
+                    <div class="setting-item-description">Set the default video resolution.</div>
+                </div>
+                <div class="select-wrapper">
+                    <select id="qualitySelect">
+                        <option>Auto (Recommended)</option>
+                        <option>2160p (4K)</option>
+                        <option>1080p (Full HD)</option>
+                        <option>720p (HD)</option>
+                        <option>480p (Standard)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <div>
+                    <div class="setting-item-label">Background Noise Reduction</div>
+                    <div class="setting-item-description">Reduces background noise for clearer audio.</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="noiseCancellationToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            </div>
+
+                <!-- About Section -->
+                <div class="settings-section info-section">
+                    <h2>About</h2>
+                    <p>atikle connect is a online live webinar platform.</p>
+                </div>
+            
+                <!-- Information Section -->
+                <div class="settings-section info-section">
+                    <h2>Information</h2>
+                    <p>Your settings are saved locally in your browser. No data is collected or stored on any server.</p>
+                </div>
+            
+                <div class="actions">
+                    <button class="btn btn-primary" id="saveButton">Save Changes</button>
+                </div>
+
+            </div>
+
+
+        </div>
 
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const saveButton = document.getElementById('saveButton');
+
+            // Function to apply the saved theme on load
+            const applyTheme = () => {
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                darkModeToggle.checked = isDarkMode;
+                if (isDarkMode) {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.remove('dark-mode');
+                }
+            };
+
+            // Event listener for the dark mode toggle
+            darkModeToggle.addEventListener('change', () => {
+                if (darkModeToggle.checked) {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('darkMode', 'true');
+                } else {
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('darkMode', 'false');
+                }
+            });
+            
+            // Event listener for the save button (for demonstration)
+            saveButton.addEventListener('click', () => {
+                // In a real app, you would collect all settings and save them.
+                // For this demo, we'll just show a temporary confirmation.
+                const originalText = saveButton.textContent;
+                saveButton.textContent = 'Saved!';
+                saveButton.style.opacity = '0.7';
+                saveButton.disabled = true;
+                
+                setTimeout(() => {
+                    saveButton.textContent = originalText;
+                    saveButton.style.opacity = '1';
+                    saveButton.disabled = false;
+                }, 2000);
+            });
+
+            // Apply the theme when the page loads
+            applyTheme();
+        });
+    </script>
 
 </body>
 
