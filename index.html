@@ -277,6 +277,36 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const saveButton = document.getElementById('saveButton');
+            // Function to apply the saved theme on load
+            const applyTheme = () => {
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                darkModeToggle.checked = isDarkMode;
+                if (isDarkMode) {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.remove('dark-mode');
+                }
+            };
+            // Event listener for the dark mode toggle
+            darkModeToggle.addEventListener('change', () => {
+                if (darkModeToggle.checked) {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('darkMode', 'true');
+                } else {
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('darkMode', 'false');
+                }
+            });
+            // Apply the theme when the page loads
+            applyTheme();
+        });
+    </script>
+
+    <script>
         const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
         const INACTIVE_MESSAGE = "Session is not started yet.";
     </script>
