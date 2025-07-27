@@ -127,7 +127,7 @@
         }
 
         .inactive:hover {
-            background-color: gray;
+            background-color: black;
         }
     </style>
 
@@ -150,9 +150,9 @@
                     Pilot Testing Session 8
                 </div>
                 <div class="webinar-date-time">
-                    15th July 2025 | 5PM
+                    15th August 2025 | 5PM
                 </div>
-                <a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Join Session</a>
+                <a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Upcoming Session</a>
             </div>
 
 
@@ -162,9 +162,9 @@
                     Pilot Testing Session 7
                 </div>
                 <div class="webinar-date-time">
-                    13th July 2025 | 5PM
+                    13th August 2025 | 5PM
                 </div>
-                <a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Join Session</a>
+                <a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Upcoming Session</a>
             </div>
 
 
@@ -176,8 +176,7 @@
                     Always active
                 </div>
                 <div class="webinar-tags-container">
-                    <div class="tag live">O Live</div>
-                    <div class="tag recording">Recording</div>
+                    <div onclick="alert(LIVE_MESSAGE)" class="tag live">O Live</div>
                 </div>
                 <a href="https://atikle.github.io/connect/webinar" class="join-button active">Join Session</a>
             </div>
@@ -192,7 +191,7 @@
                     11th July 2025 | 5PM
                 </div>
                 <div class="webinar-tags-container">
-                    <div class="tag recording">Recording</div>
+                    <div onclick="alert(RECORDING_MESSAGE)" class="tag recording">Recording</div>
                 </div>
                 <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
             </div>
@@ -207,7 +206,7 @@
                     7th July 2025 | 5PM
                 </div>
                 <div class="webinar-tags-container">
-                    <div class="tag recording">Recording</div>
+                    <div onclick="alert(RECORDING_MESSAGE)" class="tag recording">Recording</div>
                 </div>
                 <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
             </div>
@@ -222,7 +221,7 @@
                     2nd July 2025 | 5PM
                 </div>
                 <div class="webinar-tags-container">
-                    <div class="tag recording">Recording</div>
+                    <div onclick="alert(RECORDING_MESSAGE)" class="tag recording">Recording</div>
                 </div>
                 <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
             </div>
@@ -237,7 +236,7 @@
                     30th June 2025 | 5PM
                 </div>
                 <div class="webinar-tags-container">
-                    <div class="tag recording">Recording</div>
+                    <div onclick="alert(RECORDING_MESSAGE)" class="tag recording">Recording</div>
                 </div>
                 <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
             </div>
@@ -252,7 +251,7 @@
                     25th June 2025 | 5PM
                 </div>
                 <div class="webinar-tags-container">
-                    <div class="tag recording">Recording</div>
+                    <div onclick="alert(RECORDING_MESSAGE)" class="tag recording">Recording</div>
                 </div>
                 <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
             </div>
@@ -267,7 +266,7 @@
                     20th June 2025 | 5PM
                 </div>
                 <div class="webinar-tags-container">
-                    <div class="tag recording">Recording</div>
+                    <div onclick="alert(RECORDING_MESSAGE)" class="tag recording">Recording</div>
                 </div>
                 <a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>
             </div>
@@ -279,6 +278,8 @@
     <script>
         const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
         const INACTIVE_MESSAGE = "Session is not started yet.";
+        const LIVE_MESSAGE = "Session is live.";
+        const RECORDING_MESSAGE = "Session was recorded. If you are looking for session recording, please check the recording archive.";
     </script>
 
 </body>

@@ -184,9 +184,11 @@ h1 {
 .live {
     background-color: crimson;
     color: white;
+    cursor: pointer;
 }
 
 .recording {
     background-color: black;
     color: white;
+    cursor: pointer;
 }
