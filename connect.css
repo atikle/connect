@@ -71,7 +71,7 @@ body.dark-mode {
     --main-content-background: black; /* --chat-background: #3c3f56; */
     --app-background: #242526; /* --app-background: #262a42; */
     --card-background: #242526; /* --navigation-bg: #3c3f56; */
-    --text-primary: #e4e6eb;
+    --text-primary: white;
     --text-secondary: #b0b3b8;
     --primary-button-bg: #2d88ff;
     --primary-button-text: #ffffff;
