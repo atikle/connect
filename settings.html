@@ -75,44 +75,47 @@
             background-color: var(--navigation-bg);
         }
 
-        /* CSS Root Variables for Theming */
-        :root {
-            --light-background: #f0f2f5;
-            --light-card-background: #ffffff;
-            --light-text-primary: #050505;
-            --light-text-secondary: #65676b;
-            --light-primary-button-bg: #1877f2;
-            --light-primary-button-text: #ffffff;
-            --light-secondary-button-bg: #e4e6eb;
-            --light-secondary-button-text: #050505;
-            --light-hover-overlay: rgba(0, 0, 0, 0.05);
-            --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        /* 
+            :root {
+                --light-background-1: white;
+                --light-background-2: #f0f2f5;
+                --light-card-background: #ffffff;
+                --light-text-primary: #050505;
+                --light-text-secondary: #65676b;
+                --light-primary-button-bg: #1877f2;
+                --light-primary-button-text: #ffffff;
+                --light-secondary-button-bg: #e4e6eb;
+                --light-secondary-button-text: #050505;
+                --light-hover-overlay: rgba(0, 0, 0, 0.05);
+                --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
-            --dark-background-1: black;
-            --dark-background-2: #18191a;
-            --dark-card-background: #242526;
-            --dark-text-primary: #e4e6eb;
-            --dark-text-secondary: #b0b3b8;
-            --dark-primary-button-bg: #2d88ff;
-            --dark-primary-button-text: #ffffff;
-            --dark-secondary-button-bg: #3a3b3c;
-            --dark-secondary-button-text: #e4e6eb;
-            --dark-hover-overlay: rgba(255, 255, 255, 0.08);
-            --dark-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-        }
-
+                --dark-background-1: black;
+                --dark-background-2: #242526;
+                --dark-card-background: #242526;
+                --dark-text-primary: #e4e6eb;
+                --dark-text-secondary: #b0b3b8;
+                --dark-primary-button-bg: #2d88ff;
+                --dark-primary-button-text: #ffffff;
+                --dark-secondary-button-bg: #3a3b3c;
+                --dark-secondary-button-text: #e4e6eb;
+                --dark-hover-overlay: rgba(255, 255, 255, 0.08);
+                --dark-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            }
+        */
+        
         /* Applying the theme */
         body {
-            --app-background: var(--light-background);
-            --card-background: var(--light-card-background);
-            --text-primary: var(--light-text-primary);
-            --text-secondary: var(--light-text-secondary);
-            --primary-button-bg: var(--light-primary-button-bg);
-            --primary-button-text: var(--light-primary-button-text);
-            --secondary-button-bg: var(--light-secondary-button-bg);
-            --secondary-button-text: var(--light-secondary-button-text);
-            --hover-overlay: var(--light-hover-overlay);
-            --shadow: var(--light-shadow);
+            --main-content-background: white;
+            --app-background: #f0f2f5;
+            --card-background: #ffffff;
+            --text-primary: #050505;
+            --text-secondary: #65676b;
+            --primary-button-bg: #1877f2;
+            --primary-button-text: #ffffff;
+            --secondary-button-bg: #e4e6eb;
+            --secondary-button-text: #050505;
+            --hover-overlay: rgba(0, 0, 0, 0.05);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
             font-family: 'Poppins', sans-serif;
             background-color: var(--app-background);
@@ -122,17 +125,18 @@
         }
 
         body.dark-mode {
-            --main-content-background: var(--dark-background-1);
-            --app-background: var(--dark-background-2);
-            --card-background: var(--dark-card-background);
-            --text-primary: var(--dark-text-primary);
-            --text-secondary: var(--dark-text-secondary);
-            --primary-button-bg: var(--dark-primary-button-bg);
-            --primary-button-text: var(--dark-primary-button-text);
-            --secondary-button-bg: var(--dark-secondary-button-bg);
-            --secondary-button-text: var(--dark-secondary-button-text);
-            --hover-overlay: var(--dark-hover-overlay);
-            --shadow: var(--dark-shadow);
+            /* --dark-background-2: #18191a; */
+            --main-content-background: black;
+            --app-background: #242526;
+            --card-background: #242526;
+            --text-primary: #e4e6eb;
+            --text-secondary: #b0b3b8;
+            --primary-button-bg: #2d88ff;
+            --primary-button-text: #ffffff;
+            --secondary-button-bg: #3a3b3c;
+            --secondary-button-text: #e4e6eb;
+            --hover-overlay: rgba(255, 255, 255, 0.08);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
         }
 
         /* Main container for the settings page */
