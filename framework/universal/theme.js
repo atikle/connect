@@ -1,38 +1,58 @@
 // theme.js
 
-// This function runs immediately to apply the theme on initial page load
-(function () {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    if (isDarkMode) {
-        document.documentElement.classList.add('dark-mode');
-        // In your provided code, the class was added to body. 
-        // It's often better to add to documentElement (<html>) to avoid a flash of unstyled content.
-        // Let's stick to your original implementation for consistency.
-        document.body.classList.add('dark-mode');
-    }
-})();
-
-
-// This function will be called ONLY on the settings page to set up the toggle
-function setupThemeToggle() {
+document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const saveButton = document.getElementById('saveButton');
 
-    // If the toggle element doesn't exist on the current page, do nothing.
-    if (!darkModeToggle) {
-        return;
-    }
+    // Function to apply the theme on load, respecting user override and system preference
+    const applyTheme = () => {
+        const savedTheme = localStorage.getItem('darkMode');
+        let isDarkMode;
 
-    // Set the toggle's initial state based on the theme
-    darkModeToggle.checked = localStorage.getItem('darkMode') === 'true';
+        if (savedTheme !== null) {
+            // Use the saved preference if it exists
+            isDarkMode = savedTheme === 'true';
+        } else {
+            // Otherwise, fall back to the system's preferred color scheme
+            isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
 
-    // Add listener for when the toggle is clicked
+        darkModeToggle.checked = isDarkMode;
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+        } else {
+            body.classList.remove('dark-mode');
+        }
+    };
+
+    // Event listener for the dark mode toggle (this sets the user override)
     darkModeToggle.addEventListener('change', () => {
         if (darkModeToggle.checked) {
-            document.body.classList.add('dark-mode');
+            body.classList.add('dark-mode');
             localStorage.setItem('darkMode', 'true');
         } else {
-            document.body.classList.remove('dark-mode');
+            body.classList.remove('dark-mode');
             localStorage.setItem('darkMode', 'false');
         }
     });
-}
+
+    // Listener for changes in the system's color scheme preference
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            // Only update if the user hasn't manually set a theme
+            if (localStorage.getItem('darkMode') === null) {
+                const isSystemDark = event.matches;
+                darkModeToggle.checked = isSystemDark;
+                if (isSystemDark) {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.remove('dark-mode');
+                }
+            }
+        });
+    }
+
+    // Apply the theme when the page loads
+    applyTheme();
+});
