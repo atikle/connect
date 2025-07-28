@@ -1,5 +1,25 @@
 // theme.js
 
+// This script runs instantly to set the theme and avoid a flash of unstyled content (FOUC).
+// It checks for a user-saved preference, and falls back to the system theme.
+(function () {
+    let isDarkMode;
+    const savedTheme = localStorage.getItem('darkMode');
+
+    if (savedTheme !== null) {
+        // Use the user's saved preference
+        isDarkMode = savedTheme === 'true';
+    } else {
+        // If no preference is saved, use the system's theme
+        isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    if (isDarkMode) {
+        // Add the 'dark-mode' class to the <html> element
+        document.documentElement.classList.add('dark-mode');
+    }
+})();
+
 // This script runs after the DOM is loaded to handle user interactions.
 document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
