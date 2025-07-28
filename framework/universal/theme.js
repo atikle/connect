@@ -1,58 +1,45 @@
 // theme.js
 
+// This script runs after the DOM is loaded to handle user interactions.
 document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
     const saveButton = document.getElementById('saveButton');
+    const docElement = document.documentElement; // The <html> element
 
-    // Function to apply the theme on load, respecting user override and system preference
-    const applyTheme = () => {
-        const savedTheme = localStorage.getItem('darkMode');
-        let isDarkMode;
-
-        if (savedTheme !== null) {
-            // Use the saved preference if it exists
-            isDarkMode = savedTheme === 'true';
-        } else {
-            // Otherwise, fall back to the system's preferred color scheme
-            isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        }
-
-        darkModeToggle.checked = isDarkMode;
-        if (isDarkMode) {
-            body.classList.add('dark-mode');
-        } else {
-            body.classList.remove('dark-mode');
-        }
+    // Function to set the initial state of the toggle switch.
+    // The theme itself is already applied by the script in the <head>.
+    const initializeToggle = () => {
+        darkModeToggle.checked = docElement.classList.contains('dark-mode');
     };
 
-    // Event listener for the dark mode toggle (this sets the user override)
+    // Event listener for when the user clicks the dark mode toggle.
     darkModeToggle.addEventListener('change', () => {
         if (darkModeToggle.checked) {
-            body.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'true');
+            docElement.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'true'); // Save user preference
         } else {
-            body.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'false');
+            docElement.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'false'); // Save user preference
         }
     });
 
-    // Listener for changes in the system's color scheme preference
+    // Listener for when the system's color scheme changes.
     if (window.matchMedia) {
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            // Only update if the user hasn't manually set a theme
+            // This will only apply the system theme if the user has NOT manually
+            // set a theme using the toggle switch.
             if (localStorage.getItem('darkMode') === null) {
                 const isSystemDark = event.matches;
                 darkModeToggle.checked = isSystemDark;
                 if (isSystemDark) {
-                    body.classList.add('dark-mode');
+                    docElement.classList.add('dark-mode');
                 } else {
-                    body.classList.remove('dark-mode');
+                    docElement.classList.remove('dark-mode');
                 }
             }
         });
     }
 
-    // Apply the theme when the page loads
-    applyTheme();
+    // Set the initial state of the toggle when the page loads.
+    initializeToggle();
 });
