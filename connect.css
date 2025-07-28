@@ -126,7 +126,7 @@ h1 {
     left: 85px;
     right: 10px;
     border-radius: 15px;
-    background-color: var(--card-background);
+    background-color: var(--main-content-background);
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
@@ -154,7 +154,7 @@ h1 {
     padding: 40px 30px;
     color: #fff;
     background-image: url(https://atikle.github.io/resource/atikle_connect/banner_dark.png);
-    box-shadow: var(--navigation-box-shadow);
+    box-shadow: var(--shadow);
     background-size: 510px;
 }
 
@@ -176,7 +176,7 @@ h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     font-weight: 500;
-    box-shadow: var(--shadow-2);
+    box-shadow: var(--shadow);
     white-space: nowrap; /* Prevent text wrapping */
     cursor: default;
 }
