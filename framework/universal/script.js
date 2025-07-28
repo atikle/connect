@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 'block: "center"' attempts to align the element in the middle of the scrollable area
         targetElement.scrollIntoView({
             behavior: 'smooth',
-            block: 'center'
+            block: 'start'
         });
     } else {
         // Log an error if the element is not found, useful for debugging
