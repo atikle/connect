@@ -53,15 +53,15 @@ function showError(message) {
 
 function getQualitySuggestion(downloadSpeed) {
     if (downloadSpeed > 25) {
-        return { title: "Excellent for 4K!", text: "Your connection is great for 4K video streaming and high-quality group video calls." };
+        return { title: "Excellent for 4K!", text: "Your connection is great for 4K video streaming on atikle connect." };
     } else if (downloadSpeed > 10) {
-        return { title: "Great for Full HD!", text: "Your speed is ideal for streaming in 1080p (Full HD) and for reliable video conferencing." };
+        return { title: "Great for Full HD!", text: "Your speed is ideal for streaming in 1080p (Full HD) on atikle connect." };
     } else if (downloadSpeed > 5) {
-        return { title: "Good for HD!", text: "This speed is suitable for 720p (HD) video streaming and one-on-one video calls." };
+        return { title: "Good for HD!", text: "This speed is suitable for 720p (HD) video streaming on atikle connect." };
     } else if (downloadSpeed > 2) {
-        return { title: "Good for SD!", text: "You can stream in Standard Definition. Video calls may have lower quality." };
+        return { title: "Good for SD!", text: "You can stream in Standard Definition on atikle connect." };
     } else {
-        return { title: "Basic Connection", text: "Your speed is suitable for basic web browsing and email. Video streaming may be difficult." };
+        return { title: "Basic Connection", text: "Your speed is suitable for basic web browsing and email. Video streaming may be difficult on atikle connect." };
     }
 }
 
