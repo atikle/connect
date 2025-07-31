@@ -107,7 +107,7 @@
         body {
             --main-content-background: white;
             --app-background: #f0f2f5;
-            --card-background: #ffffff;
+            --card-background: #f0f2f5;
             --text-primary: #050505;
             --text-secondary: #65676b;
             --primary-button-bg: #1877f2;
@@ -333,6 +333,213 @@
                 width: 100%;
             }
         }
+
+
+
+        /* General Styling */
+        :root {
+            --background-color: #1a1c20;
+            --card-color: #25282e;
+            --text-color: #f0f0f0;
+            --text-secondary-color: #a0a0a0;
+            --accent-color: #00aaff;
+            --accent-color-dark: #0088cc;
+            --gauge-background: #333842;
+            --success-color: #2ecc71;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        /* Speed Test Container */
+        .speedtest-container {
+            background-color: var(--main-content-background);
+            border-radius: 20px;
+            padding: 30px 40px;
+            width: auto;
+            min-width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .speedtest-container h2 {
+            margin: 0 0 20px 0;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        /* Gauge Area */
+        .gauge-area {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+            height: 250px;
+            margin: 30px auto;
+        }
+        
+        .gauge-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .gauge-circle {
+            fill: none;
+            stroke-width: 20;
+        }
+
+        .gauge-track {
+            stroke: #333842;
+        }
+
+        .gauge-bar {
+            stroke: #00aaff;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            transition: stroke-dashoffset 1s cubic-bezier(0.23, 1, 0.32, 1);
+            stroke-dasharray: 754;
+            stroke-dashoffset: 754;
+        }
+
+        /* Speed Display */
+        .speed-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .speed-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--text-color);
+        }
+
+        .speed-unit {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary-color);
+        }
+        
+        .speed-label {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--accent-color);
+            margin-top: 5px;
+            visibility: hidden;
+        }
+
+        /* Metrics & Results Area */
+        .metrics-area, .results-area {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .results-area {
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 20px;
+            display: none; /* Hidden by default */
+        }
+
+        .metric {
+            background-color: var(--gauge-background);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .metric-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary-color);
+        }
+
+        /* Suggestion Area */
+        .suggestion-area {
+            background-color: var(--gauge-background);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none; /* Hidden by default */
+            text-align: left;
+            border-left: 5px solid var(--success-color);
+        }
+        
+        .suggestion-area h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            color: var(--success-color);
+        }
+        
+        .suggestion-area p {
+            margin: 0;
+            color: var(--text-secondary-color);
+            line-height: 1.5;
+        }
+
+        /* Button */
+        .start-button {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+            margin-top: 30px;
+        }
+
+        .start-button:hover:not(:disabled) {
+            background-color: var(--accent-color-dark);
+            box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);
+        }
+        
+        .start-button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .speedtest-container {
+                padding: 20px;
+            }
+            .metrics-area {
+                grid-template-columns: 1fr;
+            }
+            .results-area {
+                grid-template-columns: 1fr;
+            }
+            .gauge-area {
+                max-width: 200px;
+                height: 200px;
+            }
+            .speed-value {
+                font-size: 2rem;
+            }
+        }
     </style>
 
 </head>
@@ -396,6 +603,7 @@
                     </select>
                 </div>
             </div> -->
+
             <div class="setting-item">
                 <div>
                     <div class="setting-item-label">Video Quality</div>
@@ -423,7 +631,57 @@
                 </label>
             </div>
 
-            </div>
+            <div>
+
+                <div class="speedtest-container">
+                    <h2>Connection Quality Test</h2>
+                    
+                    <div class="gauge-area">
+                        <svg class="gauge-svg" viewBox="0 0 280 280">
+                            <circle class="gauge-circle gauge-track" cx="140" cy="140" r="120" />
+                            <circle id="gauge-bar" class="gauge-circle gauge-bar" cx="140" cy="140" r="120" />
+                        </svg>
+                        <div class="speed-display">
+                            <span id="speed-value" class="speed-value">0.00</span>
+                            <span id="speed-unit" class="speed-unit">Mbps</span>
+                            <span id="speed-label" class="speed-label">Download</span>
+                        </div>
+                    </div>
+
+                    <div class="metrics-area">
+                        <div class="metric">
+                            <div id="ping-value" class="metric-value">-</div>
+                            <div class="metric-label">Ping (ms)</div>
+                        </div>
+                        <div class="metric">
+                            <div id="jitter-value" class="metric-value">-</div>
+                            <div class="metric-label">Jitter (ms)</div>
+                        </div>
+                        <div class="metric">
+                            <div id="packet-loss-value" class="metric-value">-</div>
+                            <div class="metric-label">Packet Loss (%)</div>
+                        </div>
+                    </div>
+                    
+                    <div id="results-area" class="results-area">
+                        <div class="metric">
+                            <div id="final-download-value" class="metric-value">-</div>
+                            <div class="metric-label">Final Download (Mbps)</div>
+                        </div>
+                        <div class="metric">
+                            <div id="final-upload-value" class="metric-value">-</div>
+                            <div class="metric-label">Final Upload (Mbps)</div>
+                        </div>
+                    </div>
+
+                    <div id="suggestion-area" class="suggestion-area">
+                        <h3 id="suggestion-title"></h3>
+                        <p id="suggestion-text"></p>
+                    </div>
+
+                    <button id="start-button" class="start-button">Start Test</button>
+                    <p id="error-message" class="error-message"></p>
+                </div>
 
                 <!-- About Section -->
                 <div class="settings-section info-section">
@@ -447,6 +705,8 @@
         </div>
 
     </div>
+
+    <script src="framework/speed-test.js"></script>
 
     <!-- Add this script block to initialize the toggle on this page -->
     <script>

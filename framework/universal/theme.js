@@ -1,5 +1,3 @@
-// theme.js
-
 // This function runs immediately to apply the theme on initial page load
 (function () {
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
