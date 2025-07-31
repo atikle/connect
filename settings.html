@@ -108,6 +108,9 @@
             --main-content-background: white;
             --app-background: #f0f2f5;
             --card-background: #f0f2f5;
+
+            --card-background-2: #25282e;
+            
             --text-primary: #050505;
             --text-secondary: #65676b;
             --primary-button-bg: #1877f2;
@@ -352,21 +355,20 @@
         /* Speed Test Container */
         .speedtest-container {
             background-color: var(--main-content-background);
-            border-radius: 20px;
+            border-radius: 12px;
             padding: 30px 40px;
             width: auto;
             min-width: 300px;
             text-align: center;
             transition: all 0.3s ease;
             margin-top: 40px;
-            margin-bottom: 40px;
-            box-shadow: var(--shadow);
         }
 
         .speedtest-container h2 {
             margin: 0 0 20px 0;
             font-weight: 600;
             font-size: 1.5rem;
+            color: var(--text-primary)
         }
 
         /* Gauge Area */
@@ -417,7 +419,7 @@
             font-size: 2.5rem;
             font-weight: 700;
             line-height: 1;
-            color: var(--text-color);
+            color: var(--text-primary);
         }
 
         .speed-unit {
@@ -457,6 +459,7 @@
         .metric-value {
             font-size: 1.25rem;
             font-weight: 600;
+            color: var(--primary-button-text)
         }
 
         .metric-label {
@@ -620,6 +623,8 @@
                 </div>
             </div>
 
+
+
             <div class="setting-item">
                 <div>
                     <div class="setting-item-label">Background Noise Reduction</div>
@@ -631,10 +636,12 @@
                 </label>
             </div>
 
+
+
             <div>
 
                 <div class="speedtest-container">
-                    <h2>Connection Quality Test</h2>
+                    <h2>Speed Test</h2>
                     
                     <div class="gauge-area">
                         <svg class="gauge-svg" viewBox="0 0 280 280">
@@ -682,26 +689,25 @@
                     <button id="start-button" class="start-button">Start Test</button>
                     <p id="error-message" class="error-message"></p>
                 </div>
-
-                <!-- About Section -->
-                <div class="settings-section info-section">
-                    <h2>About</h2>
-                    <p>atikle connect is a online live webinar platform.</p>
-                </div>
             
-                <!-- Information Section -->
-                <div class="settings-section info-section">
-                    <h2>Information</h2>
-                    <p>Your settings are saved locally in your browser. No data is collected or stored on any server.</p>
-                </div>
-            
-                <div class="actions">
+                <!-- <div class="actions">
                     <button class="btn btn-primary" id="saveButton">Save Changes</button>
-                </div>
+                </div> -->
 
             </div>
 
+        </div>
 
+        <!-- About Section -->
+        <div class="settings-section info-section">
+            <h2>About</h2>
+            <p>atikle connect is a online live webinar platform.</p>
+        </div>
+
+        <!-- Information Section -->
+        <div class="settings-section info-section">
+            <h2>Information</h2>
+            <p>Your settings are saved locally in your browser. No data is collected or stored on any server.</p>
         </div>
 
     </div>
