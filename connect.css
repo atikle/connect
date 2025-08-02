@@ -3,6 +3,10 @@
     background: white;
 }
 
+a{
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
 
 
 /* ------------------- Scroll Bar ------------------- */
@@ -32,8 +36,7 @@
 
 
 
-body,
-html {
+body {
     width: 100%;
     margin: 0;
     background-repeat: no-repeat;
@@ -65,6 +68,52 @@ body {
     margin: 0;
     transition: background-color 0.3s, color 0.3s;
 }
+
+
+
+:root {
+    --background-1: white;
+    /* --body-background-2: #eaebf5; */
+    --background-2: whitesmoke;
+    --background-3: black;
+    --card-background-1: white;
+    --text-color-1: #050505;
+    --text-color-2: #65676b;
+    --text-color-3: white;
+    --shadow-1: 0 2px 6px 0 rgba(136, 148, 171, 0.2), 0 24px 20px -24px rgba(71, 82, 107, 0.1);
+    --shadow-2: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    --link-color: #c0c1c5;
+
+    --button-background-1: #1877f2;
+    --button-background-2: #e4e6eb;
+    --button-text-1: #ffffff;
+    --button-text-2: #050505;
+    --hover-overlay: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode {
+    --background-1: black;
+    --background-2: black;
+    --background-3: white;
+    --card-background-1: #242526; /* #3c3f56 */
+    --text-color-1: white;
+    --text-color-2: #b0b3b8;
+    --text-color-3: black;
+    --shadow-1: 0px 0px 8px 0px #282b33;
+    --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+    --link-color: #c0c1c5;
+
+    --button-background-1: #2d88ff;
+    --button-background-2: #3a3b3c;
+    --button-text-1: #ffffff;
+    --button-text-2: #e4e6eb;
+    --hover-overlay: rgba(255, 255, 255, 0.08);
+}
+
+
+
 
 body.dark-mode {
     /* --dark-background-2: #18191a; */
