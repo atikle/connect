@@ -41,8 +41,8 @@ body {
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: var(--app-background);
-    color: var(--message-text);
+    background-color: var(--background-4);
+    color: var(--text-color-1);
     font-family: 'Poppins', sans-serif;
     border: 0;
     top: 0;
@@ -76,6 +76,7 @@ body {
     /* --body-background-2: #eaebf5; */
     --background-2: whitesmoke;
     --background-3: black;
+    --background-4: #f0f2f5;
     --card-background-1: white;
     --card-background-2: whitesmoke;
     --text-color-1: #050505;
@@ -97,6 +98,7 @@ body.dark-mode {
     --background-1: black;
     --background-2: black;
     --background-3: white;
+    --background-4: #242526;
     --card-background-1: #242526; /* #3c3f56 */
     --card-background-2: #242526; /* #3c3f56 */
     --text-color-1: white;
@@ -164,7 +166,7 @@ body.dark {
 }
 
 h1 {
-    color: var(--message-text);
+    color: var(--text-color-1);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -177,8 +179,8 @@ h1 {
     left: 85px;
     right: 10px;
     border-radius: 15px;
-    background-color: var(--main-content-background);
-    box-shadow: var(--shadow);
+    background-color: var(--background-1);
+    box-shadow: var(--shadow-2);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -186,8 +188,7 @@ h1 {
 }
 
 .scroolable-content {
-    flex-grow: 1;
-    /* Allows content to fill available space */
+    flex-grow: 1; /* Allows content to fill available space */
     overflow-y: auto;
     height: auto;
     width: auto;
@@ -195,8 +196,7 @@ h1 {
     margin-right: 10px;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    /* white-space: nowrap; */
-    /* Prevent text wrapping */
+    /* white-space: nowrap; */ /* Prevent text wrapping */
 }
 
 .section-heading {
@@ -206,7 +206,7 @@ h1 {
     padding: 40px 30px;
     color: #fff;
     background-image: url(https://atikle.github.io/resource/atikle_connect/banner_dark.png);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-1);
     background-size: 510px;
 }
 
@@ -228,7 +228,7 @@ h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     font-weight: 500;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-1);
     white-space: nowrap; /* Prevent text wrapping */
     cursor: default;
 }
