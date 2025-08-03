@@ -72,6 +72,7 @@ body {
     --button-background-3: #3d42df;
     --button-text-1: #ffffff;
     --button-text-2: #050505;
+    --button-text-3: #ffffff;
     --hover-overlay: rgba(0, 0, 0, 0.05);
 }
 
@@ -96,6 +97,7 @@ body.dark-mode {
     --button-background-3: #6f74ff;
     --button-text-1: #ffffff;
     --button-text-2: #e4e6eb;
+    --button-text-3: #ffffff;
     --hover-overlay: rgba(255, 255, 255, 0.08);
 }
 
