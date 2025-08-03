@@ -69,8 +69,10 @@ a {
     bottom: 12px;
     right: 12px;
     font-size: 12px;
-    color: black;
-    background-color: white;
+    /* color: black;
+    background-color: white; */
+    color: var(--text-color-1);
+    background-color: var(--background-4);
     border-radius: 4px;
     padding: 4px 12px;
 }
@@ -226,7 +228,7 @@ a {
 }
 
 .chat-header-button {
-    background-color: var(--main-color);
+    background-color: var(--button-background-3);
     padding: 12px 16px 12px 40px;
     border: none;
     border-radius: 4px;
@@ -268,18 +270,18 @@ a {
     line-height: 16px;
     font-size: 12px;
     font-weight: 700;
-    color: var(--message-text);
+    color: var(--text-color-1);
 }
 
 .message {
     margin-top: 8px;
-    background-color: var(--message-bg);
+    background-color: var(--background-4);
     padding: 8px 16px;
     border-radius: 0 12px 12px 12px;
     font-size: 12px;
     line-height: 16px;
     max-width: calc(100% - 32px);
-    color: var(--message-text);
+    color: var(--text-color-1);
 }
 
 .message-wrapper {
@@ -289,7 +291,7 @@ a {
         flex-direction: row-reverse;
 
         .message {
-            background-color: var(--message-bg-2);
+            background-color: #3d42df;
             color: #fff;
             margin-left: auto;
             border-radius: 16px 0px 16px 16px;
@@ -307,7 +309,9 @@ a {
 }
 
 .message-file {
-    border: 1px solid var(--message-bg);
+    border: 1px solid silver;
+    background-color: var(--background-3);
+    color: var(--text-color-1);
     width: 100%;
     margin-top: 16px;
     border-radius: 4px;
@@ -342,7 +346,7 @@ a {
 }
 
 .file-name {
-    color: var(--message-text);
+    color: var(--text-color-3);
 }
 
 .file-size {
@@ -361,8 +365,8 @@ a {
     display: flex;
     border-radius: 10px;
     padding: 8px;
-    box-shadow: var(--navigation-box-shadow);
-    background-color: var(--message-bg);
+    box-shadow: var(--shadow-1);
+    background-color: var(--background-4);
 
     .dark & {
         box-shadow: none;
@@ -374,18 +378,18 @@ a {
     font-size: 14px;
     line-height: 24px;
     outline: none;
-    color: var(--message-text);
+    color: var(--text-color-1);
     flex: 1;
     background-color: transparent;
 
     &:placeholder {
-        color: var(--placeholder-text);
+        color: var(--text-color-3);
     }
 }
 
 .send-button {
     color: #fff;
-    background-color: var(--main-color);
+    background-color: #3d42df;
     border-radius: 8px;
     border: none;
     width: 32px;
