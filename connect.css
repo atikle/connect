@@ -143,6 +143,7 @@ h1 {
     flex-direction: column;
     overflow: hidden;
     gap: 0px;
+    user-select: none;
 }
 
 .scroolable-content {
@@ -155,6 +156,7 @@ h1 {
     margin-bottom: 20px;
     padding-bottom: 10px;
     /* white-space: nowrap; */ /* Prevent text wrapping */
+    user-select: none;
 }
 
 .section-heading {

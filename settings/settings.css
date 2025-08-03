@@ -1,5 +1,6 @@
 .main-content {
     background-color: var(--background-1);
+    user-select: none;
 }
 
 .section-heading-settings {
@@ -25,7 +26,7 @@
     font-weight: 700;
     margin-bottom: 30px;
     padding-bottom: 10px;
-    border-bottom: 2px solid silver;
+    border-bottom: 2px solid gray;
 }
 
 /* Styling for each settings section */
@@ -34,7 +35,7 @@
     border-radius: 12px;
     padding: 25px;
     margin-bottom: 25px;
-    box-shadow: var(--shadow-1);
+    /* box-shadow: var(--shadow-1); */
     transition: background-color 0.3s;
 }
 
@@ -219,35 +220,24 @@ select:focus {
 
 
 
-/* General Styling */
-:root {
-    --background-color: #1a1c20;
-    --card-color: #25282e;
-    --text-color: #f0f0f0;
-    --text-secondary-color: #a0a0a0;
-    --accent-color: #00aaff;
-    --accent-color-dark: #0088cc;
-    --gauge-background: #333842;
-    --success-color: #2ecc71;
-    --font-family: 'Poppins', sans-serif;
-}
 
 /* Speed Test Container */
 .speedtest-container {
-    background-color: var(--main-content-background);
+    background-color: var(--background-1);
     border-radius: 12px;
     padding: 30px 40px;
     width: auto;
     text-align: center;
     transition: all 0.3s ease;
     margin-top: 40px;
+    user-select: none;
 }
 
 .speedtest-container h2 {
     margin: 0 0 20px 0;
     font-weight: 600;
     font-size: 1.5rem;
-    color: var(--text-primary)
+    color: var(--text-color-1);
 }
 
 /* Gauge Area */
@@ -298,19 +288,19 @@ select:focus {
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 1;
-    color: var(--text-primary);
+    color: var(--text-color-1);
 }
 
 .speed-unit {
     font-size: 1rem;
     font-weight: 500;
-    color: var(--text-secondary-color);
+    color: var(--text-color-2);
 }
 
 .speed-label {
     font-size: 0.9rem;
     font-weight: 400;
-    color: var(--accent-color);
+    color: #00aaff;
     margin-top: 5px;
     visibility: hidden;
 }
@@ -332,7 +322,7 @@ select:focus {
 }
 
 .metric {
-    background-color: var(--gauge-background);
+    background-color: #333842;
     padding: 15px;
     border-radius: 10px;
 }
@@ -340,42 +330,41 @@ select:focus {
 .metric-value {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--primary-button-text)
+    color: white;
 }
 
 .metric-label {
     font-size: 0.8rem;
-    color: var(--text-secondary-color);
+    color: silver;
 }
 
 /* Suggestion Area */
 .suggestion-area {
-    background-color: var(--gauge-background);
+    background-color: #333842;
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
     display: none;
     /* Hidden by default */
     text-align: left;
-    /* border-left: 5px solid var(--success-color); */
-    border: 2px solid var(--success-color);
+    border-left: 5px solid #2ecc71;
 }
 
 .suggestion-area h3 {
     margin: 0 0 10px 0;
     font-size: 1.1rem;
-    color: var(--success-color);
+    color: #2ecc71;
 }
 
 .suggestion-area p {
     margin: 0;
-    color: var(--text-secondary-color);
+    color: silver;
     line-height: 1.5;
 }
 
 /* Button */
 .start-button {
-    background-color: var(--accent-color);
+    background-color: #00aaff;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -390,7 +379,7 @@ select:focus {
 }
 
 .start-button:hover:not(:disabled) {
-    background-color: var(--accent-color-dark);
+    background-color: #0088cc;
     box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);
 }
 
