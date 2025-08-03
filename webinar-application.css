@@ -322,14 +322,19 @@ a {
     display: flex;
 
     .sketch {
-        border-radius: 4px;
-        padding: 2px;
-        background-color: #fdeee2;
+        /* border-radius: 4px; */
+        /* padding: 2px; */
+        /* background-color: #fdeee2; */
         display: flex;
         justify-content: center;
         align-items: center;
         width: 32px;
         height: 32px;
+
+        img {
+            width: 32px;
+            height: 32px;
+        }
 
         svg {
             width: 20px;
