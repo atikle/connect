@@ -289,8 +289,11 @@ a {
     border-radius: 0 12px 12px 12px;
     font-size: 12px;
     line-height: 16px;
-    max-width: calc(100% - 32px);
+    width: auto;
+    max-width: 70%;
+    /* max-width: calc(100% - 32px);s */
     color: var(--text-color-1);
+    line-height: 20px;
 }
 
 .message-wrapper {
@@ -317,7 +320,10 @@ a {
     }
 }
 
-.message link{
+.message-external-link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
     color: royalblue;
 }
 
@@ -373,7 +379,9 @@ a {
 }
 
 .mention {
-    color: #7c80fd;
+    /* color: #7c80fd; */
+    color: #3d42df;
+    text-decoration: none;
 }
 
 .chat-typing-area-wrapper {
