@@ -321,7 +321,7 @@ a {
     border: 1px solid silver;
     background-color: var(--background-3);
     color: var(--text-color-1);
-    width: 100%;
+    width: auto;
     margin-top: 16px;
     border-radius: 4px;
     padding: 8px;
