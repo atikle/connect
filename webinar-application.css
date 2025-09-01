@@ -328,6 +328,10 @@ a {
     padding: 8px;
     display: flex;
 
+    .link {
+        color: royalblue;
+    }
+
     .sketch {
         /* border-radius: 4px; */
         /* padding: 2px; */
