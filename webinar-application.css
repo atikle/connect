@@ -276,8 +276,8 @@ a {
 
 .name {
     margin: 0;
-    line-height: 16px;
-    font-size: 12px;
+    font-size: 13px;
+    /* line-height: 20px; */
     font-weight: 700;
     color: var(--text-color-1);
 }
@@ -287,13 +287,11 @@ a {
     background-color: var(--background-4);
     padding: 8px 16px;
     border-radius: 0 12px 12px 12px;
-    font-size: 12px;
-    line-height: 16px;
-    width: auto;
+    font-size: 13px;
+    line-height: 20px;
     max-width: 70%;
     /* max-width: calc(100% - 32px);s */
     color: var(--text-color-1);
-    line-height: 20px;
 }
 
 .message-wrapper {
@@ -331,7 +329,7 @@ a {
     border: 1px solid silver;
     background-color: var(--background-3);
     color: var(--text-color-1);
-    width: auto;
+    min-width: max-content;
     max-width: 70%;
     margin-top: 16px;
     border-radius: 4px;
