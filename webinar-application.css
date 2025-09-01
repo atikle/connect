@@ -317,6 +317,10 @@ a {
     }
 }
 
+.message-wrapper link {
+    color: royalblue;
+}
+
 .message-file {
     border: 1px solid silver;
     background-color: var(--background-3);
@@ -327,10 +331,6 @@ a {
     border-radius: 4px;
     padding: 8px;
     display: flex;
-
-    .link {
-        color: royalblue;
-    }
 
     .sketch {
         /* border-radius: 4px; */
