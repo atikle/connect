@@ -54,17 +54,17 @@ a {
     
     position: relative;
     /* background-color: black; */
-    background-color: var(--background-3);
+    background-color: var(--background-2);
 
     border-radius: 15px;
     border: 0.53% solid transparent;
     box-shadow: var(--navigation-box-shadow);
     margin: auto;
 
-    background-image: url(https://atikle.github.io/resource/atikle_connect/video- participant-placeholder-1.png);
+    background-image: url(https://atikle.github.io/connect/static/video-participant-placeholder-1.png);
     background-repeat: no-repeat;
-    background-size: 400px;
-    background-position: 50% 101%;
+    background-size: 25%;
+    background-position: 50% 50%;
 
     img {
         width: 100%;
@@ -77,6 +77,17 @@ video {
     width: 100%;
     height: 100%;
     border-radius: 15px;
+}
+
+.branding-tag {
+    max-width: 30px;
+    max-height: 30px;
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    /* color: black;
+    background-color: white; */
+    /* padding: 4px 12px; */
 }
 
 .name-tag {
