@@ -297,6 +297,10 @@ video {
     display: flex;
 }
 
+.message-wrapper a {
+    cursor: pointer;
+}
+
 .message-wrapper {
     padding: 16px 0;
 
