@@ -40,6 +40,7 @@ a {
     left: 85px;
     right: 500px;
     background-color: transparent;
+    user-select: none;
 }
 
 .video-participant {
@@ -147,6 +148,7 @@ video {
     bottom: 20px;
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 
 .video-action-button {
