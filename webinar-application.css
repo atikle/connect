@@ -25,43 +25,58 @@ a {
     flex-wrap: wrap;
 
     position: fixed;
+
+    /* width: 77%;
+    height: 57.75%; */
+
+    /* width: auto;
+    height: auto; */
+
     width: auto;
-    height: auto;
+    height: 84.5%;
+
     top: 88px;
     bottom: 100px;
     left: 85px;
     right: 500px;
-    border-radius: 15px;
-    /* background-color: var(--navigation-bg);
-    box-shadow: var(--navigation-box-shadow); */
     background-color: transparent;
 }
 
 .video-participant {
-    width: 32.8%;
     /* width: 33.33%; */
-    height: 48.8%;
     /* height: 50%; */
-    position: relative;
-    background-color: black;
 
-    /* delete this */
+    /* width: 32.8%;
+    height: 48.8%; */
+
+    width: 32.8%;
+    height: 46.7%;
+    
+    position: relative;
+    /* background-color: black; */
+    background-color: var(--background-3);
+
     border-radius: 15px;
     border: 0.53% solid transparent;
     box-shadow: var(--navigation-box-shadow);
     margin: auto;
-    /* delete till here */
 
-    /* background-image: url(https://atikle.github.io/resource/atikle_connect/host-icon.png);
+    background-image: url(https://atikle.github.io/resource/atikle_connect/host-icon.png);
     background-repeat: no-repeat;
     background-size: 400px;
-    background-position: 150px 150px; */
+    background-position: 50% 101%;
 
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
 }
 
 .name-tag {
@@ -204,6 +219,7 @@ a {
     background-position: center left 12px;
     background-size: 16px;
     font-size: 14px;
+    box-shadow: var(--shadow-1);
 }
 
 
