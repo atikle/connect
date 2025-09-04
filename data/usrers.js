@@ -2,8 +2,8 @@ const users = {
     'anurag_gautam': {
         name: 'Anurag Gautam',
         username: '@anurag_gautam',
-        avatarUrl: 'https://atikle.github.io/connect/data/application/avatar/anurag_gautam.jpg',
-        bio: 'Passionate web developer...',
+        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg',
+        bio: 'Passionate web developer with a love for clean code and intuitive design. I enjoy building applications that solve real-world problems and creating engaging user experiences.',
         stats: {
             posts: 2,
             webinars: 7
@@ -15,12 +15,12 @@ const users = {
             linkedin: '#',
             github: '#'
         }
-    }, // <-- Make sure this comma is here before adding the next user
+    },
 
     'aditya': {
         name: 'Aditya',
         username: '@aditya',
-        avatarUrl: 'https://via.placeholder.com/150', // Placeholder image
+        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/aditya.jpg',
         bio: 'UX Designer and front-end enthusiast.',
         stats: {
             posts: 10,
@@ -30,5 +30,20 @@ const users = {
             twitter: '#',
             linkedin: '#'
         }
-    } // The very last entry doesn't need a comma after it
+    },
+
+    'ananya': {
+        name: 'Ananya',
+        username: '@ananya',
+        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/ananya.jpg',
+        bio: 'UX Designer and back-end enthusiast.',
+        stats: {
+            posts: 10,
+            webinars: 3
+        },
+        socials: {
+            twitter: '#',
+            linkedin: '#'
+        }
+    },
 };
