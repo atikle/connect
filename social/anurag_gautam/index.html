@@ -33,6 +33,7 @@
 
     <script src="https://atikle.github.io/connect/data/users.js"></script>
     <script src="posts.js"></script>
+    <script src="webinars.js"></script>
     
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
     <link rel="stylesheet" href="https://atikle.github.io/connect/connect.css">
@@ -94,45 +95,20 @@
 
                         <div id="posts" class="tab-content active">
                             <div class="posts-feed">
+
                                 <div id="posts" class="tab-content active">
                                     <div class="posts-feed"></div>
                                 </div>
+
                             </div>
                         </div>
 
                         <div id="webinars" class="tab-content">
                             <div class="webinars-list">
 
-                                <div id="posts" class="tab-content active">
-                                    <div class="posts-feed"></div>
+                                <div id="webinars" class="tab-content">
+                                    <div class="webinars-list"></div>
                                 </div>
-
-                                <!-- <article class="webinar-card">
-                                    <div class="webinar-thumbnail">
-                                        <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?q=80&w=2070" alt="Webinar Thumbnail">
-                                    </div>
-                                    <div class="webinar-details">
-                                        <h3>Introduction to Algorithmic Trading</h3>
-                                        <p class="webinar-time">Hosted on: August 15, 2025</p>
-                                        <div class="webinar-actions">
-                                            <a href="#" class="btn-action btn-recording">Watch Recording</a>
-                                            <a href="#" class="btn-action btn-files">View Files</a>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="webinar-card">
-                                    <div class="webinar-thumbnail">
-                                        <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1932" alt="Webinar Thumbnail">
-                                    </div>
-                                    <div class="webinar-details">
-                                        <h3>Understanding Blockchain & Crypto Assets</h3>
-                                        <p class="webinar-time">Hosted on: July 28, 2025</p>
-                                        <div class="webinar-actions">
-                                            <a href="#" class="btn-action btn-recording">Watch Recording</a>
-                                            <a href="#" class="btn-action btn-files">View Files</a>
-                                        </div>
-                                    </div>
-                                </article> -->
                                 
                             </div>
                         </div>
@@ -143,31 +119,26 @@
         </div>
     </div>
 
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
             // --- DATA ---
-            // Assuming 'users database' and 'posts' are loaded from users.js and posts.js
-            const currentUser = users['anurag_gautam']; // Change this to view a different user's profile
+            // Assuming 'users', 'posts', and 'webinars' are loaded from their respective .js files
+            const currentUser = users['anurag_gautam']; 
 
             // --- 1. RENDER MAIN PROFILE ---
             function renderProfile() {
-                if (!currentUser) return; // Exit if user not found
-
-                // Populate header info
+                if (!currentUser) return;
                 document.getElementById('profile-avatar').src = currentUser.avatarUrl;
                 document.getElementById('profile-name').innerText = currentUser.name;
                 document.getElementById('profile-handle').innerText = currentUser.username;
                 document.getElementById('profile-bio').innerText = currentUser.bio;
-
-                // Populate stats
                 document.getElementById('profile-posts-count').innerText = currentUser.stats.posts;
                 document.getElementById('profile-webinars-count').innerText = currentUser.stats.webinars;
-
-                // Populate social links
                 const socialContainer = document.getElementById('profile-social-links');
-                socialContainer.innerHTML = ''; // Clear existing links
+                socialContainer.innerHTML = '';
                 for (const [platform, url] of Object.entries(currentUser.socials)) {
                     const link = document.createElement('a');
                     link.href = url;
@@ -179,39 +150,50 @@
             // --- 2. RENDER POSTS ---
             function renderPosts() {
                 const feedContainer = document.querySelector('.posts-feed');
-                feedContainer.innerHTML = ''; // Clear feed
-
+                feedContainer.innerHTML = ''; 
                 posts.forEach(post => {
-                    // Find the author's data from the users object
                     const author = users[post.authorUsername];
-                    if (!author) return; // Skip post if author not found
-
-                    // Use a template literal to build the HTML for the post card
+                    if (!author) return;
                     const postHTML = `
                         <article class="post-item">
                             <div class="post-header">
-                                <div class="post-author">
-                                    <div class="post-author-avatar">
-                                        <img src="${author.avatarUrl}" alt="${author.name}'s profile picture">
-                                    </div>
-                                    <div class="post-author-info">
-                                        <p class="post-author-name">${author.name}</p>
-                                        <p class="post-author-handle">${author.username}</p>
-                                    </div>
-                                </div>
+                                <div class="post-author"><div class="post-author-avatar"><img src="${author.avatarUrl}" alt="${author.name}'s profile picture"></div><div class="post-author-info"><p class="post-author-name">${author.name}</p><p class="post-author-handle">${author.username}</p></div></div>
+                                <div class="post-options"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></div>
                             </div>
                             <p class="post-meta">Posted on ${post.timestamp}</p>
-
                             <p class="post-text">${post.text}</p>
                             ${post.imageUrl ? `<img class="post-image" src="${post.imageUrl}" alt="Post image">` : ''}
-                        </article>
-                    `;
-                    // Add the new post card to the feed
+                        </article>`;
                     feedContainer.innerHTML += postHTML;
                 });
             }
 
-            // --- 3. ANIMATED STATS ---
+            // --- 3. RENDER WEBINARS (NEW FUNCTION) ---
+            function renderWebinars() {
+                const webinarContainer = document.querySelector('.webinars-list');
+                webinarContainer.innerHTML = ''; // Clear container
+
+                webinars.forEach(webinar => {
+                    const webinarHTML = `
+                        <article class="webinar-card">
+                            <div class="webinar-thumbnail">
+                                <img src="${webinar.thumbnailUrl}" alt="Webinar Thumbnail">
+                            </div>
+                            <div class="webinar-details">
+                                <h3>${webinar.title}</h3>
+                                <p class="webinar-time">Hosted on: ${webinar.date}</p>
+                                <div class="webinar-actions">
+                                    <a href="${webinar.recordingUrl}" class="btn-action btn-recording">Watch Recording</a>
+                                    <a href="${webinar.filesUrl}" class="btn-action btn-files">View Files</a>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                    webinarContainer.innerHTML += webinarHTML;
+                });
+            }
+
+            // --- 4. ANIMATED STATS ---
             function animateStats() {
                 const counters = document.querySelectorAll('.count-up');
                 counters.forEach(counter => {
@@ -230,7 +212,7 @@
                 });
             }
 
-            // --- 4. TABS LOGIC ---
+            // --- 5. TABS LOGIC ---
             function setupTabs() {
                 const tabs = document.querySelectorAll('.tab-btn');
                 const contents = document.querySelectorAll('.tab-content');
@@ -261,6 +243,7 @@
             // --- INITIALIZE EVERYTHING ---
             renderProfile();
             renderPosts();
+            renderWebinars(); // <-- Call the new function
             animateStats();
             setupTabs();
         });
