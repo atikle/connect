@@ -8,6 +8,7 @@ const users = {
             posts: 2,
             webinars: 7
         },
+        ConnectProfileLink: '',
         socials: {
             instagram: '#',
             facebook: '#',

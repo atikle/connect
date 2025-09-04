@@ -20,6 +20,9 @@
         gtag('config', 'G-75KEQGM2PS');
     </script>
 
+    <script src="https://atikle.github.io/connect/data/users.js"></script>
+    <script src="posts.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://atikle.github.io/connect/framework/universal/script.js"></script>
     <script>
@@ -487,36 +490,27 @@
                     <div class="profile-header">
                         <div class="profile-info">
                             <div class="profile-picture">
-                                <img src="https://atikle.github.io/connect/static/anurag.jpg" alt="User Profile Picture">
+                                <img id="profile-avatar" src="" alt="User Profile Picture">
                             </div>
                             <div class="user-details">
-                                <h1 class="user-name">Anurag Gautam</h1>
-                                <h2 class="user-handle">@anurag_gautam</h2>
-                                
+                                <h1 id="profile-name" class="user-name"></h1>
+                                <h2 id="profile-handle" class="user-handle"></h2>
+
                                 <div class="user-stats">
                                     <div class="user-stat">
-                                        <span class="value count-up">2</span><br>
+                                        <span id="profile-posts-count" class="value count-up">0</span><br>
                                         <span class="label">Posts</span>
                                     </div>
                                     <div class="user-stat">
-                                        <span class="value count-up">7</span><br>
+                                        <span id="profile-webinars-count" class="value count-up">0</span><br>
                                         <span class="label">Webinars</span>
                                     </div>
                                 </div>
 
-                                <div class="social-links">
-                                    <a href="#">Instagram</a>
-                                    <a href="#">Facebook</a>
-                                    <a href="#">X</a>
-                                    <a href="#">LinkedIn</a>
-                                    <a href="#">GitHub</a>
-                                </div>
+                                <div id="profile-social-links" class="social-links"></div>
                             </div>
                         </div>
-                        <p class="about-text">
-                            Passionate web developer with a love for clean code and intuitive design.
-                            I enjoy building applications that solve real-world problems and creating engaging user experiences.
-                        </p>
+                        <p id="profile-bio" class="about-text"></p>
                     </div>
 
                     <div class="tabs-container">
@@ -531,21 +525,20 @@
 
                         <div id="posts" class="tab-content active">
                             <div class="posts-feed">
-                                <article class="post-item">
-                                    <p class="post-meta">Posted on September 4, 2025</p>
-                                    <p class="post-text">Excited to share the revamped profile page for Atikle Connect! Added smooth animations and new sections for posts and webinars. What do you think?</p>
-                                    <img class="post-image" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070" alt="Post image showing code">
-                                </article>
-                                <article class="post-item">
-                                    <p class="post-meta">Posted on September 2, 2025</p>
-                                    <p class="post-text">Just wrapped up a fantastic webinar on "The Future of Fintech." The engagement was incredible! The recording is now available in the webinars tab.</p>
-                                </article>
+                                <div id="posts" class="tab-content active">
+                                    <div class="posts-feed"></div>
+                                </div>
                             </div>
                         </div>
 
                         <div id="webinars" class="tab-content">
                             <div class="webinars-list">
-                                <article class="webinar-card">
+
+                                <div id="posts" class="tab-content active">
+                                    <div class="posts-feed"></div>
+                                </div>
+
+                                <!-- <article class="webinar-card">
                                     <div class="webinar-thumbnail">
                                         <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?q=80&w=2070" alt="Webinar Thumbnail">
                                     </div>
@@ -570,96 +563,146 @@
                                             <a href="#" class="btn-action btn-files">View Files</a>
                                         </div>
                                     </div>
-                                </article>
-                                </div>
+                                </article> -->
+                                
+                            </div>
                         </div>
 
                     </div>
-                    </div>
+                </div>           
             </div>
         </div>
     </div>
 
-    <script>
-            // UPDATED Animated Count-Up for Stats (Works great for small numbers)
-            document.addEventListener('DOMContentLoaded', function() {
-                const counters = document.querySelectorAll('.count-up');
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- DATA ---
+            // Assuming 'users' and 'posts' are loaded from users.js and posts.js
+            const currentUser = users['anurag_gautam']; // Change this to view a different user's profile
+
+            // --- 1. RENDER MAIN PROFILE ---
+            function renderProfile() {
+                if (!currentUser) return; // Exit if user not found
+
+                // Populate header info
+                document.getElementById('profile-avatar').src = currentUser.avatarUrl;
+                document.getElementById('profile-name').innerText = currentUser.name;
+                document.getElementById('profile-handle').innerText = currentUser.username;
+                document.getElementById('profile-bio').innerText = currentUser.bio;
+
+                // Populate stats
+                document.getElementById('profile-posts-count').innerText = currentUser.stats.posts;
+                document.getElementById('profile-webinars-count').innerText = currentUser.stats.webinars;
+
+                // Populate social links
+                const socialContainer = document.getElementById('profile-social-links');
+                socialContainer.innerHTML = ''; // Clear existing links
+                for (const [platform, url] of Object.entries(currentUser.socials)) {
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.innerText = platform.charAt(0).toUpperCase() + platform.slice(1);
+                    socialContainer.appendChild(link);
+                }
+            }
+
+            // --- 2. RENDER POSTS ---
+            function renderPosts() {
+                const feedContainer = document.querySelector('.posts-feed');
+                feedContainer.innerHTML = ''; // Clear feed
+
+                posts.forEach(post => {
+                    // Find the author's data from the users object
+                    const author = users[post.authorUsername];
+                    if (!author) return; // Skip post if author not found
+
+                    // Use a template literal to build the HTML for the post card
+                    const postHTML = `
+                        <article class="post-item">
+                            <div class="post-header">
+                                <div class="post-author">
+                                    <div class="post-author-avatar">
+                                        <img src="${author.avatarUrl}" alt="${author.name}'s profile picture">
+                                    </div>
+                                    <div class="post-author-info">
+                                        <p class="post-author-name">${author.name}</p>
+                                        <p class="post-author-handle">${author.username}</p>
+                                    </div>
+                                </div>
+                                <div class="post-options">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="5" r="2"></circle>
+                                        <circle cx="12" cy="12" r="2"></circle>
+                                        <circle cx="12" cy="19" r="2"></circle>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="post-meta">Posted on ${post.timestamp}</p>
+                            <p class="post-text">${post.text}</p>
+                            ${post.imageUrl ? `<img class="post-image" src="${post.imageUrl}" alt="Post image">` : ''}
+                        </article>
+                    `;
+                    // Add the new post card to the feed
+                    feedContainer.innerHTML += postHTML;
+                });
+            }
+
+            // --- 3. ANIMATED STATS ---
+            function animateStats() {
+                const counters = document.querySelectorAll('.count-up');
                 counters.forEach(counter => {
                     const target = +counter.innerText;
-                    counter.innerText = '0'; // Start the display at 0
-
-                    // The delay between each number changing (in milliseconds).
-                    // A larger number means a slower animation. 75 is a good starting point.
+                    counter.innerText = '0';
                     const delay = 75; 
-
                     let currentCount = 0;
                     const updateCount = setInterval(() => {
                         currentCount++;
                         counter.innerText = currentCount;
-
-                        // Stop the interval when the target is reached
                         if (currentCount >= target) {
                             clearInterval(updateCount);
-                            counter.innerText = target; // Ensure it ends on the exact target
+                            counter.innerText = target;
                         }
                     }, delay);
                 });
-            });
-
-
-
-        // UPDATED JAVASCRIPT FOR GOOGLE-STYLE TABS
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabsContainer = document.querySelector('.profile-tabs');
-            const tabs = document.querySelectorAll('.tab-btn');
-            const contents = document.querySelectorAll('.tab-content');
-            const slider = document.querySelector('.slider');
-
-            // Function to move the slider
-            function moveSlider(activeTab) {
-                if (!activeTab) return;
-                // Get the position of the active tab relative to its container
-                const leftPosition = activeTab.offsetLeft;
-                const width = activeTab.offsetWidth;
-                
-                // Move and resize the slider
-                slider.style.width = `${width}px`;
-                slider.style.transform = `translateX(${leftPosition}px)`;
             }
 
-            // Initial positioning of the slider on page load
-            const initialActiveTab = document.querySelector('.tab-btn.active');
-            moveSlider(initialActiveTab);
+            // --- 4. TABS LOGIC ---
+            function setupTabs() {
+                const tabs = document.querySelectorAll('.tab-btn');
+                const contents = document.querySelectorAll('.tab-content');
+                const slider = document.querySelector('.slider');
 
-            // Event listener for tab clicks
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    // Remove active class from all tabs and content
-                    tabs.forEach(item => item.classList.remove('active'));
-                    contents.forEach(item => item.classList.remove('active'));
+                function moveSlider(activeTab) {
+                    if (!activeTab) return;
+                    slider.style.width = `${activeTab.offsetWidth}px`;
+                    slider.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+                }
 
-                    // Add active class to clicked tab and corresponding content
-                    const targetContent = document.getElementById(tab.dataset.tab);
-                    tab.classList.add('active');
-                    targetContent.classList.add('active');
-                    
-                    // Move the slider to the new active tab
-                    moveSlider(tab);
+                const initialActiveTab = document.querySelector('.tab-btn.active');
+                moveSlider(initialActiveTab);
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(item => item.classList.remove('active'));
+                        contents.forEach(item => item.classList.remove('active'));
+                        tab.classList.add('active');
+                        document.getElementById(tab.dataset.tab).classList.add('active');
+                        moveSlider(tab);
+                    });
                 });
-            });
 
-            // Recalculate slider position on window resize
-            window.addEventListener('resize', () => {
-                const activeTab = document.querySelector('.tab-btn.active');
-                moveSlider(activeTab);
-            });
+                window.addEventListener('resize', () => moveSlider(document.querySelector('.tab-btn.active')));
+            }
+
+            // --- INITIALIZE EVERYTHING ---
+            renderProfile();
+            renderPosts();
+            animateStats();
+            setupTabs();
         });
     </script>
-    
-    <script>
-        const FILE_MESSAGE = "File isn't available right now. Try again later.";
-    </script>
+
     <script src="https://atikle.github.io/connect/framework/universal/theme.js"></script>
 
 </body>
