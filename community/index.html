@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <!-- <meta name="description" content="This is description"> -->
+    <meta name="keyword" content="atikleconnectrecordings, atikle connect recordings, financial webinar recordings, atikle financial webinar recordings">
+
+    <!-- Roboto @ Google Fonts -->
+    <!-- font-family: "Roboto", sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Poppins @ Google Fonts -->
+    <!-- font-family: 'Poppins', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- Fredoka @ Google Fonts -->
+    <!-- font-family: 'Fredoka', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+
+    <!-- Ununtu @ Google Fonts -->
+    <!-- font-family: 'Ubuntu', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-75KEQGM2PS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-75KEQGM2PS');
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://atikle.github.io/connect/framework/universal/script.js"></script>
+    
+    <script>
+        $(function () {
+            $("#header-placeholder").load("https://atikle.github.io/connect/framework/header.html");
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#navbar-placeholder").load("https://atikle.github.io/connect/framework/navbar.html");
+        });
+    </script>
+
+    <script src="https://atikle.github.io/connect/data/users.js"></script>
+
+    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
+    <link rel="stylesheet" href="https://atikle.github.io/connect/connect.css">
+
+    <title>Community | atikle connect</title>
+    <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
+
+    <style>
+        #profiles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+        }
+        .profile-card {
+            background-color: var(--background-4);
+            border-radius: 12px;
+            box-shadow: var(--shadow-1);
+            padding: 20px;
+            text-align: center;
+            text-decoration: none; /* Remove underline from link */
+            color: inherit;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .profile-card .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--background-3);
+        }
+        .profile-card .name {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 0 0 5px 0;
+            color: var(--text-color-1);
+        }
+        .profile-card .username {
+            font-size: 0.9em;
+            color: var(--text-color-2);
+            /* color: #657786; */
+            margin: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <div id="navbar-placeholder"></div>
+
+    <div class="main-content">
+
+        <h1 class="section-heading">Community</h1>
+
+        <div class="scroolable-content">
+            <div id="profiles-container"></div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('profiles-container');
+
+            // The 'users' object is now available because we loaded users.js
+            if (typeof users !== 'undefined') {
+
+                // Loop through each user in the users object
+                Object.values(users).forEach(user => {
+                    // Create the HTML for one profile card using a template literal
+                    const profileCardHTML = `
+                        <a href="${user.ConnectProfileUrl}" class="profile-card">
+                            <img src="${user.avatarUrl}" alt="${user.name}'s avatar" class="avatar">
+                            <h3 class="name">${user.name}</h3>
+                            <p class="username">${user.username}</p>
+                        </a>
+                    `;
+
+                    // Add the new card's HTML to the container
+                    container.innerHTML += profileCardHTML;
+                });
+            } else {
+                container.innerHTML = "<p>Error: Could not load user data.</p>";
+            }
+        });
+    </script>
+
+    <script src="https://atikle.github.io/connect/framework/universal/theme.js"></script>
+
+</body>
+
+</html>
