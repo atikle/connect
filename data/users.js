@@ -18,12 +18,12 @@ const users = {
         }
     },
 
-    'aditya': {
-        name: 'Aditya',
-        username: '@aditya',
-        ConnectProfileUrl: 'https://atikle.github.io/connect/community/aditya',
-        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/aditya.jpg',
-        bio: 'UX Designer and front-end enthusiast.',
+    'ananya': {
+        name: 'Ananya',
+        username: '@ananya',
+        ConnectProfileUrl: 'https://atikle.github.io/connect/community/ananya',
+        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/ananya.jpg',
+        bio: 'UX Designer and back-end enthusiast.',
         stats: {
             posts: 10,
             webinars: 3
@@ -37,12 +37,12 @@ const users = {
         }
     },
 
-    'ananya': {
-        name: 'Ananya',
-        username: '@ananya',
-        ConnectProfileUrl: 'https://atikle.github.io/connect/community/ananya',
-        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/ananya.jpg',
-        bio: 'UX Designer and back-end enthusiast.',
+    'aditya': {
+        name: 'Aditya',
+        username: '@aditya',
+        ConnectProfileUrl: 'https://atikle.github.io/connect/community/aditya',
+        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/aditya.jpg',
+        bio: 'UX Designer and front-end enthusiast.',
         stats: {
             posts: 10,
             webinars: 3
