@@ -67,41 +67,65 @@
     <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
 
     <style>
-        #profiles-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 40px;
-            max-width: 1000px;
-            width: 100%;
+        .designation-category {
+            padding: 10px 0px 0px 20px;
+            text-decoration: underline;
+            text-decoration-color: crimson;
+            text-underline-offset: 5px;
+            text-decoration-thickness: 3px;
         }
+        #profiles-container, #admin-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 30px;
+            width: 98%;
+            margin-top: 0px;
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+
         .profile-card {
-            background-color: var(--background-4);
+            width: auto;
             border-radius: 12px;
             box-shadow: var(--shadow-1);
             padding: 20px;
             text-align: center;
-            text-decoration: none; /* Remove underline from link */
+            text-decoration: none;
+            background-color: var(--background-4);
             color: inherit;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .profile-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+            & .avatar {
+            border-radius: 20px;
+            border: 3px solid var(--background-4);
+            }
         }
+
         .profile-card .avatar {
-            width: 80px;
-            height: 80px;
+            width: 10vw;
+            height: 10vw;
+            min-width: 80px;
+            min-height: 80px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 15px;
-            border: 3px solid var(--background-3);
+            border: 3px solid transparent;
+            transition-duration: 0.3s;
         }
+        
         .profile-card .name {
             font-size: 1.1em;
             font-weight: 600;
             margin: 0 0 5px 0;
             color: var(--text-color-1);
         }
+
         .profile-card .username {
             font-size: 0.9em;
             color: var(--text-color-2);
@@ -123,7 +147,10 @@
         <h1 class="section-heading">Community</h1>
 
         <div class="scroolable-content">
+            <h1 class="designation-category">Hosts</h1>
             <div id="profiles-container"></div>
+            <h1 class="designation-category">Admins</h1>
+            <div id="admin-container"></div>
         </div>
 
     </div>
@@ -155,7 +182,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('profiles-container');
+            const container = document.getElementById('admin-container');
 
             // The 'users' object is now available because we loaded users.js
             if (typeof admin !== 'undefined') {
@@ -176,7 +203,7 @@
                     container.innerHTML += profileCardHTML;
                 });
             } else {
-                container.innerHTML = "<p>Error: Could not load user data.</p>";
+                container.innerHTML = "<p>Error: Could not load admin data.</p>";
             }
         });
     </script>
