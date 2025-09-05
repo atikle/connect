@@ -153,6 +153,29 @@
                 container.innerHTML = "<p>Error: Could not load user data.</p>";
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('profiles-container');
+
+            // The 'users' object is now available because we loaded users.js
+            if (typeof admin !== 'undefined') {
+
+                // Loop through each user in the users object
+                Object.values(admin).forEach(admin => {
+                    // Create the HTML for one profile card using a template literal
+                    const profileCardHTML = `
+                        <img src="${admin.avatarUrl}" alt="${admin.name}'s avatar" class="avatar">
+                        <h3 class="name">${admin.name}</h3>
+                        <p class="username">${admin.username}</p>
+                    `;
+
+                    // Add the new card's HTML to the container
+                    container.innerHTML += profileCardHTML;
+                });
+            } else {
+                container.innerHTML = "<p>Error: Could not load user data.</p>";
+            }
+        });
     </script>
 
     <script src="https://atikle.github.io/connect/framework/universal/theme.js"></script>

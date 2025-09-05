@@ -1,4 +1,4 @@
-const users = {
+const admin = {
     'atikle_connect': {
         name: 'atikle connect',
         username: '@atikle_connect',
