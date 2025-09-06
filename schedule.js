@@ -20,6 +20,8 @@ const future_webinars = {
     }
 };
 
+
+
 const present_webinars = {
     'webinar-7': {
         name: 'Pilot Testing Session 7 (active window)',
