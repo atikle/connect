@@ -147,7 +147,7 @@ h1 {
     flex-direction: column;
     overflow: hidden;
     gap: 0px;
-    user-select: none;
+    /* user-select: none; */
 }
 
 .scroolable-content {
