@@ -147,11 +147,69 @@
         <h1 class="section-heading">Webinar Schedule</h1>
 
         <div class="scroolable-content">
-            <div id="webinar" class="webinar">
-            </div>
+            <div id="webinar-list"></div>
         </div>
 
     </div>
+
+    <script>
+        // This function runs once the entire page is loaded
+        window.onload = function() {
+            const webinarListContainer = document.getElementById('webinar-list');
+
+            // --- Helper Function to Generate and Append HTML ---
+            // status can be 'past', 'present', or 'future'
+            function processWebinars(webinarObject, status) {
+                for (const key in webinarObject) {
+                    if (webinarObject.hasOwnProperty(key)) {
+                        const webinar = webinarObject[key];
+                        let buttonHtml = '';
+
+                        // Determine the button based on the status
+                        switch (status) {
+                            case 'past':
+                                buttonHtml = `<a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>`;
+                                break;
+                            case 'present':
+                                buttonHtml = `<a href="https://atikle.github.io/connect/webinar" class="join-button active">Join Now</a>`;
+                                break;
+                            case 'future':
+                                buttonHtml = `<a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Upcoming Session</a>`;
+                                break;
+                        }
+
+                        // Create the final HTML for the webinar entry
+                        const webinarHtml = `
+                            <div class="webinar">
+                                <div class="webinar-name">
+                                    ${webinar.name}
+                                </div>
+                                <div class="webinar-date-time">
+                                    ${webinar.date} | ${webinar.StartTime}
+                                </div>
+                                ${buttonHtml}
+                            </div>
+                        `;
+
+                        // Add the generated HTML to the page
+                        webinarListContainer.innerHTML += webinarHtml;
+                    }
+                }
+            }
+
+            // --- Process Each Category ---
+            // Check if each constant exists before processing to avoid errors
+            if (typeof future_webinars !== 'undefined') {
+                processWebinars(future_webinars, 'future');
+            }
+            if (typeof present_webinars !== 'undefined') {
+                processWebinars(present_webinars, 'present');
+            }
+            if (typeof past_webinars !== 'undefined') {
+                processWebinars(past_webinars, 'past');
+            }
+        };
+    </script>
 
     <script>
         const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
