@@ -163,31 +163,46 @@
                 for (const key in webinarObject) {
                     if (webinarObject.hasOwnProperty(key)) {
                         const webinar = webinarObject[key];
+                        let specialId = '';
                         let buttonHtml = '';
+                        let tagsHtml = ''; // Initialize an empty string for tags
 
-                        // Determine the button based on the status
+                        // Determine the button and tags based on the status
                         switch (status) {
-                            case 'past':
-                                buttonHtml = `<a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>`;
-                                break;
-                            case 'present':
-                                buttonHtml = `<a href="https://atikle.github.io/connect/webinar" class="join-button active">Join Now</a>`;
-                                break;
                             case 'future':
                                 buttonHtml = `<a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Upcoming Session</a>`;
                                 break;
+                            case 'present':
+                                specialId = 'target-element-scroll';
+                                buttonHtml = `<a href="https://atikle.github.io/connect/webinar" class="join-button active">Join Now</a>`;
+                                tagsHtml = `<div class="webinar-tags-container">
+                                                <div onclick="alert(LIVE_MESSAGE)" class="tag live">● Live</div>
+                                            </div>`;
+                                break;
+                            case 'past':
+                                buttonHtml = `<a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>`;
+                                tagsHtml = `<div class="webinar-tags-container">
+                                                <div onclick="alert(RECORDING_MESSAGE)" class="tag recording">Recording</div>
+                                            </div>`;
+                                    break;
                         }
 
                         // Create the final HTML for the webinar entry
+                        // We add wrappers for better layout control
                         const webinarHtml = `
-                            <div class="webinar">
-                                <div class="webinar-name">
-                                    ${webinar.name}
+                            <div class="webinar" ${specialId}>
+                                <div class="webinar-info">
+                                    <div class="webinar-name">
+                                        ${webinar.name}
+                                    </div>
+                                    <div class="webinar-date-time">
+                                        ${webinar.date} | ${webinar.StartTime}
+                                    </div>
                                 </div>
-                                <div class="webinar-date-time">
-                                    ${webinar.date} | ${webinar.StartTime}
+                                <div class="webinar-actions">
+                                    ${tagsHtml}
+                                    ${buttonHtml}
                                 </div>
-                                ${buttonHtml}
                             </div>
                         `;
 
