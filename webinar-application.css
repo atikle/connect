@@ -295,48 +295,31 @@ video {
 
 .message-wrapper {
     display: flex;
+    flex-direction: column;
+    padding: 16px 0;
 }
 
 .message-wrapper a {
     cursor: pointer;
 }
 
-.message-wrapper {
-    padding: 16px 0;
-
-    &.reverse {
-        flex-direction: row-reverse;
-
-        .message {
-            background-color: #3d42df;
-            color: #fff;
-            margin-left: auto;
-            border-radius: 16px 0px 16px 16px;
-        }
-
-        .profile-picture {
-            margin-right: 0px;
-            margin-left: 12px;
-        }
-
-        .name {
-            text-align: right;
-        }
-    }
+.author-details {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
 }
 
 .profile-picture {
-    border-radius: 8px;
     width: 32px;
     height: 32px;
-    overflow: hidden;
+    border-radius: 8px;
     margin-right: 12px;
     flex-shrink: 0;
-
     box-shadow: var(--shadow-1);
     cursor: pointer;
+    overflow: hidden;
 
-    img {
+    & img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -345,24 +328,32 @@ video {
 
 .name {
     margin: 0;
-    font-size: 13px;
-    /* line-height: 20px; */
+    font-size: 14px;
+    line-height: 32px;
     font-weight: 700;
     color: var(--text-color-1);
     cursor: pointer;
 }
 
+.message-content {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    padding-left: 40px;
+}
+
 .message {
     margin-top: 8px;
-    background-color: var(--background-4);
     padding: 8px 16px;
     border-radius: 0 12px 12px 12px;
     font-size: 13px;
     line-height: 20px;
+    width: max-content;
     max-width: 70%;
     /* max-width: calc(100% - 32px);s */
     color: var(--text-color-1);
-
+    background-color: var(--background-4);
     box-shadow: var(--shadow-1);
 }
 
@@ -430,6 +421,53 @@ video {
 
 .file-size {
     color: #b8b8b8;
+}
+
+
+
+
+.message-wrapper-reverse {
+    display: flex;
+    flex-direction: column;
+
+    .author-details {
+        width: fit-content;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .profile-picture {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        margin-right: 8px;
+        margin-left: 12px;
+        flex-shrink: 0;
+        box-shadow: var(--shadow-1);
+        cursor: pointer;
+        overflow: hidden;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .message-content {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        padding-right: 45px;
+    }
+
+    .message {
+        background-color: #3d42df;
+        color: #fff;
+        margin-left: auto;
+        border-radius: 16px 0px 16px 16px;
+    }
 }
 
 
