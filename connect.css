@@ -160,7 +160,7 @@ h1 {
     margin-bottom: 20px;
     padding-bottom: 10px;
     /* white-space: nowrap; */ /* Prevent text wrapping */
-    user-select: none;
+    /* user-select: none; */
 }
 
 .section-heading {
