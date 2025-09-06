@@ -1,58 +1,61 @@
 const webinars = {
     'webinar-1': {
         name: 'Pilot Testing Session 1',
-        username: '@anurag_gautam',
-        ConnectProfileUrl: 'https://atikle.github.io/connect/community/anurag_gautam',
-        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg',
-        bio: 'Passionate web developer with a love for clean code and intuitive design. I enjoy building applications that solve real-world problems and creating engaging user experiences.',
-        stats: {
-            posts: 2,
-            webinars: 7
-        },
-        socials: {
-            instagram: '#',
-            facebook: '#',
-            twitter: '#',
-            linkedin: '#',
-            github: '#'
-        }
+        date: '20th June 2025',
+        StartTime: '5PM',
+        duration: '63 minutes',
+        recordingUrl: 'https://atikle.github.io/connect/recordings',
+        filesUrl: 'https://atikle.github.io/connect/files',
+        thumbnailUrl: 'https://atikle.github.io/resource/atikle_connect/video-thumbnail.svg'
     },
 
-    'ananya': {
-        name: 'Ananya',
-        username: '@ananya',
-        ConnectProfileUrl: 'https://atikle.github.io/connect/community/ananya',
-        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/ananya.jpg',
-        bio: 'UX Designer and back-end enthusiast.',
-        stats: {
-            posts: 10,
-            webinars: 3
-        },
-        socials: {
-            instagram: '#',
-            facebook: '#',
-            twitter: '#',
-            linkedin: '#',
-            github: '#'
-        }
+    'webinar-2': {
+        name: 'Pilot Testing Session 2',
+        date: '25th June 2025',
+        StartTime: '5PM',
+        duration: '42 minutes',
+        recordingUrl: 'https://atikle.github.io/connect/recordings',
+        filesUrl: 'https://atikle.github.io/connect/files',
+        thumbnailUrl: 'https://atikle.github.io/resource/atikle_connect/video-thumbnail.svg'
     },
 
-    'aditya': {
-        name: 'Aditya',
-        username: '@aditya',
-        ConnectProfileUrl: 'https://atikle.github.io/connect/community/aditya',
-        avatarUrl: 'https://atikle.github.io/connect/data/application/avatars/aditya.jpg',
-        bio: 'UX Designer and front-end enthusiast.',
-        stats: {
-            posts: 10,
-            webinars: 3
-        },
-        socials: {
-            instagram: '#',
-            facebook: '#',
-            twitter: '#',
-            linkedin: '#',
-            github: '#'
-        }
+    'webinar-3': {
+        name: 'Pilot Testing Session 3',
+        date: '30th June 2025',
+        StartTime: '5PM',
+        duration: '30 minutes',
+        recordingUrl: 'https://atikle.github.io/connect/recordings',
+        filesUrl: 'https://atikle.github.io/connect/files',
+        thumbnailUrl: 'https://atikle.github.io/resource/atikle_connect/video-thumbnail.svg'
+    },
+
+    'webinar-4': {
+        name: 'Pilot Testing Session 4',
+        date: '2nd July 2025',
+        StartTime: '5PM',
+        duration: '126 minutes',
+        recordingUrl: 'https://atikle.github.io/connect/recordings',
+        filesUrl: 'https://atikle.github.io/connect/files',
+        thumbnailUrl: 'https://atikle.github.io/resource/atikle_connect/video-thumbnail.svg'
+    },
+
+    'webinar-5': {
+        name: 'Pilot Testing Session 5',
+        date: '7th July 2025',
+        StartTime: '5PM',
+        duration: '97 minutes',
+        recordingUrl: 'https://atikle.github.io/connect/recordings',
+        filesUrl: 'https://atikle.github.io/connect/files',
+        thumbnailUrl: 'https://atikle.github.io/resource/atikle_connect/video-thumbnail.svg'
+    },
+
+    'webinar-6': {
+        name: 'Pilot Testing Session 6',
+        date: '11th July 2025',
+        StartTime: '5PM',
+        duration: '39 minutes',
+        recordingUrl: 'https://atikle.github.io/connect/recordings',
+        filesUrl: 'https://atikle.github.io/connect/files',
+        thumbnailUrl: 'https://atikle.github.io/resource/atikle_connect/video-thumbnail.svg'
     },
 };

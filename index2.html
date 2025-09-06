@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <!-- <meta name="description" content="This is description"> -->
+    <meta name="keyword" content="atikleconnect, atikle connect, financial webinar, atikle financial webinar">
+
+    <!-- Roboto @ Google Fonts -->
+    <!-- font-family: "Roboto", sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Poppins @ Google Fonts -->
+    <!-- font-family: 'Poppins', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- Fredoka @ Google Fonts -->
+    <!-- font-family: 'Fredoka', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+
+    <!-- Ununtu @ Google Fonts -->
+    <!-- font-family: 'Ubuntu', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-75KEQGM2PS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-75KEQGM2PS');
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://atikle.github.io/connect/framework/universal/theme.js"></script>
+    <script src="https://atikle.github.io/connect/framework/universal/script.js"></script>
+
+    <script src="https://atikle.github.io/connect/schedule.js"></script>
+    
+    <script>
+        $(function () {
+            $("#header-placeholder").load("https://atikle.github.io/connect/framework/header.html");
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#navbar-placeholder").load("https://atikle.github.io/connect/framework/navbar.html");
+        });
+    </script>
+
+    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
+    <link rel="stylesheet" href="connect.css">
+
+    <title>atikle connect | Schedule</title>
+    <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
+
+    <style>
+        .webinar {
+            width: auto;
+            margin: auto;
+            margin-top: 40px;
+            margin-left: 15px;
+            margin-right: 20px;
+            padding: 20px 10px;
+            border-radius: 15px;
+            background-color: var(--card-background-2);
+            color: var(--text-color-1);
+            box-shadow: var(--shadow-2);
+        }
+
+        .webinar-name {
+            padding: 10px 10px;
+            font-family: "Roboto", sans-serif;
+            font-size: 30px;
+            font-weight: 500;
+        }
+
+        .webinar-date-time {
+            padding: 10px 10px;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: cadetblue;
+        }
+
+        .join-button {
+            display: block;
+            margin: auto;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            color: var(--button-text-1);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .over {
+            background-color: silver;
+        }
+
+        .over:hover {
+            background-color: grey;
+        }
+
+        .active {
+            background-color: var(--button-background-1);
+        }
+
+        .active:hover {
+            background-color:  royalblue;
+        }
+
+        .inactive {
+            background-color: black;
+        }
+
+        .inactive:hover {
+            background-color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <div id="navbar-placeholder"></div>
+
+    <div class="main-content">
+
+        <h1 class="section-heading">Webinar Schedule</h1>
+
+        <div class="scroolable-content">
+            <div id="webinar" class="webinar">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
+        const INACTIVE_MESSAGE = "Session is not started yet.";
+        const LIVE_MESSAGE = "Session is live.";
+        const RECORDING_MESSAGE = "Session was recorded. If you are looking for session recording, please check the recording archive.";
+    </script>
+
+    <script src="https://atikle.github.io/connect/framework/universal/theme.js"></script>
+    <script src="https://atikle.github.io/connect/framework/universal/script.js"></script>
+
+</body>
+
+</html>
