@@ -334,6 +334,7 @@ video {
     flex-shrink: 0;
 
     box-shadow: var(--shadow-1);
+    cursor: pointer;
 
     img {
         width: 100%;
@@ -348,6 +349,7 @@ video {
     /* line-height: 20px; */
     font-weight: 700;
     color: var(--text-color-1);
+    cursor: pointer;
 }
 
 .message {

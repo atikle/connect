@@ -157,8 +157,22 @@
                     const postHTML = `
                         <article class="post-item">
                             <div class="post-header">
-                                <div class="post-author"><div class="post-author-avatar"><img src="${author.avatarUrl}" alt="${author.name}'s profile picture"></div><div class="post-author-info"><p class="post-author-name">${author.name}</p><p class="post-author-handle">${author.username}</p></div></div>
-                                <div class="post-options"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg></div>
+                                <div class="post-author">
+                                    <div class="post-author-avatar">
+                                        <img src="${author.avatarUrl}" alt="${author.name}'s profile picture">
+                                    </div>
+
+                                    <div class="post-author-info">
+                                        <p class="post-author-name">${author.name}</p>
+                                        <p class="post-author-handle">${author.username}</p>
+                                    </div>
+                                </div>
+
+                                <div class="post-options">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle>
+                                    </svg>
+                                </div>
                             </div>
                             <p class="post-meta">Posted on ${post.timestamp}</p>
                             <p class="post-text">${post.text}</p>
