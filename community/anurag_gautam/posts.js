@@ -1,7 +1,7 @@
 const posts = [
     {
         authorUsername: 'anurag_gautam',
-        timestamp: 'October 1, 2025',
+        timestamp: 'October 15, 2025',
         text: 'I am excited to announce the launch of the <strong>atikle Help Centre</strong> – our new, centralized hub for all your support needs!<br><br>We are officially streamlining our processes and moving away from Google Forms to provide a more efficient and integrated experience. The Help Centre is your one-stop destination for assistance.<br><br>Here’s a look at what you can do:<br><ul><li>Get in touch with our team directly</li><li>Report errors or issues across finatikle and insights</li><li>Manage your account, profile, and membership details</li><li>Address safety concerns and report activity or webinars</li></ul>Our goal is to resolve your queries faster and more effectively. We are committed to continuously improving your experience on our platform.<br><br>🔗 <a class="hyperlink" href="https://atikle.github.io/help">https://atikle.github.io/help</a><br><br><p class="hyperlink">#atikle #CustomerSupport #HelpCentre #UserExperience #ProductUpdate #CommunityManagement</a>',
         imageUrl: 'https://atikle.github.io/connect/community/anurag_gautam/posts/img-6.jpg'
     },
