@@ -328,6 +328,10 @@ body.dark-theme .profile-tabs {
     overflow: hidden; /* Ensures inner elements stay within bounds */
 }
 
+.hyperlink {
+    color: royalblue;
+}
+
 /* Subtle inner shadow effect - makes the card feel deeper */
 .post-item::before {
     content: '';
