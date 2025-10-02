@@ -1,0 +1,210 @@
+::selection {
+    color: black;
+    background: white;
+}
+
+a{
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
+
+
+/* ------------------- Scroll Bar ------------------- */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+    padding: 10px 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: silver;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 35px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: silver;
+}
+
+
+
+body {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    top: 0;
+    color: var(--text-color-1);
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-4);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+:root {
+    --background-1: white;
+    --background-2: whitesmoke;
+    --background-3: black;
+    --background-4: #f0f2f5;
+    --background-5: #eaebf5;
+    --card-background-1: white;
+    --card-background-2: whitesmoke;
+    --text-color-1: #050505;
+    --text-color-2: #65676b;
+    --text-color-3: white;
+    --shadow-1: 0 2px 6px 0 rgba(136, 148, 171, 0.2), 0 24px 20px -24px rgba(71, 82, 107, 0.1);
+    --shadow-2: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    --link-color: #c0c1c5;
+
+    --button-background-1: #1877f2;
+    --button-background-2: #e4e6eb;
+    --button-background-3: #3d42df;
+    --button-text-1: #ffffff;
+    --button-text-2: #050505;
+    --button-text-3: #ffffff;
+    --hover-overlay: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode {
+    --background-1: black;
+    --background-2: black;
+    --background-3: white;
+    --background-4: #242526;
+    --background-5: #18191a;
+    --card-background-1: #242526; /* #3c3f56 */
+    --card-background-2: #242526; /* #3c3f56 */
+    --text-color-1: white;
+    --text-color-2: #b0b3b8;
+    --text-color-3: black;
+    --shadow-1: 0px 0px 8px 0px #282b33;
+    --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+    --link-color: #c0c1c5;
+
+    --button-background-1: #2d88ff;
+    --button-background-2: #3a3b3c;
+    --button-background-3: #6f74ff;
+    --button-text-1: #ffffff;
+    --button-text-2: #e4e6eb;
+    --button-text-3: #ffffff;
+    --hover-overlay: rgba(255, 255, 255, 0.08);
+}
+
+
+
+body {
+    --main-color: #3d42df;
+    --message-bg: #f3f4f9;
+    --message-bg-2: #3d42df;
+    --message-text: #2c303a;
+    --placeholder-text: #a2a4bc;
+    --button-bg: #fff;
+    --webinar-bg: transparent;
+    --webinar-border: #eaebf5;
+    --webinar-text: black;
+    --secondary-text: white;
+}
+
+body.dark {
+    --shadow-2: 0px 0px 8px 0px #282b33;
+    --message-bg: #2c3046;
+    --message-text: rgba(255, 255, 255, 0.8);
+    --placeholder-text: #fff;
+    --button-bg: #3c3f56;
+    --main-color: #6f74ff;
+    --message-bg-2: #6f74ff;
+    --secondary-text: black;
+}
+
+h1 {
+    color: var(--text-color-1);
+    font-family: 'Poppins', sans-serif;
+}
+
+.main-content {
+    position: fixed;
+    width: auto;
+    height: auto;
+    top: 88px;
+    bottom: 10px;
+    left: 85px;
+    right: 10px;
+    border-radius: 15px;
+    background-color: var(--background-1);
+    box-shadow: var(--shadow-2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 0px;
+    /* user-select: none; */
+}
+
+.scroolable-content {
+    flex-grow: 1; /* Allows content to fill available space */
+    overflow-y: auto;
+    height: auto;
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    /* white-space: nowrap; */ /* Prevent text wrapping */
+    /* user-select: none; */
+}
+
+.section-heading {
+    margin-top: 0px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 40px 30px;
+    color: #fff;
+    background-image: url(https://atikle.github.io/resource/atikle_connect/banner_dark.png);
+    box-shadow: var(--shadow-1);
+    background-size: 510px;
+}
+
+.webinar-tags-container {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.tag {
+    width: fit-content;
+    padding: 2px 15px;
+    border-radius: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: var(--shadow-1);
+    white-space: nowrap; /* Prevent text wrapping */
+    cursor: default;
+}
+
+.live {
+    background-color: crimson;
+    color: white;
+    cursor: pointer;
+}
+
+.recording {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
