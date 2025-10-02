@@ -20,7 +20,7 @@ const posts = [
     {
         authorUsername: 'anurag_gautam',
         timestamp: 'August 1, 2025',
-        text: 'Excited to announce atikle connect webinar application!',
+        text: 'I am excited to announce the atikle connect webinar application!<br><br>We built this platform to solve a simple problem: making virtual events truly engaging. Our application allows you to host seamless, interactive, and high-quality webinars that help you build a real connection with your audience.<br><br>No more clunky interfaces or disconnected experiences. Just a powerful tool for community building and knowledge sharing.<br><br><a class="hyperlink" href="https://atikle.github.io/connect">https://atikle.github.io/connect</a><br><br>#atikleConnect #Webinar #VirtualEvents #CommunityBuilding',
         imageUrl: 'https://atikle.github.io/connect/community/anurag_gautam/posts/img-2.jpg'
     },
     {
