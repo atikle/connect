@@ -2,13 +2,19 @@ const posts = [
     {
         authorUsername: 'anurag_gautam',
         timestamp: 'October 1, 2025',
+        text: 'I am excited to announce the launch of the <strong>atikle Help Centre</strong> – our new, centralized hub for all your support needs!<br><br>We are officially streamlining our processes and moving away from Google Forms to provide a more efficient and integrated experience. The Help Centre is your one-stop destination for assistance.<br><br>Here’s a look at what you can do:<br><ul><li>Get in touch with our team directly</li><li>Report errors or issues across finatikle and insights</li><li>Manage your account, profile, and membership details</li><li>Address safety concerns and report activity or webinars</li></ul>Our goal is to resolve your queries faster and more effectively. We are committed to continuously improving your experience on our platform.<br><br>🔗 <a class="hyperlink" href="https://atikle.github.io/help">https://atikle.github.io/help</a><br><br>#atikle #CustomerSupport #HelpCentre #UserExperience #ProductUpdate #CommunityManagement',
+        imageUrl: 'https://atikle.github.io/connect/community/anurag_gautam/posts/img-6.jpg'
+    },
+    {
+        authorUsername: 'anurag_gautam',
+        timestamp: 'October 1, 2025',
         text: 'Excited to share the new atikle account login page!. What do you think?',
         imageUrl: 'https://atikle.github.io/connect/community/anurag_gautam/posts/img-5.jpg'
     },
     {
         authorUsername: 'anurag_gautam',
         timestamp: 'September 15, 2025',
-        text: 'Excited to officially unveil the revamped <strong>atikle community profile page</strong>! We have been listening to your feedback and are thrilled to deliver an experience that is both more functional and beautiful.<br><br>Here’s what’s new:<br>- <strong>Smooth Animations:</strong> We have added subtle animations for a more fluid and responsive feel.<br>- <strong>New Posts Section:</strong> A dedicated tab to showcase all your shared insights and articles.<br>- <strong>New Webinars Section:</strong> Easily display and access all your past and upcoming webinars.<br><br>The goal is to give you a better home for your content and contributions. We’d love for you to check out your new profile and let us know what you think!<br><br>🔗 [Link to your profile page]<br><br>#AtikleCommunity #ProductUpdate #NewFeatures #UX #UI #CommunityPlatform',
+        text: 'Excited to officially unveil the revamped <strong>atikle community profile page</strong>! We have been listening to your feedback and are thrilled to deliver an experience that is both more functional and beautiful.<br><br>Here’s what’s new:<br>- <strong>Smooth Animations:</strong> We have added subtle animations for a more fluid and responsive feel.<br>- <strong>New Posts Section:</strong> A dedicated tab to showcase all your shared insights and articles.<br>- <strong>New Webinars Section:</strong> Easily display and access all your past and upcoming webinars.<br><br>The goal is to give you a better home for your content and contributions. We’d love for you to check out your new profile and let us know what you think!<br><br>🔗 <a class="hyperlink" href="https://atikle.github.io/connect/community">https://atikle.github.io/connect/community</a><br><br>#AtikleCommunity #ProductUpdate #NewFeatures #UX #UI #CommunityPlatform',
         imageUrl: 'https://atikle.github.io/connect/community/anurag_gautam/posts/img-4.jpg'
     },
     {
