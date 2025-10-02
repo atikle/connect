@@ -377,6 +377,7 @@ body.dark-theme .profile-tabs {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for the image itself */
     object-fit: cover;
     /* max-height: 300px; */
+    border: 1px solid var(--background-3);
 }
 
 /* NEW: Styling for Webinars List */
