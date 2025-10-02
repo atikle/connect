@@ -372,7 +372,7 @@ body.dark-theme .profile-tabs {
     margin-top: 15px; /* More space above the image */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for the image itself */
     object-fit: cover;
-    max-height: 300px; /* Limit image height */
+    /* max-height: 300px; */
 }
 
 /* NEW: Styling for Webinars List */
