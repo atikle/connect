@@ -8,13 +8,13 @@ const posts = [
     {
         authorUsername: 'anurag_gautam',
         timestamp: 'September 15, 2025',
-        text: 'Excited to share the revamped profile page for atikle community! Added smooth animations and new sections for posts and webinars. What do you think?',
+        text: 'Excited to officially unveil the revamped <strong>atikle community profile page</strong>! We have been listening to your feedback and are thrilled to deliver an experience that is both more functional and beautiful.<br><br>Here’s what’s new:<br>- <strong>Smooth Animations:</strong> We have added subtle animations for a more fluid and responsive feel.<br>- <strong>New Posts Section:</strong> A dedicated tab to showcase all your shared insights and articles.<br>- <strong>New Webinars Section:</strong> Easily display and access all your past and upcoming webinars.<br><br>The goal is to give you a better home for your content and contributions. We’d love for you to check out your new profile and let us know what you think!<br><br>🔗 [Link to your profile page]<br><br>#AtikleCommunity #ProductUpdate #NewFeatures #UX #UI #CommunityPlatform',
         imageUrl: 'https://atikle.github.io/connect/community/anurag_gautam/posts/img-4.jpg'
     },
     {
         authorUsername: 'anurag_gautam',
         timestamp: 'September 1, 2025',
-        text: 'Excited to share the revamped profile page for atikle community! What do you think?',
+        text: 'The atikle community page just got a major glow-up! 🚀<br><br>Excited to share the revamped design. We have made it cleaner, faster, and more user-friendly.<br><br>Take a look and let us know what you think! All feedback is welcome.<br><br><a class="hyperlink" href="https://atikle.github.io/connect/community">https://atikle.github.io/connect/community</a><br><br>#Atikle #Community #NewLook #WebDesign #Feedback',
         imageUrl: 'https://atikle.github.io/connect/community/anurag_gautam/posts/img-3.jpg'
     },
     {
