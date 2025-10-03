@@ -208,3 +208,86 @@ h1 {
     color: white;
     cursor: pointer;
 }
+
+
+
+/* --- Mobile Responsive Styles --- */
+@media (max-width: 768px) {
+
+    /* Make the body scrollable instead of inner containers */
+    body {
+        overflow-y: auto;
+    }
+
+    /* 1. Header (Logo Bar) Adjustments */
+    .logo-para {
+        position: relative; /* Change from fixed to let it scroll with the page */
+        top: auto;
+        left: auto;
+        right: auto;
+        margin: 10px;
+    }
+
+    .branding {
+        font-size: 32px; /* Slightly smaller font for mobile */
+    }
+
+    /* 2. Main Content Area Adjustments */
+    .main-content {
+        position: relative; /* Change from fixed */
+        width: auto;
+        height: auto; /* Let content determine the height */
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin: 0 10px;
+        /* Add space at the bottom so content isn't hidden by the new navbar */
+        padding-bottom: 80px;
+        overflow: visible; /* Let the main page scroll */
+    }
+
+    .scroolable-content {
+        overflow-y: visible; /* Disable this container's scrollbar */
+        height: auto;
+    }
+
+    .section-heading {
+        background-size: cover; /* Make banner image scale better */
+        background-position: center;
+    }
+
+    .webinar-name {
+        font-size: 24px; /* Adjust webinar title size */
+    }
+
+    /* 3. Side Navbar to Bottom Navbar Transformation */
+    .navigation {
+        flex-direction: row; /* Arrange icons horizontally */
+        justify-content: space-around; /* Space them out evenly */
+        align-items: center;
+        
+        position: fixed; /* Keep it fixed to the bottom of the viewport */
+        bottom: 0;
+        left: 0;
+        top: auto; /* Remove the 'top' property from the desktop style */
+        
+        width: 100%;
+        height: 65px; /* Give the bar a fixed height */
+        padding: 0;
+        
+        border-radius: 0; /* Make it a straight bar */
+        /* Use a shadow that appears on top of the bar */
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2); 
+        z-index: 1000; /* Ensure it stays above all other content */
+    }
+
+    .nav-link + .nav-link {
+        margin-top: 0; /* Remove the vertical spacing between icons */
+    }
+
+    .icon svg, .icon img {
+        width: 28px; /* Make icons slightly bigger for easier tapping */
+        height: 28px;
+    }
+}
