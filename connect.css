@@ -228,6 +228,7 @@ h1 {
         margin: 0;             /* MODIFIED: Remove all margins to eliminate gaps */
         border-radius: 0;
         z-index: 10;
+        border-bottom: 1px  solid var(--background-3);
     }
 
     body .branding {
