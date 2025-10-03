@@ -211,7 +211,7 @@ h1 {
 
 
 
-/* --- Mobile Responsive Styles (V4 - Gapless Layout) --- */
+/* --- Mobile Responsive Styles (V6 - Smaller Icons) --- */
 @media (max-width: 768px) {
 
     /* Make the body scrollable instead of inner containers */
@@ -225,10 +225,10 @@ h1 {
         top: auto;
         left: auto;
         right: auto;
-        margin: 0;             /* MODIFIED: Remove all margins to eliminate gaps */
+        margin: 0;
         border-radius: 0;
         z-index: 10;
-        border-bottom: 1px  solid var(--background-3);
+        border-bottom: 1px solid var(--background-3);
     }
 
     body .branding {
@@ -281,5 +281,12 @@ h1 {
 
     body .nav-link + .nav-link {
         margin-top: 0;
+    }
+
+    /* ADDED: Make navbar icons smaller on mobile */
+    body .icon svg,
+    body .icon img {
+        width: 22px;
+        height: 22px;
     }
 }
