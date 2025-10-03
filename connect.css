@@ -211,7 +211,7 @@ h1 {
 
 
 
-/* --- Mobile Responsive Styles (V9 - Auto-Hide Navbar) --- */
+/* --- Mobile Responsive Styles (V10 - Auto-Hide Header & Navbar) --- */
 @media (max-width: 768px) {
 
     /* Make the body scrollable instead of inner containers */
@@ -234,6 +234,12 @@ h1 {
         border-radius: 0;
         z-index: 10;
         border-bottom: 1px solid var(--background-3);
+        transition: transform 0.3s ease-in-out; /* ADDED: For smooth animation */
+    }
+
+    /* ADDED: New class to hide the header */
+    .header--hidden {
+        transform: translateY(-100%);
     }
 
     body .branding {
@@ -279,10 +285,10 @@ h1 {
         background-color: var(--background-1);
         box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
         z-index: 1000;
-        transition: transform 0.3s ease-in-out; /* ADDED: For smooth animation */
+        transition: transform 0.3s ease-in-out;
     }
 
-    /* ADDED: New class to hide the navbar */
+    /* Class to hide the navbar */
     .navbar--hidden {
         transform: translateY(100%);
     }

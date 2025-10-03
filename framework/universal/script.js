@@ -35,34 +35,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Hide/show nav bar upon scrooling
+// Hide/show header & nav-bar upon scrooling
 $(function () {
-            // Load navbar.html and then run a function once it's complete
-            $("#navbar-placeholder").load("https://atikle.github.io/connect/framework/navbar.html", function () {
-                
-                // This code is guaranteed to run AFTER the navbar exists.
-                const navbar = document.querySelector('.navigation');
-                if (!navbar) return; // Safeguard in case the navbar isn't found
+    // Define the loading operations for the header and navbar
+    var loadHeader = $("#header-placeholder").load("https://atikle.github.io/connect/framework/header.html");
+    var loadNavbar = $("#navbar-placeholder").load("https://atikle.github.io/connect/framework/navbar.html");
 
-                let lastScrollTop = 0;
+    // Use jQuery's $.when() to wait for BOTH operations to complete
+    $.when(loadHeader, loadNavbar).done(function () {
 
-                // Listen for scroll events on the window
-                window.addEventListener('scroll', function() {
-                    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        // This code is guaranteed to run AFTER BOTH are loaded.
+        const header = document.querySelector('.logo-para');
+        const navbar = document.querySelector('.navigation');
 
-                    // Only run this logic on mobile screens
-                    if (window.matchMedia("(max-width: 768px)").matches) {
-                        if (scrollTop > lastScrollTop) {
-                            // Scrolling Down: hide the navbar
-                            navbar.classList.add('navbar--hidden');
-                        } else {
-                            // Scrolling Up: show the navbar
-                            navbar.classList.remove('navbar--hidden');
-                        }
-                    }
-                    
-                    // Update the last scroll position
-                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-                }, false);
-            });
-        });
+        // Safeguard if either element isn't found
+        if (!header || !navbar) return;
+
+        let lastScrollTop = 0;
+
+        // Listen for scroll events on the window
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Only run this logic on mobile screens
+            if (window.matchMedia("(max-width: 768px)").matches) {
+                // Check scroll direction and add a small threshold (65px)
+                if (scrollTop > lastScrollTop && scrollTop > 65) {
+                    // Scrolling Down: hide both header and navbar
+                    header.classList.add('header--hidden');
+                    navbar.classList.add('navbar--hidden');
+                } else {
+                    // Scrolling Up: show both header and navbar
+                    header.classList.remove('header--hidden');
+                    navbar.classList.remove('navbar--hidden');
+                }
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    });
+});
