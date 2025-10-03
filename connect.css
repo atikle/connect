@@ -211,7 +211,7 @@ h1 {
 
 
 
-/* --- Mobile Responsive Styles (V3 - Edge-to-Edge Layout) --- */
+/* --- Mobile Responsive Styles (V4 - Gapless Layout) --- */
 @media (max-width: 768px) {
 
     /* Make the body scrollable instead of inner containers */
@@ -225,8 +225,8 @@ h1 {
         top: auto;
         left: auto;
         right: auto;
-        margin: 10px 0;        /* MODIFIED: Remove side margins */
-        border-radius: 0;      /* ADDED: Remove rounded corners for full-width */
+        margin: 0;             /* MODIFIED: Remove all margins to eliminate gaps */
+        border-radius: 0;
         z-index: 10;
     }
 
@@ -243,8 +243,8 @@ h1 {
         bottom: auto;
         left: auto;
         right: auto;
-        margin: 0;             /* MODIFIED: Remove all margins */
-        border-radius: 0;      /* ADDED: Remove rounded corners for full-width */
+        margin: 0;
+        border-radius: 0;
         padding-bottom: 80px;
         overflow: visible;
     }
