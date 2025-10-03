@@ -211,7 +211,7 @@ h1 {
 
 
 
-/* --- Mobile Responsive Styles (V7 - Hide Scrollbar) --- */
+/* --- Mobile Responsive Styles (V8 - Corrected Logo Size) --- */
 @media (max-width: 768px) {
 
     /* Make the body scrollable instead of inner containers */
@@ -219,7 +219,7 @@ h1 {
         overflow-y: auto;
     }
 
-    /* ADDED: Hide custom scrollbar on mobile for a cleaner look */
+    /* Hide custom scrollbar on mobile for a cleaner look */
     body::-webkit-scrollbar {
         display: none;
     }
@@ -288,10 +288,16 @@ h1 {
         margin-top: 0;
     }
 
-    /* Make navbar icons smaller on mobile */
-    body .icon svg,
-    body .icon img {
+    /* MODIFIED: Separated icon styles to maintain proportions */
+    /* Set the size for the SVG icons */
+    body .icon svg {
         width: 22px;
         height: 22px;
+    }
+
+    /* Set the size for the final logo, keeping it slightly larger */
+    body .icon img {
+        width: 24px;
+        height: auto; /* Use auto height to maintain aspect ratio */
     }
 }
