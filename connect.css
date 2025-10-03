@@ -211,7 +211,7 @@ h1 {
 
 
 
-/* --- Mobile Responsive Styles --- */
+/* --- Mobile Responsive Styles (V2 - Increased Specificity) --- */
 @media (max-width: 768px) {
 
     /* Make the body scrollable instead of inner containers */
@@ -220,61 +220,56 @@ h1 {
     }
 
     /* 1. Header (Logo Bar) Adjustments */
-    .logo-para {
-        position: relative; /* Change from fixed to let it scroll with the page */
+    /* Increased specificity by adding 'body' */
+    body .logo-para {
+        position: relative;
         top: auto;
         left: auto;
         right: auto;
         margin: 10px;
+        z-index: 10; /* Ensure header can appear above other elements */
     }
 
-    .branding {
-        font-size: 32px; /* Slightly smaller font for mobile */
+    body .branding {
+        font-size: 32px;
     }
 
     /* 2. Main Content Area Adjustments */
-    .main-content {
-        position: relative; /* Change from fixed */
+    body .main-content {
+        position: relative;
         width: auto;
-        height: auto; /* Let content determine the height */
+        height: auto;
         top: auto;
         bottom: auto;
         left: auto;
         right: auto;
         margin: 0 10px;
-        /* Add space at the bottom so content isn't hidden by the new navbar */
         padding-bottom: 80px;
-        overflow: visible; /* Let the main page scroll */
+        overflow: visible;
     }
 
-    .scroolable-content {
-        overflow-y: visible; /* Disable this container's scrollbar */
+    body .scroolable-content {
+        overflow-y: visible;
         height: auto;
     }
 
-    .section-heading {
-        background-size: cover; /* Make banner image scale better */
-        background-position: center;
-    }
-
-    .webinar-name {
-        font-size: 24px; /* Adjust webinar title size */
-    }
-
-    .navigation {
-        flex-direction: row;
+    /* 3. Bottom Navbar Transformation */
+    /* Increased specificity by adding 'body' */
+    body .navigation {
+        display: flex; /* Ensure display is flex */
+        flex-direction: row; /* Arrange icons horizontally */
         justify-content: space-around;
         align-items: center;
 
         position: fixed;
         bottom: 0;
         left: 0;
-        right: 0;      /* Explicitly set right to 0 */
-        top: auto;     /* Ensure top is not set */
+        right: 0;
+        top: auto;
         
         width: 100%;
-        height: 65px;      /* Set a fixed height */
-        max-height: 65px;  /* Add max-height as a safeguard */
+        height: 65px;
+        max-height: 65px;
         padding: 0;
         
         border-radius: 0;
@@ -283,12 +278,7 @@ h1 {
         z-index: 1000;
     }
 
-    .nav-link + .nav-link {
-        margin-top: 0; /* Remove the vertical spacing between icons */
-    }
-
-    .icon svg, .icon img {
-        width: 28px; /* Make icons slightly bigger for easier tapping */
-        height: 28px;
+    body .nav-link + .nav-link {
+        margin-top: 0;
     }
 }
