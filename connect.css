@@ -211,7 +211,7 @@ h1 {
 
 
 
-/* --- Mobile Responsive Styles (V2 - Increased Specificity) --- */
+/* --- Mobile Responsive Styles (V3 - Edge-to-Edge Layout) --- */
 @media (max-width: 768px) {
 
     /* Make the body scrollable instead of inner containers */
@@ -220,14 +220,14 @@ h1 {
     }
 
     /* 1. Header (Logo Bar) Adjustments */
-    /* Increased specificity by adding 'body' */
     body .logo-para {
         position: relative;
         top: auto;
         left: auto;
         right: auto;
-        margin: 10px;
-        z-index: 10; /* Ensure header can appear above other elements */
+        margin: 10px 0;        /* MODIFIED: Remove side margins */
+        border-radius: 0;      /* ADDED: Remove rounded corners for full-width */
+        z-index: 10;
     }
 
     body .branding {
@@ -243,7 +243,8 @@ h1 {
         bottom: auto;
         left: auto;
         right: auto;
-        margin: 0 10px;
+        margin: 0;             /* MODIFIED: Remove all margins */
+        border-radius: 0;      /* ADDED: Remove rounded corners for full-width */
         padding-bottom: 80px;
         overflow: visible;
     }
@@ -254,10 +255,9 @@ h1 {
     }
 
     /* 3. Bottom Navbar Transformation */
-    /* Increased specificity by adding 'body' */
     body .navigation {
-        display: flex; /* Ensure display is flex */
-        flex-direction: row; /* Arrange icons horizontally */
+        display: flex;
+        flex-direction: row;
         justify-content: space-around;
         align-items: center;
 
