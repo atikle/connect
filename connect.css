@@ -261,25 +261,26 @@ h1 {
         font-size: 24px; /* Adjust webinar title size */
     }
 
-    /* 3. Side Navbar to Bottom Navbar Transformation */
     .navigation {
-        flex-direction: row; /* Arrange icons horizontally */
-        justify-content: space-around; /* Space them out evenly */
+        flex-direction: row;
+        justify-content: space-around;
         align-items: center;
-        
-        position: fixed; /* Keep it fixed to the bottom of the viewport */
+
+        position: fixed;
         bottom: 0;
         left: 0;
-        top: auto; /* Remove the 'top' property from the desktop style */
+        right: 0;      /* Explicitly set right to 0 */
+        top: auto;     /* Ensure top is not set */
         
         width: 100%;
-        height: 65px; /* Give the bar a fixed height */
+        height: 65px;      /* Set a fixed height */
+        max-height: 65px;  /* Add max-height as a safeguard */
         padding: 0;
         
-        border-radius: 0; /* Make it a straight bar */
-        /* Use a shadow that appears on top of the bar */
-        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2); 
-        z-index: 1000; /* Ensure it stays above all other content */
+        border-radius: 0;
+        background-color: var(--background-1);
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
     }
 
     .nav-link + .nav-link {
