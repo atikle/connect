@@ -36,16 +36,16 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-75KEQGM2PS"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-75KEQGM2PS');
+        gtag('config', 'G-75KEQGM2PS');
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://atikle.github.io/connect/framework/universal/script.js"></script>
-    
+
     <script>
         $(function () {
             $("#interaction-bar-placeholder").load("https://atikle.github.io/connect/framework/interaction-bar.html");
@@ -70,189 +70,189 @@
 
     <div class="main-content">
 
-        <!-- <h1 class="section-heading-settings">Settings</h1> -->
-
         <div class="scroolable-content">
 
             <div class="settings-container">
-        <h1 class="settings-header">Settings</h1>
+                <h1 class="settings-header">Settings</h1>
 
-        <!-- General Settings Section -->
-        <div class="settings-section">
-            <h2>General</h2>
-            <div class="setting-item">
-                <div>
-                    <div class="setting-item-label">Dark Mode</div>
-                    <div class="setting-item-description">Switch between light and dark themes.</div>
+                <!-- General Settings Section -->
+                <div class="settings-section">
+                    <h2>General</h2>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-item-label">Dark Mode</div>
+                            <div class="setting-item-description">Switch between light and dark themes.</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>
-                <label class="switch">
-                    <input type="checkbox" id="darkModeToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-        
-        <!-- Audio & Video Settings Section -->
-        <div class="settings-section">
-            <h2>Audio & Video</h2>
-            <!-- <div class="setting-item">
-                <div>
-                    <div class="setting-item-label">Camera</div>
-                    <div class="setting-item-description">Choose your preferred camera.</div>
-                </div>
-                <div class="select-wrapper">
-                    <select id="cameraSelect">
-                        <option>Integrated Webcam</option>
-                        <option>External Cam Pro</option>
-                        <option>DroidCam Source</option>
-                    </select>
-                </div>
-            </div> -->
-            <!-- <div class="setting-item">
-                <div>
-                    <div class="setting-item-label">Microphone</div>
-                    <div class="setting-item-description">Choose your preferred microphone.</div>
-                </div>
-                <div class="select-wrapper">
-                    <select id="micSelect">
-                        <option>Default - Internal Mic</option>
-                        <option>Blue Yeti Microphone</option>
-                        <option>Headset Microphone</option>
-                    </select>
-                </div>
-            </div> -->
 
-            <div class="setting-item">
-                <div>
-                    <div class="setting-item-label">Video Quality</div>
-                    <div class="setting-item-description">Set the default video resolution.</div>
-                </div>
-                <div class="select-wrapper">
-                    <select id="qualitySelect">
-                        <option>Auto (Recommended)</option>
-                        <option>2160p (4K)</option>
-                        <option>1080p (Full HD)</option>
-                        <option>720p (HD)</option>
-                        <option>480p (Standard)</option>
-                    </select>
-                </div>
-            </div>
+                <!-- Audio & Video Settings Section -->
+                <div class="settings-section">
+                    <h2>Audio & Video</h2>
+                    <!-- <div class="setting-item">
+                    <div>
+                        <div class="setting-item-label">Camera</div>
+                        <div class="setting-item-description">Choose your preferred camera.</div>
+                    </div>
+                    <div class="select-wrapper">
+                        <select id="cameraSelect">
+                            <option>Integrated Webcam</option>
+                            <option>External Cam Pro</option>
+                            <option>DroidCam Source</option>
+                        </select>
+                    </div>
+                </div> -->
 
+                <!-- <div class="setting-item">
+                    <div>
+                        <div class="setting-item-label">Microphone</div>
+                        <div class="setting-item-description">Choose your preferred microphone.</div>
+                    </div>
+                    <div class="select-wrapper">
+                        <select id="micSelect">
+                            <option>Default - Internal Mic</option>
+                            <option>Blue Yeti Microphone</option>
+                            <option>Headset Microphone</option>
+                        </select>
+                    </div>
+                </div> -->
 
-
-            <div class="setting-item">
-                <div>
-                    <div class="setting-item-label">Background Noise Reduction</div>
-                    <div class="setting-item-description">Reduces background noise for clearer audio.</div>
-                </div>
-                <label class="switch">
-                    <input type="checkbox" id="noiseCancellationToggle" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-
-
-            <div>
-
-                <div class="speedtest-container">
-                    <h2>Speed Test</h2>
-                    
-                    <div class="gauge-area">
-                        <svg class="gauge-svg" viewBox="0 0 280 280">
-                            <circle class="gauge-circle gauge-track" cx="140" cy="140" r="120" />
-                            <circle id="gauge-bar" class="gauge-circle gauge-bar" cx="140" cy="140" r="120" />
-                        </svg>
-                        <div class="speed-display">
-                            <span id="speed-value" class="speed-value">0.00</span>
-                            <span id="speed-unit" class="speed-unit">Mbps</span>
-                            <span id="speed-label" class="speed-label">Download</span>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-item-label">Video Quality</div>
+                            <div class="setting-item-description">Set the default video resolution.</div>
+                        </div>
+                        <div class="select-wrapper">
+                            <select id="qualitySelect">
+                                <option>Auto (Recommended)</option>
+                                <option>2160p (4K)</option>
+                                <option>1080p (Full HD)</option>
+                                <option>720p (HD)</option>
+                                <option>480p (Standard)</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="metrics-area">
-                        <div class="metric">
-                            <div id="ping-value" class="metric-value">-</div>
-                            <div class="metric-label">Ping (ms)</div>
+
+
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-item-label">Background Noise Reduction</div>
+                            <div class="setting-item-description">Reduces background noise for clearer audio.</div>
                         </div>
-                        <div class="metric">
-                            <div id="jitter-value" class="metric-value">-</div>
-                            <div class="metric-label">Jitter (ms)</div>
-                        </div>
-                        <div class="metric">
-                            <div id="packet-loss-value" class="metric-value">-</div>
-                            <div class="metric-label">Packet Loss (%)</div>
-                        </div>
-                    </div>
-                    
-                    <div id="results-area" class="results-area">
-                        <div class="metric">
-                            <div id="final-download-value" class="metric-value">-</div>
-                            <div class="metric-label">Final Download (Mbps)</div>
-                        </div>
-                        <div class="metric">
-                            <div id="final-upload-value" class="metric-value">-</div>
-                            <div class="metric-label">Final Upload (Mbps)</div>
-                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="noiseCancellationToggle" checked>
+                            <span class="slider"></span>
+                        </label>
                     </div>
 
-                    <div id="suggestion-area" class="suggestion-area">
-                        <h3 id="suggestion-title"></h3>
-                        <p id="suggestion-text"></p>
-                    </div>
 
-                    <button id="start-button" class="start-button">Start Test</button>
-                    <p id="error-message" class="error-message"></p>
-                </div>
-            
-                <!-- <div class="actions">
+
+                    <div>
+
+                        <div class="speedtest-container">
+                            <h2>Speed Test</h2>
+
+                            <div class="gauge-area">
+                                <svg class="gauge-svg" viewBox="0 0 280 280">
+                                    <circle class="gauge-circle gauge-track" cx="140" cy="140" r="120" />
+                                    <circle id="gauge-bar" class="gauge-circle gauge-bar" cx="140" cy="140" r="120" />
+                                </svg>
+                                <div class="speed-display">
+                                    <span id="speed-value" class="speed-value">0.00</span>
+                                    <span id="speed-unit" class="speed-unit">Mbps</span>
+                                    <span id="speed-label" class="speed-label">Download</span>
+                                </div>
+                            </div>
+
+                            <div class="metrics-area">
+                                <div class="metric">
+                                    <div id="ping-value" class="metric-value">-</div>
+                                    <div class="metric-label">Ping (ms)</div>
+                                </div>
+                                <div class="metric">
+                                    <div id="jitter-value" class="metric-value">-</div>
+                                    <div class="metric-label">Jitter (ms)</div>
+                                </div>
+                                <div class="metric">
+                                    <div id="packet-loss-value" class="metric-value">-</div>
+                                    <div class="metric-label">Packet Loss (%)</div>
+                                </div>
+                            </div>
+
+                            <div id="results-area" class="results-area">
+                                <div class="metric">
+                                    <div id="final-download-value" class="metric-value">-</div>
+                                    <div class="metric-label">Final Download (Mbps)</div>
+                                </div>
+                                <div class="metric">
+                                    <div id="final-upload-value" class="metric-value">-</div>
+                                    <div class="metric-label">Final Upload (Mbps)</div>
+                                </div>
+                            </div>
+
+                            <div id="suggestion-area" class="suggestion-area">
+                                <h3 id="suggestion-title"></h3>
+                                <p id="suggestion-text"></p>
+                            </div>
+
+                            <button id="start-button" class="start-button">Start Test</button>
+                            <p id="error-message" class="error-message"></p>
+                        </div>
+
+                        <!-- <div class="actions">
                     <button class="btn btn-primary" id="saveButton">Save Changes</button>
                 </div> -->
 
+                    </div>
+
+                </div>
+
+                <!-- About Section -->
+                <div class="settings-section info-section">
+                    <h2>About</h2>
+                    <p>atikle connect is a online live webinar platform.</p>
+                </div>
+
+                <!-- Information Section -->
+                <div class="settings-section info-section">
+                    <h2>Information</h2>
+                    <p>Your settings are saved locally in your browser. No data is collected or stored on any server.
+                    </p>
+                </div>
+
             </div>
 
-        </div>
+            <!-- Add this script block to initialize the toggle on this page -->
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    // This function is in theme.js and sets up the toggle switch
+                    setupThemeToggle();
 
-        <!-- About Section -->
-        <div class="settings-section info-section">
-            <h2>About</h2>
-            <p>atikle connect is a online live webinar platform.</p>
-        </div>
+                    // The save button logic can remain here as it's specific to this page
+                    const saveButton = document.getElementById('saveButton');
+                    saveButton.addEventListener('click', () => {
+                        const originalText = saveButton.textContent;
+                        saveButton.textContent = 'Saved!';
+                        saveButton.style.opacity = '0.7';
+                        saveButton.disabled = true;
 
-        <!-- Information Section -->
-        <div class="settings-section info-section">
-            <h2>Information</h2>
-            <p>Your settings are saved locally in your browser. No data is collected or stored on any server.</p>
-        </div>
+                        setTimeout(() => {
+                            saveButton.textContent = originalText;
+                            saveButton.style.opacity = '1';
+                            saveButton.disabled = false;
+                        }, 2000);
+                    });
+                });
+            </script>
 
-    </div>
+            <script src="speed-test.js"></script>
 
-    <!-- Add this script block to initialize the toggle on this page -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // This function is in theme.js and sets up the toggle switch
-            setupThemeToggle();
-
-            // The save button logic can remain here as it's specific to this page
-            const saveButton = document.getElementById('saveButton');
-            saveButton.addEventListener('click', () => {
-                const originalText = saveButton.textContent;
-                saveButton.textContent = 'Saved!';
-                saveButton.style.opacity = '0.7';
-                saveButton.disabled = true;
-                
-                setTimeout(() => {
-                    saveButton.textContent = originalText;
-                    saveButton.style.opacity = '1';
-                    saveButton.disabled = false;
-                }, 2000);
-            });
-        });
-    </script>
-
-    <script src="speed-test.js"></script>
-
-    <script src="https://atikle.github.io/connect/framework/universal/theme.js"></script>
+            <script src="https://atikle.github.io/connect/framework/universal/theme.js"></script>
 
 </body>
 
