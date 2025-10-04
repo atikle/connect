@@ -6,17 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-75KEQGM2PS"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-75KEQGM2PS');
-    </script>
-
-    <title>connect/framework/navbar</title>
+    <title>connect/framework/interaction-bar</title>
 
     <style>
         a {
@@ -53,11 +43,82 @@
             color: var(--link-color);
             transition: .2s ease-in;
         }
+
+        .logo-para a{
+            text-decoration: none;
+            color: var(--text-color-1);
+        }
+        
+        .logo-para {
+            position: fixed;
+            width: auto;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            background-color: var(--background-1);
+            box-shadow: var(--shadow-2);
+        }
+
+        /* .icon-para {
+        position: fixed;
+        width: auto;
+        margin-top: 10px;
+        left: 10px;
+        padding: 2px 7px;
+        padding-top: 9px;
+        border-radius: 15px;
+        background-color: var(--navigation-bg);
+        box-shadow: var(--navigation-box-shadow);
+        } */
+
+        /* .logo-para {
+        position: fixed;
+        width: auto;
+        top: 10px;
+        left: 85px;
+        right: 10px;
+        padding: 10px 20px;
+        border-radius: 15px;
+        background-color: var(--navigation-bg);
+        box-shadow: var(--navigation-box-shadow);
+        } */
+
+        /* .connect-icon {
+            width: 50px;
+            left: 20px;
+            position: fixed;
+        } */
+
+        .branding {
+            font-family: "Roboto", sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            /* margin-left: 50px; */
+            color: var(--text-color-1);
+        }
+
+        .connect-branding {
+            background: linear-gradient(90deg, rgb(255, 85, 85) 0.1%, rgb(85, 85, 255) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 
 </head>
 
 <body>
+
+    <div class="logo-para">
+        <a href="https://atikle.github.io/connect/schedule">
+            <!-- <img class="connect-icon" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="connect-icon"> -->
+            <text class="branding">atikle <font class="connect-branding">connect</font></text>
+        </a>
+    </div>
+
+    
 
     <nav class="navigation">
         <a href="https://atikle.github.io/connect/schedule" class="nav-link icon">
