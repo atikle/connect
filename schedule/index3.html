@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="keyword" content="atikleconnect, atikle connect, financial webinar, atikle financial webinar">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <script defer src="https://atikle.github.io/connect/framework/universal/theme.js"></script>
+    <script defer src="https://atikle.github.io/connect/framework/universal/script.js"></script>
+    <script defer src="https://atikle.github.io/connect/schedule/schedule.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#interaction-bar-placeholder").load("https://atikle.github.io/connect/framework/interaction-bar.html");
+        });
+    </script>
+
+    <link rel="stylesheet" href="connect.css">
+    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-75KEQGM2PS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-75KEQGM2PS');
+    </script>
+
+    <title>atikle connect | Schedule</title>
+    <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <div id="interaction-bar-placeholder"></div>
+
+    <div class="main-content">
+        <div class="scroolable-content">
+            <div class="section-heading">
+                <h1>Webinar Schedule</h1>
+                <div id="live-clock-container">
+                    <div id="clock-time"></div>
+                    <div id="clock-date"></div>
+                </div>
+            </div>
+            <div id="webinar-list"></div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // --- Live Clock Functionality ---
+            const timeElement = document.getElementById('clock-time');
+            const dateElement = document.getElementById('clock-date');
+
+            function updateClock() {
+                const now = new Date();
+                let hours = now.getHours();
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                const formattedTime = `${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+                const dayOptions = { weekday: 'long' };
+                const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+                const formattedDate = `${new Intl.DateTimeFormat('en-US', dayOptions).format(now)}, ${new Intl.DateTimeFormat('en-US', dateOptions).format(now)}`;
+                timeElement.textContent = formattedTime;
+                dateElement.textContent = formattedDate;
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+
+            // --- DYNAMIC WEBINAR PROCESSING LOGIC ---
+            const webinarListContainer = document.getElementById('webinar-list');
+            const CALENDAR_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>`;
+            const CLOCK_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>`;
+
+            // Helper function to parse inconsistent date strings like "15th August 2025"
+            function parseWebinarDate(dateString) {
+                // Remove st, nd, rd, th from the day number
+                const cleanDateString = dateString.replace(/(\d+)(st|nd|rd|th)/, "$1");
+                return new Date(cleanDateString);
+            }
+
+            // 1. Combine all webinars into a single list
+            const allWebinars = [
+                ...Object.values(typeof future_webinars !== 'undefined' ? future_webinars : {}),
+                ...Object.values(typeof present_webinars !== 'undefined' ? present_webinars : {}),
+                ...Object.values(typeof past_webinars !== 'undefined' ? past_webinars : {})
+            ];
+
+            const now = new Date();
+            let future = [];
+            let past = [];
+            let present = [];
+
+            // 2. Dynamically categorize each webinar
+            allWebinars.forEach(webinar => {
+                if (webinar.date === 'Always active') {
+                    webinar.status = 'present';
+                    present.push(webinar);
+                    return;
+                }
+                const webinarDate = parseWebinarDate(webinar.date);
+                if (isNaN(webinarDate.getTime())) return; // Skip invalid dates
+
+                webinar.dateObject = webinarDate; // Store date object for sorting
+
+                if (webinarDate > now) {
+                    webinar.status = 'future';
+                    future.push(webinar);
+                } else {
+                    webinar.status = 'past';
+                    past.push(webinar);
+                }
+            });
+
+            // 3. Sort the categories
+            future.sort((a, b) => a.dateObject - b.dateObject); // Ascending: Soonest first
+            past.sort((a, b) => b.dateObject - a.dateObject);   // Descending: Most recent first
+
+            // 4. Render the webinars in the correct order
+            let lastStatus = null;
+            const sortedWebinars = [...future, ...present, ...past];
+            
+            sortedWebinars.forEach(webinar => {
+                // Add a divider when the status changes
+                if (lastStatus && webinar.status !== lastStatus) {
+                     webinarListContainer.innerHTML += `<hr class="section-divider">`;
+                }
+                lastStatus = webinar.status;
+                
+                let specialId = '', buttonHtml = '', tagsHtml = '';
+                
+                switch (webinar.status) {
+                    case 'future':
+                        buttonHtml = `<a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Upcoming</a>`;
+                        break;
+                    case 'present':
+                        specialId = 'id="target-element-scroll"';
+                        buttonHtml = `<a href="https://atikle.github.io/connect/webinar" class="join-button active">Join Now</a>`;
+                        tagsHtml = `<div onclick="alert(LIVE_MESSAGE)" class="tag live"><span class="live-dot"></span>Live</div>`;
+                        break;
+                    case 'past':
+                        buttonHtml = `<a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>`;
+                        tagsHtml = `<div onclick="alert(RECORDING_MESSAGE)" class="tag recording">▶ Recording</div>`;
+                        break;
+                }
+
+                const webinarHtml = `
+                    <div class="webinar" ${specialId}>
+                        <div class="webinar-thumbnail"><img src="${webinar.thumbnailUrl}" alt="${webinar.name} thumbnail"></div>
+                        <div class="webinar-content">
+                            <div class="webinar-info">
+                                <div class="webinar-name">${webinar.name}</div>
+                                <div class="webinar-date-time">
+                                    <span class="date-time-item">${CALENDAR_ICON} ${webinar.date}</span>
+                                    <span class="date-time-item">${CLOCK_ICON} ${webinar.StartTime}</span>
+                                </div>
+                            </div>
+                            <div class="webinar-actions">${tagsHtml}${buttonHtml}</div>
+                        </div>
+                    </div>`;
+                webinarListContainer.innerHTML += webinarHtml;
+            });
+        };
+    </script>
+    <script>
+        const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
+        const INACTIVE_MESSAGE = "This session has not started yet. Please check back on the scheduled date.";
+        const LIVE_MESSAGE = "This session is currently live! Click the Join Now button to enter.";
+        const RECORDING_MESSAGE = "Session was recorded. If you are looking for session recording, please check the recording archive.";
+    </script>
+</body>
+</html>

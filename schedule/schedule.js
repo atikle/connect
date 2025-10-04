@@ -1,7 +1,7 @@
 const future_webinars = {
     'webinar-9': {
         name: 'Pilot Testing Session 9',
-        date: '15th August 2025',
+        date: '15th October 2025',
         StartTime: '5PM',
         duration: '',
         recordingUrl: 'https://atikle.github.io/connect/recordings',
@@ -11,7 +11,7 @@ const future_webinars = {
 
     'webinar-8': {
         name: 'Pilot Testing Session 8',
-        date: '13th August 2025',
+        date: '13th October 2025',
         StartTime: '5PM',
         duration: '',
         recordingUrl: 'https://atikle.github.io/connect/recordings',

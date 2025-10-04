@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="keyword" content="atikleconnect, atikle connect, financial webinar, atikle financial webinar">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <script defer src="https://atikle.github.io/connect/framework/universal/theme.js"></script>
+    <script defer src="https://atikle.github.io/connect/framework/universal/script.js"></script>
+    <script defer src="https://atikle.github.io/connect/schedule/schedule.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#interaction-bar-placeholder").load("https://atikle.github.io/connect/framework/interaction-bar.html");
+        });
+    </script>
+
+    <!-- <link rel="stylesheet" href="https://atikle.github.io/connect/connect.css"> -->
+    <link rel="stylesheet" href="connect.css">
+    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-75KEQGM2PS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-75KEQGM2PS');
+    </script>
+
+    <title>atikle connect | Schedule</title>
+    <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
+
+    <style>
+        /* --- Keyframe Animations --- */
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(220, 20, 60, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(220, 20, 60, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(220, 20, 60, 0);
+            }
+        }
+        
+        /* --- Main Content --- */
+        .section-heading {
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px; /* Adjusted padding */
+            margin-top: 20px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; /* Using flexbox for alignment */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section-heading-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.75);
+            z-index: 2;
+        }
+
+        .section-heading h1 {
+            position: relative;
+            z-index: 3;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 2.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+        
+        /* --- Live Clock Styles --- */
+        #live-clock-container {
+            position: relative;
+            z-index: 3;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin-top: 10px;
+        }
+        #clock-time {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+        }
+        #clock-date {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        #webinar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+
+        .section-divider {
+            border: none;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 10px 0;
+        }
+
+        .webinar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: var(--card-background-1);
+            box-shadow: var(--shadow-1);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            opacity: 0;
+            animation: slideUpFadeIn 0.5s ease-out forwards;
+        }
+        
+        .webinar:nth-child(1) { animation-delay: 0.1s; }
+        .webinar:nth-child(2) { animation-delay: 0.2s; }
+        .webinar:nth-child(3) { animation-delay: 0.3s; }
+        .webinar:nth-child(4) { animation-delay: 0.4s; }
+        .webinar:nth-child(5) { animation-delay: 0.5s; }
+
+        .webinar:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-2);
+        }
+
+        .webinar-thumbnail {
+            width: 120px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: var(--background-5);
+        }
+
+        .webinar-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .webinar-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .webinar-name {
+            font-family: "Poppins", sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            color: var(--text-color-1);
+        }
+
+        .webinar-date-time {
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-color-2);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .date-time-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .date-time-item svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--text-color-2);
+        }
+
+        .webinar-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: default;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .live { background-color: crimson; color: white; cursor: pointer; }
+        .live .live-dot { width: 8px; height: 8px; background-color: white; border-radius: 50%; animation: pulse 2s infinite; }
+        .recording { background-color: black; color: white; cursor: pointer; }
+
+        .join-button {
+            padding: 8px 20px;
+            font-size: 13px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--button-text-1);
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .join-button:hover { transform: scale(1.05); }
+        .over { background-color: #888; color: #eee; }
+        .over:hover { background-color: #777; }
+        .active { background-color: var(--button-background-1); }
+        .active:hover { background-color: royalblue; }
+        .inactive { background-color: #555; color: #ddd; cursor: not-allowed; }
+        .inactive:hover { background-color: #555; }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="interaction-bar-placeholder"></div>
+
+    <div class="main-content">
+        <div class="scroolable-content">
+            <div class="section-heading">
+                <div class="video-overlay"></div>
+                <video class="section-heading-video" autoplay loop muted playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-liquid-ink-in-water-845-large.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h1>Webinar Schedule</h1>
+                <div id="live-clock-container">
+                    <div id="clock-time"></div>
+                    <div id="clock-date"></div>
+                </div>
+            </div>
+            <div id="webinar-list"></div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // --- Live Clock Functionality ---
+            const timeElement = document.getElementById('clock-time');
+            const dateElement = document.getElementById('clock-date');
+
+            function updateClock() {
+                const now = new Date();
+
+                // Format Time
+                let hours = now.getHours();
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // Hour '0' should be '12'
+                const formattedTime = `${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+
+                // Format Date
+                const dayOptions = { weekday: 'long' };
+                const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+                const formattedDate = `${new Intl.DateTimeFormat('en-US', dayOptions).format(now)}, ${new Intl.DateTimeFormat('en-US', dateOptions).format(now)}`;
+
+                // Update DOM
+                timeElement.textContent = formattedTime;
+                dateElement.textContent = formattedDate;
+            }
+
+            updateClock(); // Initial call
+            setInterval(updateClock, 1000); // Update every second
+
+
+            // --- Webinar List Functionality ---
+            const webinarListContainer = document.getElementById('webinar-list');
+            const CALENDAR_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>`;
+            const CLOCK_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>`;
+
+            let isFirstSection = true;
+            function addDividerIfNeeded() {
+                if (!isFirstSection) {
+                    webinarListContainer.innerHTML += `<hr class="section-divider">`;
+                }
+                isFirstSection = false;
+            }
+
+            function processWebinars(webinarObject, status) {
+                const keys = Object.keys(webinarObject);
+                if (keys.length === 0) return;
+
+                addDividerIfNeeded();
+
+                if (status === 'past') keys.reverse();
+
+                for (const key of keys) {
+                    if (webinarObject.hasOwnProperty(key)) {
+                        const webinar = webinarObject[key];
+                        let specialId = '';
+                        let buttonHtml = '';
+                        let tagsHtml = ''; 
+
+                        switch (status) {
+                            case 'future':
+                                buttonHtml = `<a onclick="alert(INACTIVE_MESSAGE)" class="join-button inactive">Upcoming</a>`;
+                                break;
+                            case 'present':
+                                specialId = 'id="target-element-scroll"';
+                                buttonHtml = `<a href="https://atikle.github.io/connect/webinar" class="join-button active">Join Now</a>`;
+                                tagsHtml = `<div onclick="alert(LIVE_MESSAGE)" class="tag live"><span class="live-dot"></span>Live</div>`;
+                                break;
+                            case 'past':
+                                buttonHtml = `<a onclick="alert(OVER_MESSAGE)" class="join-button over">Session Over</a>`;
+                                tagsHtml = `<div onclick="alert(RECORDING_MESSAGE)" class="tag recording">▶ Recording</div>`;
+                                break;
+                        }
+
+                        const webinarHtml = `
+                            <div class="webinar" ${specialId}>
+                                <div class="webinar-thumbnail">
+                                    <img src="${webinar.thumbnailUrl}" alt="${webinar.name} thumbnail">
+                                </div>
+                                <div class="webinar-content">
+                                    <div class="webinar-info">
+                                        <div class="webinar-name">${webinar.name}</div>
+                                        <div class="webinar-date-time">
+                                            <span class="date-time-item">${CALENDAR_ICON} ${webinar.date}</span>
+                                            <span class="date-time-item">${CLOCK_ICON} ${webinar.StartTime}</span>
+                                        </div>
+                                    </div>
+                                    <div class="webinar-actions">
+                                        ${tagsHtml}
+                                        ${buttonHtml}
+                                    </div>
+                                </div>
+                            </div>`;
+
+                        webinarListContainer.innerHTML += webinarHtml;
+                    }
+                }
+            }
+            
+            if (typeof future_webinars !== 'undefined') processWebinars(future_webinars, 'future');
+            if (typeof present_webinars !== 'undefined') processWebinars(present_webinars, 'present');
+            if (typeof past_webinars !== 'undefined') processWebinars(past_webinars, 'past');
+        };
+    </script>
+
+    <script>
+        const OVER_MESSAGE = "Session Over. If you are looking for session recording, please check the recording archive. Kindly check the schedule for upcoming sessions.";
+        const INACTIVE_MESSAGE = "This session has not started yet. Please check back on the scheduled date.";
+        const LIVE_MESSAGE = "This session is currently live! Click the Join Now button to enter.";
+        const RECORDING_MESSAGE = "Session was recorded. If you are looking for session recording, please check the recording archive.";
+    </script>
+
+</body>
+</html>
