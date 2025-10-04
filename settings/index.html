@@ -286,21 +286,15 @@
 
         /* Speed Test Container */
         .speedtest-container {
-            background-color: var(--background-1);
+            /* background-color: var(--background-1); */
             border-radius: 12px;
-            padding: 30px 40px;
+            /* padding: 30px 40px; */
+            padding-bottom: 30px;
             width: auto;
             text-align: center;
             transition: all 0.3s ease;
-            margin-top: 40px;
+            /* margin-top: 40px; */
             user-select: none;
-        }
-
-        .speedtest-container h2 {
-            margin: 0 0 20px 0;
-            font-weight: 600;
-            font-size: 1.5rem;
-            color: var(--text-color-1);
         }
 
         /* Gauge Area */
@@ -529,8 +523,6 @@
                         </div>
                     </div> -->
 
-
-
                     <!-- <div class="setting-item">
                         <div>
                             <div class="setting-item-label">Microphone</div>
@@ -544,8 +536,6 @@
                             </select>
                         </div>
                     </div> -->
-
-
 
                     <div class="setting-item">
                         <div>
@@ -563,8 +553,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="setting-item">
                         <div>
                             <div class="setting-item-label">Background Noise Reduction</div>
@@ -578,63 +566,61 @@
                 </div>
 
                 <div class="settings-section">
-                    <div>
+                    <h2>Speed Test</h2>
 
-                        <div class="speedtest-container">
-                            <h2>Speed Test</h2>
+                    <div class="speedtest-container">
 
-                            <div class="gauge-area">
-                                <svg class="gauge-svg" viewBox="0 0 280 280">
-                                    <circle class="gauge-circle gauge-track" cx="140" cy="140" r="120" />
-                                    <circle id="gauge-bar" class="gauge-circle gauge-bar" cx="140" cy="140" r="120" />
-                                </svg>
-                                <div class="speed-display">
-                                    <span id="speed-value" class="speed-value">0.00</span>
-                                    <span id="speed-unit" class="speed-unit">Mbps</span>
-                                    <span id="speed-label" class="speed-label">Download</span>
-                                </div>
+                        <div class="gauge-area">
+                            <svg class="gauge-svg" viewBox="0 0 280 280">
+                                <circle class="gauge-circle gauge-track" cx="140" cy="140" r="120" />
+                                <circle id="gauge-bar" class="gauge-circle gauge-bar" cx="140" cy="140" r="120" />
+                            </svg>
+                            <div class="speed-display">
+                                <span id="speed-value" class="speed-value">0.00</span>
+                                <span id="speed-unit" class="speed-unit">Mbps</span>
+                                <span id="speed-label" class="speed-label">Download</span>
                             </div>
-
-                            <div class="metrics-area">
-                                <div class="metric">
-                                    <div id="ping-value" class="metric-value">-</div>
-                                    <div class="metric-label">Ping (ms)</div>
-                                </div>
-                                <div class="metric">
-                                    <div id="jitter-value" class="metric-value">-</div>
-                                    <div class="metric-label">Jitter (ms)</div>
-                                </div>
-                                <div class="metric">
-                                    <div id="packet-loss-value" class="metric-value">-</div>
-                                    <div class="metric-label">Packet Loss (%)</div>
-                                </div>
-                            </div>
-
-                            <div id="results-area" class="results-area">
-                                <div class="metric">
-                                    <div id="final-download-value" class="metric-value">-</div>
-                                    <div class="metric-label">Final Download (Mbps)</div>
-                                </div>
-                                <div class="metric">
-                                    <div id="final-upload-value" class="metric-value">-</div>
-                                    <div class="metric-label">Final Upload (Mbps)</div>
-                                </div>
-                            </div>
-
-                            <div id="suggestion-area" class="suggestion-area">
-                                <h3 id="suggestion-title"></h3>
-                                <p id="suggestion-text"></p>
-                            </div>
-
-                            <button id="start-button" class="start-button">Start Test</button>
-                            <p id="error-message" class="error-message"></p>
                         </div>
 
-                        <!-- <div class="actions">
-                            <button class="btn btn-primary" id="saveButton">Save Changes</button>
-                        </div> -->
+                        <div class="metrics-area">
+                            <div class="metric">
+                                <div id="ping-value" class="metric-value">-</div>
+                                <div class="metric-label">Ping (ms)</div>
+                            </div>
+                            <div class="metric">
+                                <div id="jitter-value" class="metric-value">-</div>
+                                <div class="metric-label">Jitter (ms)</div>
+                            </div>
+                            <div class="metric">
+                                <div id="packet-loss-value" class="metric-value">-</div>
+                                <div class="metric-label">Packet Loss (%)</div>
+                            </div>
+                        </div>
 
+                        <div id="results-area" class="results-area">
+                            <div class="metric">
+                                <div id="final-download-value" class="metric-value">-</div>
+                                <div class="metric-label">Final Download (Mbps)</div>
+                            </div>
+                            <div class="metric">
+                                <div id="final-upload-value" class="metric-value">-</div>
+                                <div class="metric-label">Final Upload (Mbps)</div>
+                            </div>
+                        </div>
+
+                        <div id="suggestion-area" class="suggestion-area">
+                            <h3 id="suggestion-title"></h3>
+                            <p id="suggestion-text"></p>
+                        </div>
+
+                        <button id="start-button" class="start-button">Start Test</button>
+                        <p id="error-message" class="error-message"></p>
                     </div>
+
+                    <!-- <div class="actions">
+                        <button class="btn btn-primary" id="saveButton">Save Changes</button>
+                    </div> -->
+
                 </div>
 
                 <!-- About Section -->
