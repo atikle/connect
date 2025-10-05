@@ -369,9 +369,9 @@
 
             .action-controls-container {
                 position: fixed;
-                bottom: 15px;
-                left: 15px;
-                right: 15px;
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
                 z-index: 50;
             }
         }
@@ -687,43 +687,6 @@
             </div>
         </aside>
     </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            const mainContent = document.getElementById('app-container');
-
-            setTimeout(() => {
-                loadingScreen.style.opacity = '0';
-                loadingScreen.addEventListener('transitionend', () => {
-                    loadingScreen.style.display = 'none';
-                    if (mainContent) mainContent.classList.remove('content-hidden');
-                    document.body.style.overflow = 'auto';
-                }, { once: true });
-            }, 1000);
-
-            var video = document.querySelector("#videoElement");
-            if (navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function (stream) { video.srcObject = stream; })
-                    .catch(function (err0r) { console.log("Something went wrong with camera access!"); });
-            }
-
-            // --- RESPONSIVE CHAT TOGGLE SCRIPT from index3.html ---
-            const chatToggle = document.getElementById('chat-toggle');
-            const chatPanel = document.getElementById('chat-panel');
-            const chatCloseButton = document.getElementById('chat-close-button');
-
-            if (chatToggle && chatPanel && chatCloseButton) {
-                chatToggle.addEventListener('click', () => {
-                    chatPanel.classList.toggle('visible');
-                });
-                chatCloseButton.addEventListener('click', () => {
-                    chatPanel.classList.remove('visible');
-                });
-            }
-        });
-    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
