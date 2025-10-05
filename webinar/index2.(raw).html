@@ -41,11 +41,6 @@
         type="image/x-icon">
 
     <style>
-        /* trying new body color style */
-        body {
-            background-color: #18191a;
-        }
-
         /* Base styles from original index.html */
         @media (max-width: 768px) {
             body .navigation-bar {
@@ -167,15 +162,16 @@
             /* Adjust based on interaction bar height */
         }
 
+        /* Video Grid Container */
         .video-grid-container {
             flex-grow: 1;
             display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 1rem;
             position: relative;
         }
 
+        /* Action Controls (Bottom Bar) */
         .action-controls-container {
             flex-shrink: 0;
         }
@@ -195,7 +191,7 @@
         .action-controls-inner .icon-button {
             padding: 0.75rem;
             border-radius: 9999px;
-            background-color: var(--background-4);
+            background-color: #f3f4f6;
             border: none;
             cursor: pointer;
             transition: background-color 0.2s;
@@ -363,27 +359,30 @@
                 right: 1rem;
             }
 
-            .video-grid-container {
-                padding-bottom: 6rem;
-            }
-
+            /* --- FIX FOR MOBILE BOTTOM BAR --- */
             .action-controls-container {
                 position: fixed;
-                bottom: 15px;
-                left: 15px;
-                right: 15px;
+                bottom: 0;
+                left: 0;
+                right: 0;
                 z-index: 50;
             }
+
+            .video-grid-container {
+                padding-bottom: 6rem;
+                /* Creates space for the fixed bottom bar */
+            }
+
+            /* --- END FIX --- */
         }
 
         @media (min-width: 1025px) {
             .action-controls-container {
-                position: fixed;
-                width: min-content;
-                bottom: 1rem;
+                position: absolute;
+                bottom: 0;
                 left: 0;
                 right: 0;
-                margin: auto;
+                width: 100%;
                 background-color: transparent;
                 box-shadow: none;
                 padding: 0;
@@ -394,14 +393,12 @@
                 width: auto;
                 padding: 0.75rem 1.5rem;
                 justify-content: center;
-                gap: 1rem;
+                gap: 1.5rem;
             }
 
             .video-grid-container {
-                padding-bottom: 5rem;
+                padding-bottom: 7rem;
                 box-sizing: border-box;
-
-                /* padding-left: 4rem; */
             }
 
             .video-call-wrapper {
@@ -409,19 +406,51 @@
                 width: 100%;
                 height: 100%;
                 top: 0;
-                margin-left: 66px;
+                left: 0;
                 right: 0;
                 bottom: 0;
             }
         }
+
+        /* Removing original action bar */
+        .video-call-actions {
+            display: none;
+        }
+
+        .right-side {
+            display: none;
+        }
+
+        /* --- FIX FOR DARK MODE BUTTON/INPUT BACKGROUNDS --- */
+        .dark .action-controls-inner .icon-button {
+            background-color: #3a3b3c;
+            /* Dark grey background for buttons */
+            color: #b0b3b8;
+        }
+
+        .dark .action-controls-inner .icon-button:hover {
+            background-color: #4b5563;
+        }
+
+        .dark .chat-input-wrapper {
+            background-color: #242526;
+            /* Dark background for chat input area */
+        }
+
+        /* --- END FIX --- */
     </style>
 </head>
 
-<body>
+<body onload="zoom()">
+
+    <script type="text/javascript">
+        function zoom() { document.body.style.zoom = "100%" }
+    </script>
+
     <div id="loading-screen" class="loading-screen">
         <div style="display: flex; flex-direction: column; align-items: center;">
             <text style="margin-top: 300px;" class="branding">atikle <font class="connect-branding">connect</font>
-            </text>
+                </text>
             <div class="spinner"></div>
             <p class="loading-text">Loading webinar application...</p>
         </div>
@@ -710,94 +739,6 @@
             }
 
             // --- RESPONSIVE CHAT TOGGLE SCRIPT from index3.html ---
-            const chatToggle = document.getElementById('chat-toggle');
-            const chatPanel = document.getElementById('chat-panel');
-            const chatCloseButton = document.getElementById('chat-close-button');
-
-            if (chatToggle && chatPanel && chatCloseButton) {
-                chatToggle.addEventListener('click', () => {
-                    chatPanel.classList.toggle('visible');
-                });
-                chatCloseButton.addEventListener('click', () => {
-                    chatPanel.classList.remove('visible');
-                });
-            }
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            const mainContent = document.getElementById('app-container');
-
-            setTimeout(() => {
-                loadingScreen.style.opacity = '0';
-                loadingScreen.addEventListener('transitionend', () => {
-                    loadingScreen.style.display = 'none';
-                    if (mainContent) mainContent.classList.remove('content-hidden');
-                    document.body.style.overflow = 'auto';
-                }, { once: true });
-            }, 1000);
-
-            var video = document.querySelector("#videoElement");
-            if (navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function (stream) { video.srcObject = stream; })
-                    .catch(function (err0r) { console.log("Something went wrong with camera access!"); });
-            }
-
-            // --- BUTTON FUNCTIONALITY (LEAVE & FULLSCREEN) ---
-            const leaveButton = document.getElementById('leave-button');
-            const fullscreenButton = document.getElementById('fullscreen-button');
-            const docEl = document.documentElement;
-
-            if (leaveButton) {
-                leaveButton.addEventListener('click', () => {
-                    document.body.innerHTML = `
-                    <div style="position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background-color: var(--background-1);">
-                        <div style="text-align: center;">
-                            <h1 style="font-size: 1.875rem; font-weight: 700; color: var(--text-color-1);">atikle <span style="color: var(--brand-blue);">connect</span></h1>
-                            <p style="margin-top: 1rem; font-size: 1.125rem; color: var(--text-color-2);">You have left the webinar.</p>
-                            <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-color-3);">You can now close this tab.</p>
-                        </div>
-                    </div>
-                `;
-                    document.body.className = "";
-                });
-            }
-
-            if (fullscreenButton) {
-                fullscreenButton.addEventListener('click', () => {
-                    if (
-                        !document.fullscreenElement &&
-                        !document.mozFullScreenElement &&
-                        !document.webkitFullscreenElement &&
-                        !document.msFullscreenElement
-                    ) {
-                        if (docEl.requestFullscreen) {
-                            docEl.requestFullscreen();
-                        } else if (docEl.mozRequestFullScreen) { // Firefox
-                            docEl.mozRequestFullScreen();
-                        } else if (docEl.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                            docEl.webkitRequestFullscreen();
-                        } else if (docEl.msRequestFullscreen) { // IE/Edge
-                            docEl.msRequestFullscreen();
-                        }
-                    } else {
-                        if (document.exitFullscreen) {
-                            document.exitFullscreen();
-                        } else if (document.mozCancelFullScreen) { // Firefox
-                            document.mozCancelFullScreen();
-                        } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-                            document.webkitExitFullscreen();
-                        } else if (document.msExitFullscreen) { // IE/Edge
-                            document.msExitFullscreen();
-                        }
-                    }
-                });
-            }
-
-            // --- RESPONSIVE CHAT TOGGLE SCRIPT ---
             const chatToggle = document.getElementById('chat-toggle');
             const chatPanel = document.getElementById('chat-panel');
             const chatCloseButton = document.getElementById('chat-close-button');
