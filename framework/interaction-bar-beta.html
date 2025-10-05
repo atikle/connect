@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         .logo-para a {
             text-decoration: none;
             color: var(--text-color-1);
@@ -24,11 +24,11 @@
         }
 
         .logo-para {
-            position: fixed;
+            /* position: fixed; */
             width: auto;
-            top: 10px;
+            /* top: 10px;
             left: 10px;
-            right: 10px;
+            right: 10px; */
             padding: 10px 20px;
             border-radius: 15px;
             background-color: var(--background-1);
@@ -111,11 +111,12 @@
             
 
             body .logo-para {
-                position: absolute;
+                /* position: absolute;
                 border-radius: 0px;
                 top: 0;
                 left: 0;
-                right: 0;
+                right: 0; */
+                border-radius: 10px;
                 /* position: fixed;
                 margin-top: 10px;
                 margin-left: 10px;
@@ -201,11 +202,13 @@
 
 <body>
 
-    <div class="logo-para">
-        <a href="https://atikle.github.io/connect/schedule">
-            <img class="connect-icon" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="connect-icon">
-            <text class="branding">atikle <font class="connect-branding">connect</font></text>
-        </a>
+    <div style="margin: 10px;">
+        <div class="logo-para">
+            <a href="https://atikle.github.io/connect/schedule">
+                <img class="connect-icon" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="connect-icon">
+                <text class="branding">atikle <font class="connect-branding">connect</font></text>
+            </a>
+        </div>
     </div>
 
 
