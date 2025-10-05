@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atikle Connect | Modern Webinar</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Favicon -->
+    <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
+
+    <style>
+        /* CSS Variables for theming */
+        :root {
+            --brand-blue: #3d42df;
+            --brand-red: #ff1932;
+            
+            --light-bg: #ffffff;
+            --light-card: #ffffff;
+            --light-border: #e5e7eb;
+            --light-text: #111827;
+            --light-text-secondary: #6b7280;
+
+            --dark-bg: #18191a;
+            --dark-card: #242526;
+            --dark-border: #3a3b3c;
+            --dark-text: #e4e6eb;
+            --dark-text-secondary: #b0b3b8;
+
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        /* Base styles */
+        html {
+            font-family: var(--font-sans);
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* Dark mode styles */
+        html.dark body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #4a4a4a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #6a6a6a;
+        }
+
+        /* Loading spinner animation */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid var(--brand-blue);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Pulse animation for loading text */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .loading-text {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        /* Layout and Component Styles */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            transition: opacity 500ms ease-in-out;
+            background-color: var(--light-bg);
+        }
+        html.dark #loading-screen { background-color: var(--dark-bg); }
+
+        #loading-screen .text-center { text-align: center; }
+        #loading-screen h1 { 
+            font-size: 1.875rem; 
+            font-weight: 700; 
+            color: #1f2937;
+        }
+        html.dark #loading-screen h1 { color: #fff; }
+        #loading-screen h1 span { color: var(--brand-blue); }
+        #loading-screen .spinner { margin: 2rem auto; }
+        #loading-screen p { 
+            font-size: 1.125rem; 
+            color: #4b5563;
+        }
+        html.dark #loading-screen p { color: var(--dark-text-secondary); }
+
+        #app-container {
+            opacity: 0;
+            transition: opacity 500ms;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+            box-sizing: border-box;
+        }
+
+        header {
+            flex-shrink: 0;
+            height: 4rem;
+            background-color: var(--light-card);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+        html.dark header { background-color: var(--dark-card); }
+        
+        header .logo-container { display: flex; align-items: center; gap: 0.75rem; }
+        header .logo-container img { height: 2rem; width: 2rem; }
+        header .logo-container h1 { font-size: 1.25rem; font-weight: 700; }
+        header .logo-container h1 span { color: var(--brand-blue); }
+
+        header .controls-container { display: flex; align-items: center; gap: 1rem; }
+        header .live-indicator { display: flex; align-items: center; gap: 0.5rem; }
+        header .live-indicator div { width: 0.75rem; height: 0.75rem; border-radius: 9999px; background-color: #ef4444; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        header .live-indicator span { font-size: 0.875rem; font-weight: 500; color: #ef4444; }
+        
+        #theme-toggle { padding: 0.5rem; border-radius: 9999px; background: none; border: none; cursor: pointer; transition: background-color 0.2s; }
+        #theme-toggle:hover { background-color: #f3f4f6; }
+        html.dark #theme-toggle:hover { background-color: #374151; }
+        #theme-toggle svg { height: 1.5rem; width: 1.5rem; }
+        
+        main {
+            flex-grow: 1;
+            display: flex;
+            gap: 1rem;
+            overflow: hidden;
+        }
+
+        .video-grid-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            flex-grow: 1;
+        }
+
+        .video-participant {
+            position: relative;
+            background-color: #e5e7eb;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+        html.dark .video-participant { background-color: var(--dark-card); }
+        .video-participant video { width: 100%; height: 100%; object-fit: cover; border-radius: 1rem; }
+
+        .video-overlay { position: absolute; inset: 0; background-color: rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.2s; }
+        .video-participant:hover .video-overlay { opacity: 1; }
+        
+        .participant-controls { position: absolute; top: 0.75rem; left: 0.75rem; display: flex; gap: 0.5rem; opacity: 0; transition: opacity 0.2s; }
+        .video-participant:hover .participant-controls { opacity: 1; }
+        .participant-controls button { padding: 0.5rem; background-color: rgba(0,0,0,0.4); border-radius: 0.5rem; border:none; cursor: pointer; }
+        .participant-controls button:hover { background-color: rgba(0,0,0,0.6); }
+        .participant-controls svg { height: 1.25rem; width: 1.25rem; color: white; }
+
+        .participant-tag {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            background-color: rgba(255,255,255,0.8);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+        }
+        html.dark .participant-tag { background-color: rgba(0,0,0,0.5); }
+        
+        .action-controls-container {
+            flex-shrink: 0;
+        }
+
+        .action-controls-inner {
+            display: flex;
+            align-items: center;
+            background-color: var(--light-card);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            padding: 1rem;
+            height: 5rem;
+            box-sizing: border-box;
+            justify-content: space-evenly;
+        }
+        html.dark .action-controls-inner { background-color: var(--dark-card); }
+        
+        .action-controls-inner .icon-button {
+            padding: 0.75rem;
+            border-radius: 9999px;
+            background-color: #f3f4f6;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: var(--light-text-secondary);
+        }
+        .action-controls-inner .icon-button:hover {
+            background-color: #e5e7eb;
+        }
+        .action-controls-inner .icon-button svg {
+            height: 1.5rem;
+            width: 1.5rem;
+            display: block;
+        }
+        
+        html.dark .action-controls-inner .icon-button {
+            background-color: var(--dark-border);
+            color: var(--dark-text-secondary);
+        }
+        html.dark .action-controls-inner .icon-button:hover {
+            background-color: #4b5563;
+        }
+        
+        #leave-button {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            color: white;
+            background-color: var(--brand-red);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #leave-button:hover {
+            background-color: #dc2626;
+        }
+        #leave-button svg {
+             height: 1.25rem;
+             width: 1.25rem;
+        }
+        
+        #chat-panel {
+            width: 24rem;
+            flex-shrink: 0;
+            background-color: var(--light-card);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+            transform: translateX(0);
+        }
+        html.dark #chat-panel { background-color: var(--dark-card); }
+        
+        .chat-header { 
+            padding: 1rem; 
+            border-bottom: 1px solid var(--light-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        html.dark .chat-header { border-bottom-color: var(--dark-border); }
+        .chat-header h2 { font-size: 1.125rem; font-weight: 600; margin: 0; }
+        
+        #chat-close-button {
+            display: none;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        #chat-close-button svg {
+            height: 1.5rem;
+            width: 1.5rem;
+            color: var(--light-text-secondary);
+        }
+        html.dark #chat-close-button svg {
+            color: var(--dark-text-secondary);
+        }
+        
+        #chat-area { flex-grow: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem;}
+        
+        .message-wrapper { display: flex; gap: 0.75rem; align-items: flex-start; }
+        .message-wrapper.own-message { flex-direction: row-reverse; }
+        .message-wrapper img { width: 2rem; height: 2rem; border-radius: 9999px; flex-shrink: 0; }
+        .message-content { display: flex; flex-direction: column; gap: 0.5rem; }
+        .message-wrapper.own-message .message-content { align-items: flex-end; }
+        .message-author { font-size: 0.75rem; font-weight: 600; color: var(--light-text-secondary); margin-bottom: -0.25rem; }
+        html.dark .message-author { color: var(--dark-text-secondary); }
+        
+        .message-bubble {
+            padding: 0.75rem;
+            border-radius: 1rem;
+            max-width: 16rem;
+            font-size: 0.875rem;
+            word-break: break-word;
+            background-color: #f3f4f6;
+            border-bottom-left-radius: 0;
+        }
+        html.dark .message-bubble { background-color: var(--dark-border); border-radius: 1rem; border-bottom-left-radius: 0;}
+        .message-wrapper.own-message .message-bubble {
+            background-color: var(--brand-blue);
+            color: white;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 1rem;
+        }
+        .message-bubble a.mention { color: var(--brand-blue); font-weight: 600; text-decoration: none; }
+        html.dark .message-bubble a.mention { color: #818cf8; }
+        .message-bubble a.link { color: #3b82f6; text-decoration: underline; }
+        
+        .file-attachment {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            border: 1px solid var(--light-border);
+            background-color: var(--light-bg);
+            border-radius: 0.5rem;
+            width: 16rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        html.dark .file-attachment { border-color: var(--dark-border); background-color: var(--dark-card); }
+        .file-attachment img { width: 2rem; height: 2rem; }
+        .file-info .file-name { font-size: 0.875rem; font-weight: 600; }
+        .file-info .file-size { font-size: 0.75rem; color: var(--light-text-secondary); }
+        html.dark .file-info .file-size { color: var(--dark-text-secondary); }
+        
+        .chat-input-area { padding: 1rem; border-top: 1px solid var(--light-border); }
+        html.dark .chat-input-area { border-top-color: var(--dark-border); }
+        .chat-input-wrapper { display: flex; align-items: center; gap: 0.5rem; background-color: #f3f4f6; padding: 0.5rem; border-radius: 0.5rem; }
+        html.dark .chat-input-wrapper { background-color: var(--dark-bg); }
+        #chat-input {
+            width: 100%;
+            background: transparent;
+            outline: none;
+            border: none;
+            padding: 0 0.5rem;
+            color: inherit;
+        }
+        #send-button {
+            padding: 0.5rem;
+            background-color: var(--brand-blue);
+            color: white;
+            border-radius: 0.375rem;
+            border: none;
+            cursor: pointer;
+        }
+        #send-button:hover { background-color: #2563eb; }
+        #send-button svg { height: 1.25rem; width: 1.25rem; }
+
+        .hidden { display: none; }
+
+        #chat-toggle {
+            display: none;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 1024px) {
+            #chat-panel {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 100;
+                padding: 0;
+                gap: 0;
+            }
+            #chat-panel.visible {
+                transform: translateX(0);
+            }
+            #chat-close-button {
+                display: block;
+            }
+            #chat-toggle { 
+                display: block !important;
+            }
+            .video-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+             header .logo-container h1 { display: none; }
+        }
+        
+        @media (max-width: 640px) {
+            .video-grid { grid-template-columns: repeat(1, 1fr); }
+        }
+
+        @media (min-width: 1025px) {
+            .action-controls-container {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                background-color: transparent;
+                box-shadow: none;
+                padding: 0;
+            }
+            .action-controls-inner {
+                 margin: 0 auto;
+                 width: auto;
+                 padding: 0.75rem 1.5rem;
+                 justify-content: center;
+                 gap: 1.5rem;
+            }
+            .video-grid-container {
+                padding-bottom: 7rem;
+                box-sizing: border-box;
+            }
+            #chat-toggle {
+                display: none;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="text-center">
+            <h1>atikle <span>connect</span></h1>
+            <div class="spinner"></div>
+            <p class="loading-text">Loading webinar application...</p>
+        </div>
+    </div>
+
+    <!-- Main Application Wrapper -->
+    <div id="app-container">
+
+        <!-- Header / Interaction Bar -->
+        <header>
+            <div class="logo-container">
+                <img src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="Logo">
+                <h1>atikle <span>connect</span></h1>
+            </div>
+            <div class="controls-container">
+                <div class="live-indicator">
+                    <div></div>
+                    <span>LIVE</span>
+                </div>
+                <button id="theme-toggle">
+                    <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" class="hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                    <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main>
+
+            <!-- Video Grid -->
+            <div class="video-grid-container">
+                <div class="video-grid">
+                    <!-- Video Participant: You -->
+                    <div class="video-participant">
+                        <video autoplay="true" id="videoElement"></video>
+                        <div class="video-overlay"></div>
+                        <div class="participant-controls">
+                            <button><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg></button>
+                            <button><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.55a1 1 0 011.45.89v2.22a1 1 0 01-1.45.89L15 12M4 6h11a1 1 0 011 1v8a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z" /></svg></button>
+                        </div>
+                        <span class="participant-tag">You</span>
+                    </div>
+
+                    <!-- Other Participants -->
+                    <div class="video-participant" style="background-image: url('https://atikle.github.io/connect/data/application/resources/participant-placeholder.png'); background-size: contain; background-repeat: no-repeat;">
+                        <span class="participant-tag">Host 1</span>
+                    </div>
+                    <div class="video-participant" style="background-image: url('https://atikle.github.io/connect/data/application/resources/participant-placeholder.png'); background-size: contain; background-repeat: no-repeat;">
+                        <span class="participant-tag">Host 2</span>
+                    </div>
+                     <div class="video-participant" style="background-color: black; background-image: url('https://atikle.github.io/resource/atikle_connect/spotlight.png'); background-size: 70%; background-repeat: no-repeat;">
+                        <span class="participant-tag" style="color: white;">Spotlight</span>
+                    </div>
+                    <div class="video-participant" style="background-image: url('https://atikle.github.io/connect/data/application/resources/participant-placeholder.png'); background-size: contain; background-repeat: no-repeat;">
+                        <span class="participant-tag">Host 3</span>
+                    </div>
+                    <div class="video-participant" style="background-image: url('https://atikle.github.io/connect/data/application/resources/participant-placeholder.png'); background-size: contain; background-repeat: no-repeat;">
+                        <span class="participant-tag">Host 4</span>
+                    </div>
+
+                </div>
+
+                <!-- Action Controls -->
+                <div class="action-controls-container">
+                    <div class="action-controls-inner">
+                            <button class="icon-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M1 1l22 22M9 9v3a3 3 0 005.12 2.12M15 9.34V4a3 3 0 00-5.94-.6" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 16.95A7 7 0 015 12v-2m14 0v2a7 7 0 01-.11 1.23M12 19v4M8 23h8" />
+                                </svg>
+                            </button>
+                            <button class="icon-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M1 1l22 22M21 21H3a2 2 0 01-2-2V8a2 2 0 012-2h3m3-3h6l2 3h4a2 2 0 012 2v9.34m-7.72-2.06a4 4 0 11-5.56-5.56" />
+                                </svg>
+                            </button>
+                            <button id="leave-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="23" y1="1" x2="17" y2="7"></line>
+                                    <line x1="17" y1="1" x2="23" y2="7"></line>
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                                Leave
+                            </button>
+                            <button id="fullscreen-button" class="icon-button"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3" /></svg></button>
+                            <button id="chat-toggle" class="icon-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                            </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Panel -->
+            <aside id="chat-panel">
+                <div class="chat-header">
+                    <h2>Live Chat</h2>
+                     <button id="chat-close-button" class="icon-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" >
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                </div>
+                <div id="chat-area">
+                    <!-- Chat messages will be added here -->
+                </div>
+                <div class="chat-input-area">
+                    <div class="chat-input-wrapper">
+                        <input id="chat-input" type="text" placeholder="Type your meesage...">
+                        <button id="send-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const appContainer = document.getElementById('app-container');
+            const videoElement = document.getElementById('videoElement');
+
+            // --- THEME TOGGLE ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const sunIcon = document.getElementById('theme-icon-sun');
+            const moonIcon = document.getElementById('theme-icon-moon');
+            const htmlEl = document.documentElement;
+
+            // Check for saved theme in localStorage
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlEl.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                htmlEl.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                htmlEl.classList.toggle('dark');
+                sunIcon.classList.toggle('hidden');
+                moonIcon.classList.toggle('hidden');
+                if (htmlEl.classList.contains('dark')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+            // --- BUTTON FUNCTIONALITY ---
+            const leaveButton = document.getElementById('leave-button');
+            const fullscreenButton = document.getElementById('fullscreen-button');
+            const docEl = document.documentElement;
+
+            leaveButton.addEventListener('click', () => {
+                document.body.innerHTML = `
+                    <div style="position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 50; background-color: var(--light-bg);">
+                        <div style="text-align: center;">
+                            <h1 style="font-size: 1.875rem; font-weight: 700; color: #1f2937;">atikle <span style="color: var(--brand-blue);">connect</span></h1>
+                            <p style="margin-top: 1rem; font-size: 1.125rem; color: #4b5563;">You have left the webinar.</p>
+                            <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280;">You can now close this tab.</p>
+                        </div>
+                    </div>
+                `;
+                document.body.className = "";
+                if(htmlEl.classList.contains('dark')) {
+                    const leaveScreen = document.querySelector('div[style*="background-color"]');
+                    leaveScreen.style.backgroundColor = 'var(--dark-bg)';
+                    leaveScreen.querySelector('h1').style.color = 'var(--dark-text)';
+                    leaveScreen.querySelector('p:nth-of-type(1)').style.color = 'var(--dark-text-secondary)';
+                    leaveScreen.querySelector('p:nth-of-type(2)').style.color = '#9ca3af';
+                }
+            });
+
+            fullscreenButton.addEventListener('click', () => {
+                if (
+                    !document.fullscreenElement &&
+                    !document.mozFullScreenElement &&
+                    !document.webkitFullscreenElement &&
+                    !document.msFullscreenElement
+                ) {
+                    if (docEl.requestFullscreen) {
+                        docEl.requestFullscreen().catch(err => console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`));
+                    } else if (docEl.mozRequestFullScreen) { // Firefox
+                        docEl.mozRequestFullScreen();
+                    } else if (docEl.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                        docEl.webkitRequestFullscreen();
+                    } else if (docEl.msRequestFullscreen) { // IE/Edge
+                        docEl.msRequestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen().catch(err => console.error(`Error attempting to exit full-screen mode: ${err.message} (${err.name})`));
+                    } else if (document.mozCancelFullScreen) { // Firefox
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) { // IE/Edge
+                        document.msExitFullscreen();
+                    }
+                }
+            });
+
+
+            // --- LOADING SCREEN & APP INITIALIZATION ---
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                loadingScreen.addEventListener('transitionend', () => {
+                    loadingScreen.style.display = 'none';
+                    appContainer.style.opacity = '1';
+                }, { once: true });
+            }, 1000);
+
+            // --- CAMERA ACCESS ---
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        videoElement.srcObject = stream;
+                    })
+                    .catch(function(error) {
+                        console.log("Something went wrong with camera access!", error);
+                        // Hide video element and show a fallback in the container
+                        const videoParticipant = videoElement.parentElement;
+                        videoElement.style.display = 'none';
+                        videoParticipant.style.backgroundImage = "url('https://atikle.github.io/resource/atikle_connect/camera-access.png')";
+                    });
+            } else {
+                console.log("getUserMedia not supported on this browser.");
+            }
+
+            // --- CHAT FUNCTIONALITY ---
+            const chatArea = document.getElementById('chat-area');
+            const chatInput = document.getElementById('chat-input');
+            const sendButton = document.getElementById('send-button');
+            const chatToggle = document.getElementById('chat-toggle');
+            const chatPanel = document.getElementById('chat-panel');
+            const chatCloseButton = document.getElementById('chat-close-button');
+            
+            // Replicated original chat messages with correct structure
+            const originalMessages = [
+                { name: "Admin (atikle connect)", avatar: "https://atikle.github.io/connect/data/application/resources/admin.png", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Hello everybody!"}] }
+                ]},
+                { name: "Ananya (Host)", avatar: "https://atikle.github.io/connect/data/application/resources/host.png", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Hello! Is my audio and video clear? "}, {type: 'mention', value: "@atikle_connect", href: "https://atikle.github.io/connect/community/atikle_connect"}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "Btw "}, {type: 'mention', value: "@anurag_gautam", href: "https://atikle.github.io/connect/community/anurag_gautam"}, {type: 'text', value: " you have built an amazing application."}] }
+                ]},
+                { name: "Aditya (Host)", avatar: "https://atikle.github.io/connect/data/application/resources/host.png", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Hello "}, {type: 'mention', value: "@ananya", href: "https://atikle.github.io/connect/community/ananya"}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "Anurag is the host and admin as well."}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "I guess he is still tweaking things."}] }
+                ]},
+                { name: "Anurag (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Hello Ananya and Aditya."}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "Thankyou guys for joining."}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "Sorry, I did not replied as I was busy in fixing some bugs."}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "Now the theme switch works perfectly fine and it adapts the theme automatically."}] }
+                ]},
+                { name: "Ananya (Host)", avatar: "https://atikle.github.io/connect/data/application/resources/host.png", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Yes, I checked the theme toggle switch works perfectly fine."}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "What do you think about adding a recording indicator?"}] }
+                ]},
+                { name: "Aditya (Host)", avatar: "https://atikle.github.io/connect/data/application/resources/host.png", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Thats an amazing idea "}, {type: 'mention', value: "@ananya", href: "https://atikle.github.io/connect/community/ananya"}] }
+                ]},
+                { name: "Anurag (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Yes, that will be really helpful, will add rightaway."}] }
+                ]},
+                { name: "Aditya (Host)", avatar: "https://atikle.github.io/connect/data/application/resources/host.png", content: [
+                    { type: 'bubble', parts: [{type: 'mention', value: "@anurag_gautam", href: "https://atikle.github.io/connect/community/anurag_gautam"}, {type: 'text', value: " Bro you forgot to share the dns documentation."}] }
+                ]},
+                { name: "Anurag (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'mention', value: "@aditya", href: "https://atikle.github.io/connect/community/aditya"}, {type: 'text', value: " Here is the Cloudflare DNS's Docs."}] },
+                    { type: 'bubble', parts: [{type: 'link', value: "https://developers.cloudflare.com/1.1.1.1/ip-addresses", href: "https://developers.cloudflare.com/1.1.1.1/ip-addresses"}] },
+                    { type: 'file', name: "Cloudflare 1.1.1.1 docs.pdf", size: "280 KB", icon: 'https://atikle.github.io/resource/atikle_connect/document-placeholder.svg', href: 'https://atikle.github.io/connect/files/Cloudflare 1.1.1.1 docs.pdf' }
+                ]},
+                { name: "Aditya (Host)", avatar: "https://atikle.github.io/connect/data/application/resources/host.png", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Thanks buddy!"}] }
+                ]},
+                { name: "Anurag (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'mention', value: "@aditya", href: "https://atikle.github.io/connect/community/aditya"}, {type: 'text', value: " "}, {type: 'mention', value: "@ananya", href: "https://atikle.github.io/connect/community/ananya"}, {type: 'text', value: " can you share your profile picture?"}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "Actually I was building profile page for hosts so for testig it will be really helpful."}] }
+                ]},
+                { name: "Ananya (Host)", avatar: "https://atikle.github.io/connect/data/application/resources/host.png", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Sure"}] }
+                ]},
+                { name: "Aditya (Host)", avatar: "https://atikle.github.io/connect/data/application/resources/host.png", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Just give me a minute."}] },
+                    { type: 'file', name: "aditya.jpg", size: "426 KB", icon: 'https://atikle.github.io/resource/atikle_connect/image-placeholder.svg', href: 'https://atikle.github.io/connect/data/application/avatars/aditya.jpg' }
+                ]},
+                { name: "Ananya (Host)", avatar: "https://atikle.github.io/connect/data/application/resources/host.png", content: [
+                    { type: 'file', name: "ananya.jpg", size: "302 KB", icon: 'https://atikle.github.io/resource/atikle_connect/image-placeholder.svg', href: 'https://atikle.github.io/connect/data/application/avatars/ananya.jpg' }
+                ]},
+                { name: "Anurag (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Guys I have updated your profile picture."}] }
+                ]},
+                { name: "Ananya (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/ananya.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Am I visible? (just kidding, the pfp)"}] }
+                ]},
+                { name: "Aditya (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/aditya.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Lets test!"}] }
+                ]},
+                { name: "Admin (atikle connect)", avatar: "https://atikle.github.io/connect/data/application/resources/admin.png", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Thankyou so much "}, {type: 'mention', value: "@aditya", href: "https://atikle.github.io/connect/community/aditya"}, {type: 'text', value: " "}, {type: 'mention', value: "@ananya", href: "https://atikle.github.io/connect/community/ananya"}, {type: 'text', value: " "}, {type: 'mention', value: "@anurag_gautam", href: "https://atikle.github.io/connect/community/anurag_gautam"}, {type: 'text', value: " for joining the pilot testing session."}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "You can leave the session."}] }
+                ]},
+                { name: "Aditya (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/aditya.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "It was great joining the testing session."}] },
+                    { type: 'bubble', parts: [{type: 'text', value: "The entire application worked amazing."}] }
+                ]},
+                { name: "Ananya (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/ananya.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Yes, it was fun."}] },
+                    { type: 'bubble', parts: [{type: 'text', value: ""}, {type: 'mention', value: "@aditya", href: "https://atikle.github.io/connect/community/aditya"}, {type: 'text', value: " True, it worked pretty well."}] }
+                ]},
+                { name: "Anurag (Host)", avatar: "https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg", content: [
+                    { type: 'bubble', parts: [{type: 'text', value: "Thankyou guys."}]}
+                ]}
+            ];
+            
+            originalMessages.forEach(msg => addMessageToChat(msg.name, msg.avatar, msg.content));
+
+            function addMessageToChat(name, avatar, content, isOwnMessage = false) {
+                const messageWrapper = document.createElement('div');
+                messageWrapper.className = `message-wrapper ${isOwnMessage ? 'own-message' : ''}`;
+
+                const avatarImg = document.createElement('img');
+                avatarImg.src = avatar;
+                avatarImg.alt = name;
+                
+                const contentWrapper = document.createElement('div');
+                contentWrapper.className = 'message-content';
+
+                const nameP = document.createElement('p');
+                nameP.className = 'message-author';
+                nameP.textContent = name;
+                contentWrapper.appendChild(nameP);
+
+                content.forEach(item => {
+                    if (item.type === 'bubble') {
+                        const bubble = document.createElement('div');
+                        bubble.className = 'message-bubble';
+                        item.parts.forEach(part => {
+                            if (part.type === 'text') {
+                                bubble.appendChild(document.createTextNode(part.value));
+                            } else if (part.type === 'mention' || part.type === 'link') {
+                                const a = document.createElement('a');
+                                a.href = part.href;
+                                a.target = "_blank"; // Open links in a new tab
+                                a.textContent = part.value;
+                                a.className = part.type;
+                                bubble.appendChild(a);
+                            }
+                        });
+                        contentWrapper.appendChild(bubble);
+                    } else if (item.type === 'file') {
+                        const fileLink = document.createElement('a');
+                        fileLink.href = item.href;
+                        fileLink.setAttribute('download', '');
+                        fileLink.className = `file-attachment`;
+                        
+                        const iconImg = document.createElement('img');
+                        iconImg.src = item.icon;
+                        
+                        const fileInfo = document.createElement('div');
+                        fileInfo.className = 'file-info';
+                        const fileName = document.createElement('div');
+                        fileName.className = 'file-name';
+                        fileName.textContent = item.name;
+                        const fileSize = document.createElement('div');
+                        fileSize.className = 'file-size';
+                        fileSize.textContent = item.size;
+                        
+                        fileInfo.appendChild(fileName);
+                        fileInfo.appendChild(fileSize);
+                        fileLink.appendChild(iconImg);
+                        fileLink.appendChild(fileInfo);
+                        contentWrapper.appendChild(fileLink);
+                    }
+                });
+                
+                messageWrapper.appendChild(avatarImg);
+                messageWrapper.appendChild(contentWrapper);
+
+                chatArea.appendChild(messageWrapper);
+                chatArea.scrollTop = chatArea.scrollHeight;
+            }
+
+            function sendMessage() {
+                const messageText = chatInput.value.trim();
+                if (messageText) {
+                     const content = [{ type: 'bubble', parts: [ { type: 'text', value: messageText } ] }];
+                    addMessageToChat('You', 'https://placehold.co/40x40/7c80fd/FFF?text=U', content, true);
+                    chatInput.value = '';
+                }
+            }
+
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // --- RESPONSIVE CHAT TOGGLE ---
+            chatToggle.addEventListener('click', () => {
+                chatPanel.classList.toggle('visible');
+            });
+            chatCloseButton.addEventListener('click', () => {
+                chatPanel.classList.remove('visible');
+            });
+
+        });
+    </script>
+</body>
+
+</html>

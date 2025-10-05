@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <script defer src="https://atikle.github.io/connect/framework/universal/theme.js"></script>
+    <script defer src="https://atikle.github.io/connect/framework/universal/script.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <script>
+        $(function () {
+            $("#interaction-bar-placeholder").load("https://atikle.github.io/connect/framework/interaction-bar.html");
+        });
+    </script>
+
+    <link rel="stylesheet" href="https://atikle.github.io/connect/webinar/webinar-application.css">
+    <link rel="stylesheet" href="https://atikle.github.io/connect/connect.css">
+    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-75KEQGM2PS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-75KEQGM2PS');
+    </script>
+
+    <title>atikle connect</title>
+    <link rel="icon" href="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" type="image/x-icon">
+
+    <style>
+        /* Base styles from original index.html */
+        @media (max-width: 768px) {
+            body .navigation-bar {
+                display: none !important;
+            }
+        }
+        .icon-para { z-index: 100; }
+        .logo-para { z-index: 100; }
+        .navigation { z-index: 100; }
+        .spinner {
+            margin-top: 200px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .content-hidden { display: none; }
+        .loading-screen {
+            position: fixed; inset: 0; background-color: var(--background-1);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 90; transition: opacity 500ms ease-in-out;
+        }
+        .loading-text {
+            color: var(--text-color-1); font-size: 1.125rem; margin-top: 1rem;
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /*
+        ## --- STYLES FROM index3.html --- ##
+        */
+        :root {
+            --brand-blue: #3d42df;
+            --brand-red: #ff1932;
+            --light-border: #e5e7eb;
+            --light-text-secondary: #6b7280;
+            --dark-border: #3a3b3c;
+        }
+
+        /* Overriding scrollbar for modern look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background-color: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: #4a4a4a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: #6a6a6a; }
+
+        body {
+            /* Adjust body to accommodate new layout */
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden; /* Prevent double scrollbars */
+        }
+        main {
+            display: flex;
+            flex-grow: 1;
+            gap: 1rem;
+            padding: 1rem;
+            overflow: hidden;
+            margin-top: 70px; /* Adjust based on interaction bar height */
+        }
+
+        /* Video Grid Container */
+        .video-grid-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+        }
+
+        /* Action Controls (Bottom Bar) */
+        .action-controls-container {
+            flex-shrink: 0;
+        }
+        .action-controls-inner {
+            display: flex;
+            align-items: center;
+            background-color: var(--background-1);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            padding: 1rem;
+            height: 5rem;
+            box-sizing: border-box;
+            justify-content: space-evenly;
+        }
+        .action-controls-inner .icon-button {
+            padding: 0.75rem;
+            border-radius: 9999px;
+            background-color: #f3f4f6;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: var(--light-text-secondary);
+        }
+        .action-controls-inner .icon-button:hover { background-color: #e5e7eb; }
+        .action-controls-inner .icon-button svg { height: 1.5rem; width: 1.5rem; display: block; }
+        #leave-button {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            color: white;
+            background-color: var(--brand-red);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #leave-button:hover { background-color: #dc2626; }
+        #leave-button svg { height: 1.25rem; width: 1.25rem; }
+
+        /* Chat Panel */
+        #chat-panel {
+            width: 445px; /* Match old width */
+            flex-shrink: 0;
+            background-color: var(--background-1);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+            transform: translateX(0);
+        }
+        .chat-header { 
+            padding: 1rem; 
+            border-bottom: 1px solid var(--light-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h2 { font-size: 1.125rem; font-weight: 600; margin: 0; color: var(--text-color-1) }
+        #chat-close-button {
+            display: none;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        #chat-close-button svg { height: 1.5rem; width: 1.5rem; color: var(--text-color-1); }
+        #chat-area { flex-grow: 1; padding: 0 1rem; overflow-y: auto; }
+        
+        .chat-input-area { padding: 1rem; border-top: 1px solid var(--light-border); }
+        .chat-input-wrapper { display: flex; align-items: center; gap: 0.5rem; background-color: #f3f4f6; padding: 0.5rem; border-radius: 0.5rem; }
+        #chat-input {
+            width: 100%; background: transparent; outline: none;
+            border: none; padding: 0 0.5rem; color: var(--text-color-1);
+        }
+        #send-button {
+            padding: 0.5rem; background-color: var(--brand-blue); color: white;
+            border-radius: 0.375rem; border: none; cursor: pointer;
+        }
+        #send-button:hover { background-color: #2563eb; }
+        #send-button svg { height: 1.25rem; width: 1.25rem; }
+        #chat-toggle { display: none; }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            #chat-panel {
+                position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+                width: 100%; height: 100%; border-radius: 0;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 100; padding: 0; gap: 0;
+            }
+            #chat-panel.visible { transform: translateX(0); }
+            #chat-close-button { display: block; }
+            #chat-toggle { display: block !important; }
+            .video-call-wrapper { right: 1rem; }
+            
+            /* --- FIX FOR MOBILE BOTTOM BAR --- */
+            .action-controls-container {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 50;
+            }
+            .video-grid-container {
+                padding-bottom: 6rem; /* Creates space for the fixed bottom bar */
+            }
+            /* --- END FIX --- */
+        }
+
+        @media (min-width: 1025px) {
+            .action-controls-container {
+                position: absolute; bottom: 0; left: 0;
+                right: 0; width: 100%;
+                background-color: transparent; box-shadow: none; padding: 0;
+            }
+            .action-controls-inner {
+                 margin: 0 auto; width: auto;
+                 padding: 0.75rem 1.5rem;
+                 justify-content: center; gap: 1.5rem;
+            }
+            .video-grid-container {
+                padding-bottom: 7rem;
+                box-sizing: border-box;
+            }
+            .video-call-wrapper {
+                position: static;
+                width: 100%; height: 100%;
+                top: 0; left: 0; right: 0; bottom: 0;
+            }
+        }
+        /* Removing original action bar */
+        .video-call-actions { display: none; }
+        .right-side { display: none; }
+    </style>
+</head>
+
+<body onload="zoom()">
+    
+    <script type="text/javascript">
+        function zoom() { document.body.style.zoom = "100%" }
+    </script>
+
+    <div id="loading-screen" class="loading-screen">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <text style="margin-top: 300px;" class="branding">atikle <font class="connect-branding">connect</font></text>
+            <div class="spinner"></div>
+            <p class="loading-text">Loading webinar application...</p>
+        </div>
+    </div>
+
+    <div id="interaction-bar-placeholder"></div>
+
+    <main id="app-container">
+        <div class="video-grid-container">
+            <div class="video-call-wrapper">
+                <div class="video-participant" style="background-color: black; background-image: url(https://atikle.github.io/resource/atikle_connect/camera-access.png); background-repeat: no-repeat; background-size: 80%; background-position: 0% 40%;">
+                    <div class="participant-actions">
+                        <button class="btn-mute"></button>
+                        <button class="btn-camera"></button>
+                    </div>
+                    <img class="branding-tag" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="atikle connect icon">
+                    <a href="#" class="name-tag">You</a>
+                    <video autoplay="true" id="videoElement"></video>
+                </div>
+                <div class="video-participant">
+                    <div class="participant-actions"><button class="btn-mute"></button><button class="btn-camera"></button></div>
+                    <img class="branding-tag" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="atikle connect icon">
+                    <a href="#" class="name-tag">Host 1</a>
+                </div>
+                <div class="video-participant">
+                    <div class="participant-actions"><button class="btn-mute"></button><button class="btn-camera"></button></div>
+                    <img class="branding-tag" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="atikle connect icon">
+                    <a href="#" class="name-tag">Host 2</a>
+                </div>
+                <div class="video-participant" style="background-color: black; background-image: url(https://atikle.github.io/resource/atikle_connect/spotlight.png); background-repeat: no-repeat; background-size: 75%; background-position: 50% 50% ">
+                    <div class="participant-actions"><button class="btn-mute"></button><button class="btn-camera"></button></div>
+                    <img class="branding-tag" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="atikle connect icon">
+                    <a href="#" class="name-tag">Spotlight</a>
+                </div>
+                <div class="video-participant">
+                    <div class="participant-actions"><button class="btn-mute"></button><button class="btn-camera"></button></div>
+                    <img class="branding-tag" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="atikle connect icon">
+                    <a href="#" class="name-tag">Host 3</a>
+                </div>
+                <div class="video-participant">
+                    <div class="participant-actions"><button class="btn-mute"></button><button class="btn-camera"></button></div>
+                    <img class="branding-tag" src="https://atikle.github.io/resource/atikle_connect/atikle_connect-icon-transparent.png" alt="atikle connect icon">
+                    <a href="#" class="name-tag">Host 4</a>
+                </div>
+            </div>
+
+            <div class="action-controls-container">
+                <div class="action-controls-inner">
+                    <button class="icon-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M1 1l22 22M9 9v3a3 3 0 005.12 2.12M15 9.34V4a3 3 0 00-5.94-.6" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16.95A7 7 0 015 12v-2m14 0v2a7 7 0 01-.11 1.23M12 19v4M8 23h8" />
+                        </svg>
+                    </button>
+                    <button class="icon-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M1 1l22 22M21 21H3a2 2 0 01-2-2V8a2 2 0 012-2h3m3-3h6l2 3h4a2 2 0 012 2v9.34m-7.72-2.06a4 4 0 11-5.56-5.56" />
+                        </svg>
+                    </button>
+                    <button id="leave-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="23" y1="1" x2="17" y2="7"></line><line x1="17" y1="1" x2="23" y2="7"></line>
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81 .7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        Leave
+                    </button>
+                    <button id="fullscreen-button" class="icon-button"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3" /></svg></button>
+                    <button id="chat-toggle" class="icon-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <aside id="chat-panel">
+            <div class="chat-header">
+                <h2>Live Chat</h2>
+                 <button id="chat-close-button" class="icon-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+            </div>
+            <div id="chat-area">
+                <div class="message-wrapper">
+                    <a class="author-details" href="https://atikle.github.io/connect/community/atikle_connect"><div class="profile-picture"><img src="https://atikle.github.io/connect/data/application/resources/admin.png" alt="pp"></div><p class="name">Admin (atikle connect)</p></a>
+                    <div class="message-content"><div class="message">Hello everybody!</div></div>
+                </div>
+                <div class="message-wrapper">
+                    <a class="author-details" href="https://atikle.github.io/connect/community/ananya"><div class="profile-picture"><img src="https://atikle.github.io/connect/data/application/resources/host.png" alt="pp"></div><p class="name">Ananya (Host)</p></a>
+                    <div class="message-content"><div class="message">Hello! Is my audio and video clear? <a class="mention" href="https://atikle.github.io/connect/community/atikle_connect">@atikle_connect</a></div><div class="message">Btw <a class="mention" href="https://atikle.github.io/connect/community/anurag_gautam">@anurag_gautam</a> you have built an amazing application.</div></div>
+                </div>
+                <div class="message-wrapper">
+                    <a class="author-details" href="https://atikle.github.io/connect/community/aditya"><div class="profile-picture"><img src="https://atikle.github.io/connect/data/application/resources/host.png" alt="pp"></div><p class="name">Aditya (Host)</p></a>
+                    <div class="message-content"><div class="message">Hello <a class="mention" href="https://atikle.github.io/connect/community/ananya">@ananya</a></div><div class="message">Anurag is the host and admin as well.</div><div class="message">I guess he is still tweaking things.</div></div>
+                </div>
+                <div class="message-wrapper">
+                    <a class="author-details" href="https://atikle.github.io/connect/community/anurag_gautam"><div class="profile-picture"><img src="https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg" alt="pp"></div><p class="name">Anurag (Host)</p></a>
+                    <div class="message-content"><div class="message">Hello Ananya and Aditya.</div><div class="message">Thankyou guys for joining.</div><div class="message">Sorry, I did not replied as I was busy in fixing some bugs.</div><div class="message">Now the theme switch works perfectly fine and it adapts the theme automatically.</div></div>
+                </div>
+                <div class="message-wrapper">
+                    <a class="author-details" href="https://atikle.github.io/connect/community/ananya"><div class="profile-picture"><img src="https://atikle.github.io/connect/data/application/resources/host.png" alt="pp"></div><p class="name">Ananya (Host)</p></a>
+                    <div class="message-content"><div class="message">Yes, I checked the theme toggle switch works perfectly fine.</div><div class="message">What do you think about adding a recording indicator?</div></div>
+                </div>
+                <div class="message-wrapper">
+                    <a class="author-details" href="https://atikle.github.io/connect/community/aditya"><div class="profile-picture"><img src="https://atikle.github.io/connect/data/application/resources/host.png" alt="pp"></div><p class="name">Aditya (Host)</p></a>
+                    <div class="message-content"><div class="message">Thats an amazing idea <a class="mention" href="https://atikle.github.io/connect/community/ananya">@ananya</a></div></div>
+                </div>
+                <div class="message-wrapper">
+                    <a class="author-details" href="https://atikle.github.io/connect/community/anurag_gautam"><div class="profile-picture"><img src="https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg" alt="pp"></div><p class="name">Anurag (Host)</p></a>
+                    <div class="message-content"><div class="message">Yes, that will be really helpful, will add rightaway.</div></div>
+                </div>
+                <div class="message-wrapper">
+                    <a class="author-details" href="https://atikle.github.io/connect/community/aditya"><div class="profile-picture"><img src="https://atikle.github.io/connect/data/application/resources/host.png" alt="pp"></div><p class="name">Aditya (Host)</p></a>
+                    <div class="message-content"><div class="message"><a class="mention" href="https://atikle.github.io/connect/community/anurag_gautam">@anurag_gautam</a> Bro you forgot to share the dns documentation.</div></div>
+                </div>
+                <div class="message-wrapper">
+                    <a class="author-details" href="https://atikle.github.io/connect/community/anurag_gautam"><div class="profile-picture"><img src="https://atikle.github.io/connect/data/application/avatars/anurag_gautam.jpg" alt="pp"></div><p class="name">Anurag (Host)</p></a>
+                    <div class="message-content"><div class="message"><a class="mention" href="https://atikle.github.io/connect/community/aditya">@aditya</a> Here is the Cloudflare DNS's Docs.</div><div class="message"><a class="message-external-link" href="https://developers.cloudflare.com/1.1.1.1/ip-addresses">https://developers.cloudflare.com/1.1.1.1/ip-addresses</a></div><a class="message-file" href="https://atikle.github.io/connect/files/Cloudflare 1.1.1.1 docs.pdf" download="(atikle.github.io/connect) Cloudflare 1.1.1.1 docs.pdf"><div class="icon sketch"><img src="https://atikle.github.io/resource/atikle_connect/document-placeholder.svg" alt=""></div><div class="file-info"><div class="file-name">Cloudflare 1.1.1.1 docs.pdf</div><div class="file-size">280 KB</div></div></a></div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <div class="chat-input-wrapper">
+                    <input id="chat-input" type="text" placeholder="Type your meesage...">
+                    <button id="send-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('app-container');
+
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                loadingScreen.addEventListener('transitionend', () => {
+                    loadingScreen.style.display = 'none';
+                    if(mainContent) mainContent.classList.remove('content-hidden');
+                    document.body.style.overflow = 'auto'; 
+                }, { once: true });
+            }, 1000);
+
+            var video = document.querySelector("#videoElement");
+            if (navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function (stream) { video.srcObject = stream; })
+                    .catch(function (err0r) { console.log("Something went wrong with camera access!"); });
+            }
+
+            // --- RESPONSIVE CHAT TOGGLE SCRIPT from index3.html ---
+            const chatToggle = document.getElementById('chat-toggle');
+            const chatPanel = document.getElementById('chat-panel');
+            const chatCloseButton = document.getElementById('chat-close-button');
+
+            if(chatToggle && chatPanel && chatCloseButton) {
+                chatToggle.addEventListener('click', () => {
+                    chatPanel.classList.toggle('visible');
+                });
+                chatCloseButton.addEventListener('click', () => {
+                    chatPanel.classList.remove('visible');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
